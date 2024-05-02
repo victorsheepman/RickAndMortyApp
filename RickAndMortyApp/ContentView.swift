@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var indice = 0
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("rick and morty!")
+        TabView(selection: $indice) {
+            EpisodeView().tabItem {
+                Text("Episodios")
+            }.tag(0)
+            CharacterView().tabItem {
+                Text("Personajes")
+            }.tag(1)
         }
-        .padding()
     }
 }
 
