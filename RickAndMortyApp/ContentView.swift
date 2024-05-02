@@ -17,6 +17,9 @@ struct ContentView: View {
             CharacterView().tabItem {
                 Text("Personajes")
             }.tag(1)
+            FavoriteView().tabItem {
+                Text("Favoritos")
+            }.tag(2)
         }
     }
 }
