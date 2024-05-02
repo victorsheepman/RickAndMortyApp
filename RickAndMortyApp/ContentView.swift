@@ -20,6 +20,9 @@ struct ContentView: View {
             FavoriteView().tabItem {
                 Text("Favoritos")
             }.tag(2)
+            SettingView().tabItem {
+                Text("Favoritos")
+            }.tag(3)
         }
     }
 }
