@@ -9,7 +9,10 @@ import SwiftUI
 
 struct EpisodeView: View {
     var body: some View {
-        Text("Episode view")
+        ZStack {
+            Color.orange
+            Text("Episode view")
+        }
     }
 }
 

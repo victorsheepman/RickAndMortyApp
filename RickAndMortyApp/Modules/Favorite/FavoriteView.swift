@@ -9,7 +9,12 @@ import SwiftUI
 
 struct FavoriteView: View {
     var body: some View {
-        Text("Favorite View")
+        ZStack {
+            Color.blue
+            Text("Favorite View")
+            
+        }
+      
     }
 }
 

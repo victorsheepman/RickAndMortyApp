@@ -13,16 +13,16 @@ struct ContentView: View {
         TabView(selection: $indice) {
             EpisodeView().tabItem {
                 Text("Episodios")
-            }.tag(0)
+            }.tag(0).edgesIgnoringSafeArea(.top)
             CharacterView().tabItem {
                 Text("Personajes")
-            }.tag(1)
+            }.tag(1).edgesIgnoringSafeArea(.top)
             FavoriteView().tabItem {
                 Text("Favoritos")
-            }.tag(2)
+            }.tag(2).edgesIgnoringSafeArea(.top)
             SettingView().tabItem {
                 Text("Favoritos")
-            }.tag(3)
+            }.tag(3).edgesIgnoringSafeArea(.top)
         }
     }
 }
