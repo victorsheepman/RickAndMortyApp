@@ -16,4 +16,10 @@ struct Constansts {
         static let locations  = "/location"
         static let episodes   = "/episode"
     }
+    struct TabTitle{
+        static let episode    = "Episodios"
+        static let character  = "Personajes"
+        static let favorite   = "Favoritos"
+        static let setting    = "Ajustes"
+    }
 }

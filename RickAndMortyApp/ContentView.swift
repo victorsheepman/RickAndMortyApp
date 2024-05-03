@@ -12,16 +12,16 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $indice) {
             EpisodeView().tabItem {
-                Text("Episodios")
+                Text(Constansts.TabTitle.episode)
             }.tag(0).edgesIgnoringSafeArea(.top)
             CharacterView().tabItem {
-                Text("Personajes")
+                Text(Constansts.TabTitle.character)
             }.tag(1).edgesIgnoringSafeArea(.top)
             FavoriteView().tabItem {
-                Text("Favoritos")
+                Text(Constansts.TabTitle.favorite)
             }.tag(2).edgesIgnoringSafeArea(.top)
             SettingView().tabItem {
-                Text("Favoritos")
+                Text(Constansts.TabTitle.setting)
             }.tag(3).edgesIgnoringSafeArea(.top)
         }
     }
