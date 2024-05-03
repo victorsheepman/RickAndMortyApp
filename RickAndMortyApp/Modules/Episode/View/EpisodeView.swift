@@ -8,10 +8,16 @@
 import SwiftUI
 
 struct EpisodeView: View {
+    @StateObject var episodeViewModel = EpisodeViewModel()
     var body: some View {
-        ZStack {
-            Color.orange
-            Text("Episode view")
+        NavigationView {
+            List(episodeViewModel.episodeModel, id: \.id) { episode in
+                Text(episode.name)
+                   }
+                   .navigationTitle("Episodes")
+               }.onAppear{
+           
+                   episodeViewModel.getEpisodes()
         }
     }
 }

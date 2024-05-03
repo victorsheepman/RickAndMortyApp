@@ -32,7 +32,7 @@ class NetworkManager {
        }
     
     func fetchEpisodeData() -> Future<[EpisodeDataModel], Error> {
-        let url = URL(string: Constansts.MainURL.main+Constansts.Endpoints.episodes+"/?page=1")!
+        let url = URL(string: Constansts.MainURL.main+Constansts.Endpoints.episodes+"/?page=2")!
         
         return Future<[EpisodeDataModel], Error> { promise in
             URLSession.shared.dataTask(with: url) { data, response, error in
