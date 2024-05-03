@@ -30,4 +30,23 @@ class NetworkManager {
                }.resume()
            }
        }
+    
+    func fetchEpisodeData() -> Future<[EpisodeDataModel], Error> {
+        let url = URL(string: Constansts.MainURL.main+Constansts.Endpoints.episodes+"/?page=1")!
+        
+        return Future<[EpisodeDataModel], Error> { promise in
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    promise(.failure(error))
+                } else if let data = data {
+                    do {
+                        let decodedData = try JSONDecoder().decode(EpisodeResponseDataModel.self, from: data)
+                        promise(.success(decodedData.results))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }.resume()
+        }
+    }
 }
