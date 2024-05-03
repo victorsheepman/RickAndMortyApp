@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct CharacterView: View {
+    @StateObject var characterViewModel = CharacterViewModel()
     var body: some View {
         ZStack {
             Color.green
             Text("Character view")
+        }.onAppear{
+           
+            print(characterViewModel.getCharacters())
         }
     }
 }
