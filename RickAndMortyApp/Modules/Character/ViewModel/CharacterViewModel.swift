@@ -25,8 +25,8 @@ class CharacterViewModel: ObservableObject {
                    case .failure(let error):
                        print("error: \(error.localizedDescription)")
                    }
-               } receiveValue: { [weak self] weatherModel in
-                   self?.characterModel = weatherModel
+               } receiveValue: { [weak self] characterDataModel in
+                   self?.characterModel = characterDataModel
                }
                
             cancellable.store(in: &cancellables)
