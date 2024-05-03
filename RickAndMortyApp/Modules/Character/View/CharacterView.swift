@@ -10,12 +10,14 @@ import SwiftUI
 struct CharacterView: View {
     @StateObject var characterViewModel = CharacterViewModel()
     var body: some View {
-        ZStack {
-            Color.green
-            Text("Character view")
-        }.onAppear{
+        NavigationView {
+            List(characterViewModel.characterModel, id: \.id) { character in
+                        Text(character.name)
+                   }
+                   .navigationTitle("Characters")
+               }.onAppear{
            
-            print(characterViewModel.getCharacters())
+            characterViewModel.getCharacters()
         }
     }
 }
