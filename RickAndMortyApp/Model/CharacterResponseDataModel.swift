@@ -10,6 +10,18 @@ import Foundation
 
 // MARK: - CharacterResponseDataModel
 struct CharacterResponseDataModel: Codable {
+    let info: Info
+    let results: [CharacterDataModel]
+}
+
+// MARK: - Info
+struct Info: Codable {
+    let count, pages: Int
+    let next, prev: String
+}
+
+// MARK: - Result
+struct CharacterDataModel: Codable {
     let id: Int
     let name, status, species, type: String
     let gender: String

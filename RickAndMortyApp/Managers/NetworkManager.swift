@@ -12,22 +12,22 @@ import Combine
 
 class NetworkManager {
     static let shared = NetworkManager()
-       /*func fetchWeatherData(for city: String) -> Future<WeatherDataModel, Error> {
-           let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=97d162391ba73630b4a02aa1cebd2e88&units=metric&lang=es")!
+       func fetchCharacterData() -> Future<[CharacterDataModel], Error> {
+           let url = URL(string: Constansts.MainURL.main+Constansts.Endpoints.characters)!
            
-           return Future<WeatherDataModel, Error> { promise in
+           return Future<[CharacterDataModel], Error> { promise in
                URLSession.shared.dataTask(with: url) { data, response, error in
                    if let error = error {
                        promise(.failure(error))
                    } else if let data = data {
                        do {
-                           let decodedData = try JSONDecoder().decode(WeatherDataModel.self, from: data)
-                           promise(.success(decodedData))
+                           let decodedData = try JSONDecoder().decode(CharacterResponseDataModel.self, from: data)
+                           promise(.success(decodedData.results))
                        } catch {
                            promise(.failure(error))
                        }
                    }
                }.resume()
            }
-       }*/
+       }
 }
