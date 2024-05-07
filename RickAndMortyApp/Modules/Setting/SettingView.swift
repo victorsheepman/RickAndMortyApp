@@ -8,14 +8,21 @@
 import SwiftUI
 
 struct SettingView: View {
+   @Binding var isDarkMode: Bool
     var body: some View {
         ZStack {
-            Color.red
-            Text("Setting View")
+            isDarkMode ? Color("D") : Color.white
+            VStack{
+                Toggle(isOn: $isDarkMode) {
+                    Text("Dark Mode")
+                        .foregroundStyle(isDarkMode ? .white : .black)
+                }
+            }
+            .padding()
         }
     }
 }
 
 #Preview {
-    SettingView()
+    SettingView(isDarkMode: .constant(false))
 }

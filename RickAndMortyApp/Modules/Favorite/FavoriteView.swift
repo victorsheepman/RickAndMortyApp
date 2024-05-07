@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct FavoriteView: View {
+    
+    @Binding var isDarkMode:Bool
+   
     var body: some View {
         ZStack {
-            Color.blue
+            isDarkMode ? Color("D") : Color.white
             Text("Favorite View")
+                .foregroundStyle(isDarkMode ? .white : .black)
             
         }
       
@@ -19,5 +23,5 @@ struct FavoriteView: View {
 }
 
 #Preview {
-    FavoriteView()
+    FavoriteView(isDarkMode: .constant(false))
 }

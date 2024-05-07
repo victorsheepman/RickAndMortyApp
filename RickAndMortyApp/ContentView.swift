@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var indice = 0
+    @State var isDarkMode: Bool = false
+
     var body: some View {
         TabView(selection: $indice) {
             EpisodeView().tabItem {
@@ -17,10 +19,10 @@ struct ContentView: View {
             CharacterView().tabItem {
                 Text(Constansts.TabTitle.character)
             }.tag(1).edgesIgnoringSafeArea(.top)
-            FavoriteView().tabItem {
+            FavoriteView(isDarkMode: $isDarkMode).tabItem {
                 Text(Constansts.TabTitle.favorite)
             }.tag(2).edgesIgnoringSafeArea(.top)
-            SettingView().tabItem {
+            SettingView(isDarkMode: $isDarkMode).tabItem {
                 Text(Constansts.TabTitle.setting)
             }.tag(3).edgesIgnoringSafeArea(.top)
         }
