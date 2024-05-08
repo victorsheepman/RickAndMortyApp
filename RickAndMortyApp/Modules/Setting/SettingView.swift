@@ -12,10 +12,22 @@ struct SettingView: View {
     var body: some View {
         ZStack {
             isDarkMode ? Color("D") : Color.white
-            VStack{
+            VStack(spacing:20){
                 Toggle(isOn: $isDarkMode) {
                     Text("Dark Mode")
                         .foregroundStyle(isDarkMode ? .white : .black)
+                }
+                HStack{
+                    Text("Delete Favorite")
+                        .foregroundStyle(isDarkMode ? .white : .black)
+                    Spacer()
+                    Button(action: {
+                        print("Eliminar Favoritos!!!!")
+                    }, label: {
+                        Text("Delete")
+                    })
+                    .foregroundStyle(.red)
+                    
                 }
             }
             .padding()
