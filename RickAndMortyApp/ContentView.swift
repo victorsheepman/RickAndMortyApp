@@ -13,19 +13,22 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $indice) {
-            EpisodeView().tabItem {
-                Text(Constansts.TabTitle.episode)
-            }.tag(0).edgesIgnoringSafeArea(.top)
             CharacterView().tabItem {
+                Image(indice ==  0 ? "ghost-active" : "ghost")
+                   
                 Text(Constansts.TabTitle.character)
+            }.tag(0).edgesIgnoringSafeArea(.top)
+            LocationView().tabItem {
+                Image(indice ==  1 ? "planet-active" : "planet")
+                Text(Constansts.TabTitle.location)
             }.tag(1).edgesIgnoringSafeArea(.top)
-            FavoriteView(isDarkMode: $isDarkMode).tabItem {
-                Text(Constansts.TabTitle.favorite)
+            EpisodeView().tabItem {
+                Image(indice ==  2 ? "tv-active" : "tv")
+                Text(Constansts.TabTitle.episode)
             }.tag(2).edgesIgnoringSafeArea(.top)
-            SettingView(isDarkMode: $isDarkMode).tabItem {
-                Text(Constansts.TabTitle.setting)
-            }.tag(3).edgesIgnoringSafeArea(.top)
-        }
+           
+          
+        }.accentColor(Color("Indigo"))
     }
 }
 
