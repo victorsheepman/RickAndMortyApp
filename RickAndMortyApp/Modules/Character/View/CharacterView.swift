@@ -36,8 +36,10 @@ struct CharacterView: View {
         }
         .fullScreenCover(isPresented: $isPresented,
                          onDismiss: { isPresented = false},
-                         content: {
-                            ///componente filter
+                         content: 
+                        {
+                            FilterCharacter()
+                           
                         }
         )
     }
