@@ -13,7 +13,7 @@ import Combine
 class NetworkManager {
     static let shared = NetworkManager()
        func fetchCharacterData() -> Future<[CharacterDataModel], Error> {
-           let url = URL(string: Constansts.MainURL.main+Constansts.Endpoints.characters+"/?page=18")!
+           let url = URL(string: Constansts.MainURL.main+Constansts.Endpoints.characters+"/?page=2")!
            
            return Future<[CharacterDataModel], Error> { promise in
                URLSession.shared.dataTask(with: url) { data, response, error in

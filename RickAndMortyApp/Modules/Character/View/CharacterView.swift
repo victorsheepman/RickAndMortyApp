@@ -10,16 +10,30 @@ import SwiftUI
 struct CharacterView: View {
     @StateObject var characterViewModel = CharacterViewModel()
     @State var isPresented:Bool = false
+    
+    let layout = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
+    
     var body: some View {
         NavigationView {
-            List(characterViewModel.characterModel, id: \.id) { character in
-                Text(character.name)
+            ScrollView(.vertical, showsIndicators: false) {
+                LazyVGrid(columns: layout){
+                    ForEach(characterViewModel.characterModel, id:\.id){ character in
+                        
+                        CharacterCard(status: character.status, name: character.name, img: character.image)
+                        
+                    }
+                }.padding(.bottom, 65)
+                    .padding(.top,15)
             }
             .navigationTitle("Character")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                       isPresented = true
+                        isPresented = true
                     })
                     {
                         Text("Filter")
@@ -31,16 +45,16 @@ struct CharacterView: View {
             }
         }
         .onAppear{
-           
+            
             characterViewModel.getCharacters()
         }
         .fullScreenCover(isPresented: $isPresented,
                          onDismiss: { isPresented = false},
-                         content: 
-                        {
-                            FilterCharacter()
-                           
-                        }
+                         content:
+                            {
+            FilterCharacter()
+            
+        }
         )
     }
 }
