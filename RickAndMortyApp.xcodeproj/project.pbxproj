@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8425A4B92C37503B00829EF2 /* FilterCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425A4B82C37503B00829EF2 /* FilterCharacter.swift */; };
 		8425A4BB2C3755F800829EF2 /* CharacterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425A4BA2C3755F800829EF2 /* CharacterCard.swift */; };
+		84453D8D2C3B014F00F234B4 /* CharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84453D8C2C3B014F00F234B4 /* CharacterDetailView.swift */; };
 		844A90852BE5350200FD5154 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A90842BE5350200FD5154 /* NetworkManager.swift */; };
 		844A90892BE5356E00FD5154 /* Constansts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A90882BE5356E00FD5154 /* Constansts.swift */; };
 		844A908B2BE5361300FD5154 /* CharacterResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A908A2BE5361300FD5154 /* CharacterResponseDataModel.swift */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		8425A4B82C37503B00829EF2 /* FilterCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCharacter.swift; sourceTree = "<group>"; };
 		8425A4BA2C3755F800829EF2 /* CharacterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCard.swift; sourceTree = "<group>"; };
+		84453D8C2C3B014F00F234B4 /* CharacterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailView.swift; sourceTree = "<group>"; };
 		844A90842BE5350200FD5154 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		844A90882BE5356E00FD5154 /* Constansts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constansts.swift; sourceTree = "<group>"; };
 		844A908A2BE5361300FD5154 /* CharacterResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterResponseDataModel.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				844BA2362BE43B4600138F3D /* CharacterView.swift */,
 				8425A4B82C37503B00829EF2 /* FilterCharacter.swift */,
 				8425A4BA2C3755F800829EF2 /* CharacterCard.swift */,
+				84453D8C2C3B014F00F234B4 /* CharacterDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				844A90922BE53E3F00FD5154 /* EpisodeResponseDataModel.swift in Sources */,
 				844A908B2BE5361300FD5154 /* CharacterResponseDataModel.swift in Sources */,
 				844BA2322BE43ABA00138F3D /* EpisodeView.swift in Sources */,
+				84453D8D2C3B014F00F234B4 /* CharacterDetailView.swift in Sources */,
 				8425A4BB2C3755F800829EF2 /* CharacterCard.swift in Sources */,
 				844BA2372BE43B4600138F3D /* CharacterView.swift in Sources */,
 				844A90892BE5356E00FD5154 /* Constansts.swift in Sources */,
