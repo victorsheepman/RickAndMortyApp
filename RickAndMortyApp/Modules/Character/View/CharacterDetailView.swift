@@ -9,10 +9,17 @@ import SwiftUI
 
 
 struct CharacterDetailView: View {
+    
+    @StateObject var detailViewModel = DetailCharacterViewModel()
+    
     let episode =  [
         "https://rickandmortyapi.com/api/episode/1",
         "https://rickandmortyapi.com/api/episode/2",
     ]
+    
+    let epidodeIds = {
+        return  episode.compactMap { $0.last }
+    }
     
     var body: some View {
         NavigationView {
@@ -119,6 +126,10 @@ struct CharacterDetailView: View {
                 Divider()
                 
                 
+                
+                
+            }.onAppear(){
+                detailViewModel.getEpisodes(episodes: epidodeIds)
             }
         }
     }

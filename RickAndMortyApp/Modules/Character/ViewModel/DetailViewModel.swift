@@ -1,22 +1,22 @@
 //
-//  CharacterViewModel.swift
+//  DetailViewModel.swift
 //  RickAndMortyApp
 //
-//  Created by Victor Marquez on 3/5/24.
+//  Created by Victor Marquez on 8/7/24.
 //
-
 
 import Foundation
 import Combine
 
-class CharacterViewModel: ObservableObject {
-
-    @Published var characterModel:[CharacterDataModel] = []
+class DetailCharacterViewModel: ObservableObject {
+    @Published var episodes:[EpisodeDataModel] = []
 
     var cancellables = Set<AnyCancellable>()
     
-    func getCharacters() {
-        let url = URL(string: Constansts.MainURL.main + Constansts.Endpoints.characters + "/?page=2")!
+    func getEpisodes(episodes:[String]) {
+        
+        let url = URL(string: Constansts.MainURL.main + Constansts.Endpoints.episodes + "/\(episodes)")!
+        
         let cancellable = NetworkManager.shared.fetchData(from: url, responseType: CharacterResponseDataModel.self)
                .receive(on: DispatchQueue.main)
                .sink { completion in
@@ -26,11 +26,10 @@ class CharacterViewModel: ObservableObject {
                    case .failure(let error):
                        print("error: \(error.localizedDescription)")
                    }
-               } receiveValue: { [weak self] characterDataModel in
-                   self?.characterModel =  characterDataModel.results
+               } receiveValue: { [weak self] episodes in
+                   print(episodes)
                }
                
             cancellable.store(in: &cancellables)
     }
-        
 }

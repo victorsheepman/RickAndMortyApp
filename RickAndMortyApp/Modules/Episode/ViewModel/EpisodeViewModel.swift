@@ -15,7 +15,8 @@ class EpisodeViewModel: ObservableObject {
     var cancellables = Set<AnyCancellable>()
     
     func getEpisodes() {
-        let cancellable = NetworkManager.shared.fetchEpisodeData()
+        let url = URL(string: Constansts.MainURL.main + Constansts.Endpoints.episodes + "/?page=2")!
+        let cancellable = NetworkManager.shared.fetchData(from: url, responseType: EpisodeResponseDataModel.self)
                .receive(on: DispatchQueue.main)
                .sink { completion in
                    switch completion {
@@ -25,7 +26,7 @@ class EpisodeViewModel: ObservableObject {
                        print("error: \(error.localizedDescription)")
                    }
                } receiveValue: { [weak self] episodeDataModel in
-                   self?.episodeModel = episodeDataModel
+                   self?.episodeModel = episodeDataModel.results
                }
                
             cancellable.store(in: &cancellables)

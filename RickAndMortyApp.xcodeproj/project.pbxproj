@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84085A6F2C3C33C8001F8DB9 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84085A6E2C3C33C8001F8DB9 /* DetailViewModel.swift */; };
 		8425A4B92C37503B00829EF2 /* FilterCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425A4B82C37503B00829EF2 /* FilterCharacter.swift */; };
 		8425A4BB2C3755F800829EF2 /* CharacterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425A4BA2C3755F800829EF2 /* CharacterCard.swift */; };
 		84453D8D2C3B014F00F234B4 /* CharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84453D8C2C3B014F00F234B4 /* CharacterDetailView.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84085A6E2C3C33C8001F8DB9 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		8425A4B82C37503B00829EF2 /* FilterCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCharacter.swift; sourceTree = "<group>"; };
 		8425A4BA2C3755F800829EF2 /* CharacterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCard.swift; sourceTree = "<group>"; };
 		84453D8C2C3B014F00F234B4 /* CharacterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailView.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				844A908D2BE5383800FD5154 /* CharacterViewModel.swift */,
+				84085A6E2C3C33C8001F8DB9 /* DetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				844A908E2BE5383800FD5154 /* CharacterViewModel.swift in Sources */,
 				844BA23E2BE43D7700138F3D /* SettingView.swift in Sources */,
 				8425A4B92C37503B00829EF2 /* FilterCharacter.swift in Sources */,
+				84085A6F2C3C33C8001F8DB9 /* DetailViewModel.swift in Sources */,
 				844BA23A2BE43BBA00138F3D /* FavoriteView.swift in Sources */,
 				8473D97B2C34B72300796618 /* LocationViewModel.swift in Sources */,
 				844A90952BE53F6800FD5154 /* EpisodeViewModel.swift in Sources */,
