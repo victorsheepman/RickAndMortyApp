@@ -23,7 +23,11 @@ struct CharacterView: View {
                 LazyVGrid(columns: layout){
                     ForEach(characterViewModel.characterModel, id:\.id){ character in
                         
-                        CharacterCard(status: character.status, name: character.name, img: character.image)
+                        NavigationLink(destination: CharacterDetailView( characterId: character.id, episodes: character.episode)) {
+                            CharacterCard(status: character.status, name: character.name, img: character.image)
+                        }
+                        
+                        
                         
                     }
                 }.padding(.bottom, 65)

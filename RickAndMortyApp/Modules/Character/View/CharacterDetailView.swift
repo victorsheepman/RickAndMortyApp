@@ -9,16 +9,15 @@ import SwiftUI
 
 
 struct CharacterDetailView: View {
-    
+
     @StateObject var detailViewModel = DetailCharacterViewModel()
     
-    let episode =  [
-        "https://rickandmortyapi.com/api/episode/1",
-        "https://rickandmortyapi.com/api/episode/2",
-    ]
-    
-    let epidodeIds = {
-        return  episode.compactMap { $0.last }
+    var characterId: Int
+    var episodes: [String]
+    var episodeIds: [String] {
+        return episodes.compactMap { url in
+            return url.split(separator: "/").last.map(String.init)
+        }
     }
     
     var body: some View {
@@ -27,6 +26,7 @@ struct CharacterDetailView: View {
                 ZStack{
                     
                     VStack(spacing: 0){
+                        
                         Image("Banner")
                             .resizable()
                             .frame(width:.infinity, height: 84)
@@ -35,21 +35,35 @@ struct CharacterDetailView: View {
                             .frame(width:.infinity, height: 170)
                     }
                     VStack{
-                        Image("image")
-                            .resizable()
-                            .frame(width: 130, height: 130)
-                            .clipShape(RoundedRectangle(cornerRadius: 110))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 110)
-                                    .stroke(Color("White"), lineWidth: 2)
-                            )
-                        Text("Alive")
+                        
+                        AsyncImage(url:URL(string: detailViewModel.character?.image ?? "")){ phase in
+                            phase
+                                .resizable()
+                                .frame(width: 130, height: 130)
+                                .clipShape(RoundedRectangle(cornerRadius: 110))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 110)
+                                        .stroke(Color("White"), lineWidth: 2)
+                                )
+                        }placeholder: {
+                            Image("image")
+                                .resizable()
+                                .frame(width: 130, height: 130)
+                                .clipShape(RoundedRectangle(cornerRadius: 110))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 110)
+                                        .stroke(Color("White"), lineWidth: 2)
+                                )
+
+                        }
+                        
+                        Text(detailViewModel.character?.status ?? "")
                             .font(.caption)
                             .fontWeight(.regular)
                             .foregroundStyle(.gray3)
                             .padding(.top, 10)
                         
-                        Text("Rick Sanchez")
+                        Text(detailViewModel.character?.name ?? "")
                             .font(.title2)
                             .fontWeight(.bold)
                         
@@ -74,7 +88,7 @@ struct CharacterDetailView: View {
                         .fontWeight(.semibold)
                         .foregroundStyle(.black)
                     
-                    Text("Male")
+                    Text(detailViewModel.character?.gender ?? "")
                         .font(.caption)
                         .fontWeight(.regular)
                         .foregroundColor(Color.gray)
@@ -86,18 +100,7 @@ struct CharacterDetailView: View {
                         .fontWeight(.semibold)
                         .foregroundStyle(.black)
                     
-                    Text("Unknown")
-                        .font(.caption)
-                        .fontWeight(.regular)
-                        .foregroundColor(Color.gray)
-                    Divider()
-                    
-                    Text("Type")
-                        .font(.system(size: 17))
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.black)
-                    
-                    Text("Unknown")
+                    Text(detailViewModel.character?.type ?? "Unknow")
                         .font(.caption)
                         .fontWeight(.regular)
                         .foregroundColor(Color.gray)
@@ -111,7 +114,7 @@ struct CharacterDetailView: View {
                                     .fontWeight(.semibold)
                                     .foregroundColor(.black)
                                 
-                                Text("Earth (Replacement Dimension)")
+                                Text(detailViewModel.character?.location.name ?? "")
                                     .font(.caption)
                                     .fontWeight(.regular)
                                     .foregroundColor(Color.gray)
@@ -122,14 +125,36 @@ struct CharacterDetailView: View {
                         }
                     }
                     
+                    
+                    List(detailViewModel.episodes, id:\.id) { item in
+                        NavigationLink(destination: DetailView()) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(item.episode)
+                                        .font(.system(size: 17))
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.black)
+                                    
+                                    Text(item.episode)
+                                        .font(.caption)
+                                        .fontWeight(.regular)
+                                        .foregroundColor(Color.gray)
+                                }
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+                    
                 }.padding(.horizontal, 16)
                 Divider()
                 
-                
-                
+               
                 
             }.onAppear(){
-                detailViewModel.getEpisodes(episodes: epidodeIds)
+                detailViewModel.getEpisodes(episodes: episodeIds)
+                detailViewModel.getCharacter(from: characterId)
             }
         }
     }
@@ -143,5 +168,8 @@ struct DetailView: View {
 }
 
 #Preview {
-    CharacterDetailView()
+    CharacterDetailView(characterId: 2, episodes: [
+        "https://rickandmortyapi.com/api/episode/1",
+        "https://rickandmortyapi.com/api/episode/2",
+    ])
 }

@@ -10,6 +10,7 @@ import Combine
 
 class DetailCharacterViewModel: ObservableObject {
     @Published var episodes:[EpisodeDataModel] = []
+    @Published var character: CharacterDataModel?
 
     var cancellables = Set<AnyCancellable>()
     
@@ -17,7 +18,7 @@ class DetailCharacterViewModel: ObservableObject {
         
         let url = URL(string: Constansts.MainURL.main + Constansts.Endpoints.episodes + "/\(episodes)")!
         
-        let cancellable = NetworkManager.shared.fetchData(from: url, responseType: CharacterResponseDataModel.self)
+        let cancellable = NetworkManager.shared.fetchData(from: url, responseType: EpisodeResponseDataModel.self)
                .receive(on: DispatchQueue.main)
                .sink { completion in
                    switch completion {
@@ -26,8 +27,28 @@ class DetailCharacterViewModel: ObservableObject {
                    case .failure(let error):
                        print("error: \(error.localizedDescription)")
                    }
-               } receiveValue: { [weak self] episodes in
-                   print(episodes)
+               } receiveValue: { [weak self] data in
+                   self?.episodes = data.results
+               }
+               
+            cancellable.store(in: &cancellables)
+    }
+    
+    func getCharacter(from id: Int) {
+        
+        let url = URL(string: Constansts.MainURL.main + Constansts.Endpoints.characters + "/\(id)")!
+        
+        let cancellable = NetworkManager.shared.fetchData(from: url, responseType: CharacterDataModel.self)
+               .receive(on: DispatchQueue.main)
+               .sink { completion in
+                   switch completion {
+                   case .finished:
+                       break
+                   case .failure(let error):
+                       print("error: \(error.localizedDescription)")
+                   }
+               } receiveValue: { [weak self] data in
+                   self?.character = data
                }
                
             cancellable.store(in: &cancellables)
