@@ -14,17 +14,17 @@ struct CharacterDetailView: View {
     
     var characterId: Int
     var episodes: [String]
-    var episodeIds: [String] {
+    var episodeIds: [Int] {
         return episodes.compactMap { url in
-            return url.split(separator: "/").last.map(String.init)
+            return url.split(separator: "/").last.flatMap { Int($0) }
         }
     }
+
     
     var body: some View {
         NavigationView {
             VStack(alignment:.leading){
                 ZStack{
-                    
                     VStack(spacing: 0){
                         
                         Image("Banner")
@@ -124,38 +124,54 @@ struct CharacterDetailView: View {
                                 .foregroundColor(.gray)
                         }
                     }
-                    
-                    
-                    List(detailViewModel.episodes, id:\.id) { item in
+        
+                }.padding(.horizontal, 16)
+                Divider()
+                
+                Text("Episodes")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.gray1)
+                    .padding(.horizontal, 16)
+                    .padding(.top, 10)
+                Divider()
+                VStack {
+                    ForEach(detailViewModel.episodes, id:\.id) { item in
+                      
                         NavigationLink(destination: DetailView()) {
+                          
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(item.episode)
-                                        .font(.system(size: 17))
+                                        .font(.subheadline)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.black)
                                     
-                                    Text(item.episode)
-                                        .font(.caption)
+                                    Text(item.name)
+                                        .font(.system(size: 15))
                                         .fontWeight(.regular)
                                         .foregroundColor(Color.gray)
+                                    
+                                    Text(item.airDate)
+                                        .font(.caption)
+                                        .fontWeight(.regular)
+                                        .foregroundColor(Color.gray1)
                                 }
                                 Spacer()
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(.gray)
                             }
                         }
+                        Divider()
+                        
                     }
-                    
                 }.padding(.horizontal, 16)
-                Divider()
-                
-               
-                
-            }.onAppear(){
+            }
+            .onAppear(){
                 detailViewModel.getEpisodes(episodes: episodeIds)
                 detailViewModel.getCharacter(from: characterId)
             }
+            Spacer()
         }
     }
 }

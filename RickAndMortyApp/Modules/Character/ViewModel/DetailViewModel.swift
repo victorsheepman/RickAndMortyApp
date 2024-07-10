@@ -14,11 +14,11 @@ class DetailCharacterViewModel: ObservableObject {
 
     var cancellables = Set<AnyCancellable>()
     
-    func getEpisodes(episodes:[String]) {
+    func getEpisodes(episodes:[Int]) {
         
         let url = URL(string: Constansts.MainURL.main + Constansts.Endpoints.episodes + "/\(episodes)")!
-        
-        let cancellable = NetworkManager.shared.fetchData(from: url, responseType: EpisodeResponseDataModel.self)
+        print(url)
+        let cancellable = NetworkManager.shared.fetchData(from: url, responseType: [EpisodeDataModel].self)
                .receive(on: DispatchQueue.main)
                .sink { completion in
                    switch completion {
@@ -28,7 +28,8 @@ class DetailCharacterViewModel: ObservableObject {
                        print("error: \(error.localizedDescription)")
                    }
                } receiveValue: { [weak self] data in
-                   self?.episodes = data.results
+                
+                   self?.episodes = data
                }
                
             cancellable.store(in: &cancellables)
