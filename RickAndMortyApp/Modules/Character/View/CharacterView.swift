@@ -11,6 +11,12 @@ struct CharacterView: View {
     @StateObject var characterViewModel = CharacterViewModel()
     @State var isPresented:Bool = false
     
+    @State private var gender:  String = "unknow"
+    @State private var status:  String = "unknown"
+    @State private var species: String = ""
+    @State private var type:    String = ""
+    @State private var name:    String = ""
+    
     let layout = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -56,7 +62,7 @@ struct CharacterView: View {
                          onDismiss: { isPresented = false},
                          content:
                             {
-            FilterCharacter()
+            FilterCharacter(status: $status, gender: $gender, species: $species, name: $name, manager: characterViewModel)
             
         }
         )

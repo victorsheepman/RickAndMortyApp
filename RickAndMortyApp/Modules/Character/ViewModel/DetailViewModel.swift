@@ -11,6 +11,10 @@ import Combine
 class DetailCharacterViewModel: ObservableObject {
     @Published var episodes:[EpisodeDataModel] = []
     @Published var character: CharacterDataModel?
+    
+    
+    
+    
 
     var cancellables = Set<AnyCancellable>()
     
@@ -54,4 +58,6 @@ class DetailCharacterViewModel: ObservableObject {
                
             cancellable.store(in: &cancellables)
     }
+    
+    
 }

@@ -12,6 +12,7 @@ struct CharacterDetailView: View {
 
     @StateObject var detailViewModel = DetailCharacterViewModel()
     
+    
     var characterId: Int
     var episodes: [String]
     var episodeIds: [Int] {
