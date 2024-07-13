@@ -10,15 +10,30 @@ import SwiftUI
 struct LocationView: View {
     @StateObject var locationViewModel = LocationViewModel()
     
+    let layout = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     var body: some View {
         NavigationView {
-            List(locationViewModel.locations, id: \.id) { location in
-                Text(location.name ?? "")
-                   }
-                   .navigationTitle("Episodes")
-               }.onAppear{
-           
-                   locationViewModel.getLocations(from: "page=3")
+            ScrollView(.vertical, showsIndicators: false) {
+                LazyVGrid(columns: layout){
+                    ForEach(locationViewModel.locations, id:\.id){ location in
+                        
+                     
+                        LocationCard(type: location.type ?? "", name: location.name ?? "")
+                        
+                        
+                        
+                    }
+                }
+            }
+          
+            
+        }.onAppear{
+            
+            locationViewModel.getLocations(from: "page=3")
         }
     }
 }
