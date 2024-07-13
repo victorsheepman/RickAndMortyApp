@@ -24,7 +24,7 @@ class CharacterViewModel: ObservableObject {
     
     func getCharacterFiltered(gender: String? = nil, status: String? = nil, species: String? = nil, name: String? = nil) {
         guard let url = constructURL(gender: gender, status: status, species: species, name: name) else {
-            print("Invalid URL")
+            print("Invalid URL.zzsasqs")
             return
         }
         getDataFromApi(url: url)
