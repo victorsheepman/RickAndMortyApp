@@ -44,7 +44,7 @@ struct CharacterDetailView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 110))
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 110)
-                                        .stroke(Color("White"), lineWidth: 2)
+                                        .stroke(Color("White"), lineWidth: 5)
                                 )
                         }placeholder: {
                             Image("image")
@@ -61,20 +61,22 @@ struct CharacterDetailView: View {
                         Text(detailViewModel.character?.status ?? "")
                             .font(.caption)
                             .fontWeight(.regular)
-                            .foregroundStyle(.gray3)
+                            .foregroundStyle(.gray2)
                             .padding(.top, 10)
                         
                         Text(detailViewModel.character?.name ?? "")
                             .font(.title2)
                             .fontWeight(.bold)
                         
-                        Text("Human")
+                        Text(detailViewModel.character?.species ?? "")
                             .font(.subheadline)
                             .fontWeight(.medium)
                             .foregroundStyle(.gray1)
                         
                     }
                 }
+                .padding(.top, -50)
+               
                 Text("Informations")
                     .font(.headline)
                     .fontWeight(.bold)
@@ -96,12 +98,25 @@ struct CharacterDetailView: View {
                     
                     Divider()
                     
+                    Text("Origin")
+                        .font(.system(size: 17))
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.black)
+                    
+                    Text(detailViewModel.character?.origin.name ?? "")
+                        .font(.caption)
+                        .fontWeight(.regular)
+                        .foregroundColor(Color.gray)
+                    
+                    
+                    Divider()
+                    
                     Text("Type")
                         .font(.system(size: 17))
                         .fontWeight(.semibold)
                         .foregroundStyle(.black)
                     
-                    Text(detailViewModel.character?.type ?? "Unknow")
+                    Text((detailViewModel.character?.type.isEmpty ?? true ? "Unknown" : detailViewModel.character?.type) ?? "Unknown")
                         .font(.caption)
                         .fontWeight(.regular)
                         .foregroundColor(Color.gray)
@@ -136,37 +151,40 @@ struct CharacterDetailView: View {
                     .padding(.horizontal, 16)
                     .padding(.top, 10)
                 Divider()
-                VStack {
-                    ForEach(detailViewModel.episodes, id:\.id) { item in
-                      
-                        NavigationLink(destination: DetailView()) {
+                ScrollView {
+                    VStack {
+                        ForEach(detailViewModel.episodes, id:\.id) { item in
                           
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(item.episode)
-                                        .font(.subheadline)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.black)
-                                    
-                                    Text(item.name)
-                                        .font(.system(size: 15))
-                                        .fontWeight(.regular)
-                                        .foregroundColor(Color.gray)
-                                    
-                                    Text(item.airDate)
-                                        .font(.caption)
-                                        .fontWeight(.regular)
-                                        .foregroundColor(Color.gray1)
+                            NavigationLink(destination: DetailView()) {
+                              
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(item.episode)
+                                            .font(.subheadline)
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(.black)
+                                        
+                                        Text(item.name)
+                                            .font(.system(size: 15))
+                                            .fontWeight(.regular)
+                                            .foregroundColor(Color.gray)
+                                        
+                                        Text(item.airDate)
+                                            .font(.caption)
+                                            .fontWeight(.regular)
+                                            .foregroundColor(Color.gray1)
+                                    }
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.gray)
                                 }
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
                             }
+                            Divider()
+                            
                         }
-                        Divider()
+                    }.padding(.horizontal, 16)
                         
-                    }
-                }.padding(.horizontal, 16)
+                }
             }
             .onAppear(){
                 detailViewModel.getEpisodes(episodes: episodeIds)
