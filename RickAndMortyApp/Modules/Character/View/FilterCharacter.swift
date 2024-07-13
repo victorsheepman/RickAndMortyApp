@@ -25,7 +25,7 @@ enum Gender: String {
 struct FilterLink: Identifiable {
     var id = UUID()
     
-    let title: String
+    let title:   String
     let caption: String
 }
 
@@ -33,10 +33,11 @@ struct FilterCharacter: View {
     
     @State private var isOn = false
     
-    @Binding var status:  String
-    @Binding var gender:  String
-    @Binding var species: String
-    @Binding var name:    String
+    @Binding var status:      String
+    @Binding var gender:      String
+    @Binding var species:     String
+    @Binding var name:        String
+    @Binding var isPresented: Bool
     
     var manager: CharacterViewModel
     
@@ -49,7 +50,7 @@ struct FilterCharacter: View {
                 HStack(alignment: .center){
                     
                     Button("Clear"){
-                        
+                        cleanData()
                     }
                     .foregroundStyle(Color("Indigo"))
                     .font(.callout)
@@ -238,6 +239,15 @@ struct FilterCharacter: View {
 
         }
     }
+    
+    private func cleanData() -> Void {
+        gender      = "unknown"
+        status      = "unknown"
+        species     = ""
+        name        = ""
+        isPresented = false
+
+    }
 }
 
 extension Binding where Value == Status {
@@ -295,7 +305,8 @@ struct Search: View {
         status:  .constant("unknown"),
         gender:  .constant("unknown"),
         species: .constant(""),
-        name:    .constant(""),
+        name:    .constant(""), 
+        isPresented: .constant(false),
         manager: CharacterViewModel()
     )
 }
