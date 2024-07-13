@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct LocationView: View {
+    @StateObject var locationViewModel = LocationViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            List(locationViewModel.locations, id: \.id) { location in
+                Text(location.name ?? "")
+                   }
+                   .navigationTitle("Episodes")
+               }.onAppear{
+           
+                   locationViewModel.getLocations(from: "page=3")
+        }
     }
 }
 
