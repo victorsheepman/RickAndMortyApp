@@ -12,36 +12,15 @@ import Combine
 
 class NetworkManager {
     static let shared = NetworkManager()
-       func fetchCharacterData() -> Future<[CharacterDataModel], Error> {
-           let url = URL(string: Constansts.MainURL.main+Constansts.Endpoints.characters+"/?page=18")!
-           
-           return Future<[CharacterDataModel], Error> { promise in
-               URLSession.shared.dataTask(with: url) { data, response, error in
-                   if let error = error {
-                       promise(.failure(error))
-                   } else if let data = data {
-                       do {
-                           let decodedData = try JSONDecoder().decode(CharacterResponseDataModel.self, from: data)
-                           promise(.success(decodedData.results))
-                       } catch {
-                           promise(.failure(error))
-                       }
-                   }
-               }.resume()
-           }
-       }
-    
-    func fetchEpisodeData() -> Future<[EpisodeDataModel], Error> {
-        let url = URL(string: Constansts.MainURL.main+Constansts.Endpoints.episodes+"/?page=2")!
-        
-        return Future<[EpisodeDataModel], Error> { promise in
+    func fetchData<T: Decodable>(from url: URL, responseType: T.Type) -> Future<T, Error> {
+        return Future<T, Error> { promise in
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
                     promise(.failure(error))
                 } else if let data = data {
                     do {
-                        let decodedData = try JSONDecoder().decode(EpisodeResponseDataModel.self, from: data)
-                        promise(.success(decodedData.results))
+                        let decodedData = try JSONDecoder().decode(responseType, from: data)
+                        promise(.success(decodedData))
                     } catch {
                         promise(.failure(error))
                     }

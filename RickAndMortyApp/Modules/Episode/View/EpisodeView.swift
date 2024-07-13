@@ -17,7 +17,7 @@ struct EpisodeView: View {
                    .navigationTitle("Episodes")
                }.onAppear{
            
-                   episodeViewModel.getEpisodes()
+                episodeViewModel.getEpisodes()
         }
     }
 }
