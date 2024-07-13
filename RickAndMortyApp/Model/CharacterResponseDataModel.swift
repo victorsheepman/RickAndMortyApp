@@ -17,7 +17,8 @@ struct CharacterResponseDataModel: Codable {
 // MARK: - Info
 struct Info: Codable {
     let count, pages: Int
-    let next, prev: String
+    let next: String
+    let prev: String?
 }
 
 // MARK: - Result

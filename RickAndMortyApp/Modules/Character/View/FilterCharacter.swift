@@ -23,8 +23,7 @@ enum Gender: String {
 
 
 struct FilterLink: Identifiable {
-    var id = UUID()
-    
+    var id =     UUID()
     let title:   String
     let caption: String
 }
@@ -64,6 +63,7 @@ struct FilterCharacter: View {
                     Spacer()
                     Button("APPLY"){
                         manager.getCharacterFiltered(gender: gender, status: status, species: species, name:name)
+                        isPresented = false
                     }.frame(width:82, height:38)
                     .background(Color("Indigo"))
                     .cornerRadius(20)
@@ -241,11 +241,13 @@ struct FilterCharacter: View {
     }
     
     private func cleanData() -> Void {
-        gender      = "unknown"
-        status      = "unknown"
+        manager.getCharacters(from: "page=19")
+        gender      = ""
+        status      = ""
         species     = ""
         name        = ""
         isPresented = false
+        
 
     }
 }
@@ -280,6 +282,9 @@ struct Search: View {
                     .disableAutocorrection(true)
                     .onTapGesture {
                         isSearching = true
+                    }
+                    .onChange(of: textToSearch) { newValue in
+                        textToSearch = newValue.lowercased()
                     }
                     
                     if isSearching {

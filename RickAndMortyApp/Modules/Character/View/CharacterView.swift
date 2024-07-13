@@ -11,8 +11,8 @@ struct CharacterView: View {
     @StateObject var characterViewModel = CharacterViewModel()
     @State var isPresented:Bool = false
     
-    @State private var gender:  String = "unknown"
-    @State private var status:  String = "unknown"
+    @State private var gender:  String = ""
+    @State private var status:  String = ""
     @State private var species: String = ""
     @State private var name:    String = ""
     
@@ -55,7 +55,7 @@ struct CharacterView: View {
         }
         .onAppear{
             
-            characterViewModel.getCharacters()
+            characterViewModel.getCharacters(from: "page=19")
         }
         .fullScreenCover(isPresented: $isPresented,
                          onDismiss: { isPresented = false},
