@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LocationView: View {
     @StateObject var locationViewModel = LocationViewModel()
+   
+    @State var isPresented:Bool = false
     
     let layout = [
         GridItem(.flexible()),
@@ -26,6 +28,20 @@ struct LocationView: View {
                         
                         
                         
+                    }
+                }
+                .navigationTitle("Location")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            isPresented = true
+                        })
+                        {
+                            Text("Filter")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(Color("Indigo"))
+                        }
                     }
                 }
             }
