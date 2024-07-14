@@ -26,7 +26,7 @@ class LocationViewModel: ObservableObject {
             print("Invalid URL")
             return
         }
-        print(url)
+        getDataFromApi(url: url)
     }
     
     
