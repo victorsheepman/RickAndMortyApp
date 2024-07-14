@@ -21,6 +21,15 @@ class LocationViewModel: ObservableObject {
         getDataFromApi(url: url)
     }
     
+    func getLocationsFiltered(name: String? = nil, type: String? = nil, dimension: String? = nil) {
+        guard let url = constructURL(name: name, type: type, dimension: dimension) else {
+            print("Invalid URL")
+            return
+        }
+        print(url)
+    }
+    
+    
     private func getDataFromApi(url:URL){
         let cancellable = NetworkManager.shared.fetchData(from: url, responseType: LocationResponseDataModel.self)
             .receive(on: DispatchQueue.main)
@@ -37,5 +46,28 @@ class LocationViewModel: ObservableObject {
             }
         
         cancellable.store(in: &cancellables)
+    }
+    
+    private func constructURL(name: String?, type: String?, dimension: String?) -> URL? {
+
+        var queryItems = [URLQueryItem]()
+        
+       
+        if let name = name, !name.isEmpty {
+            queryItems.append(URLQueryItem(name: "name", value: name))
+        }
+        if let type = type, !type.isEmpty {
+            queryItems.append(URLQueryItem(name: "type", value: type))
+        }
+        if let dimension = dimension, !dimension.isEmpty {
+            queryItems.append(URLQueryItem(name: "dimension", value: dimension))
+        }
+      
+        
+        var urlComponents = URLComponents(string: self.baseURL)
+        urlComponents?.queryItems = queryItems
+
+
+        return urlComponents?.url
     }
 }

@@ -10,8 +10,11 @@ import SwiftUI
 struct LocationView: View {
     @StateObject var locationViewModel = LocationViewModel()
     
-    @State var isPresented:Bool = false
-    
+    @State private var isPresented: Bool   = false
+    @State private var name: String        = ""
+    @State private var type: String        = ""
+    @State private var dimension: String   = ""
+
     let layout = [
         GridItem(.flexible(), spacing: 30),
         GridItem(.flexible(), spacing: 30)
@@ -53,6 +56,9 @@ struct LocationView: View {
         .onAppear{
             
             locationViewModel.getLocations(from: "page=3")
+        }
+        .fullScreenCover(isPresented: $isPresented, onDismiss: { isPresented = false}){
+            FilterLocationView(name: $name, type: $type, dimension: $dimension, isPresented: $isPresented, manager: locationViewModel)
         }
     }
 }
