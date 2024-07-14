@@ -9,12 +9,12 @@ import SwiftUI
 
 struct LocationView: View {
     @StateObject var locationViewModel = LocationViewModel()
-   
+    
     @State var isPresented:Bool = false
     
     let layout = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
+        GridItem(.flexible(), spacing: 30),
+        GridItem(.flexible(), spacing: 30)
     ]
     
     var body: some View {
@@ -23,13 +23,14 @@ struct LocationView: View {
                 LazyVGrid(columns: layout){
                     ForEach(locationViewModel.locations, id:\.id){ location in
                         
-                     
                         LocationCard(type: location.type ?? "", name: location.name ?? "")
-                        
-                        
                         
                     }
                 }
+                
+                .padding(.top, 19)
+                .padding(.horizontal, 16)
+                .background(.white)
                 .navigationTitle("Location")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -44,10 +45,12 @@ struct LocationView: View {
                         }
                     }
                 }
-            }
-          
+                
+            }.background(Color("Gray7"))
             
-        }.onAppear{
+        }
+        
+        .onAppear{
             
             locationViewModel.getLocations(from: "page=3")
         }
