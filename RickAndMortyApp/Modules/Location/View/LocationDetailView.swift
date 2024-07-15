@@ -7,9 +7,17 @@
 
 import SwiftUI
 
+let layout = [
+    GridItem(.flexible()),
+    GridItem(.flexible())
+]
+
+
+
 struct LocationDetailView: View {
     
-    @StateObject var locationDetailViewModel = LocationDetailViewModel()
+    @StateObject private var locationDetailViewModel = LocationDetailViewModel()
+    @State private var isPresentingDetailResident = false
     
     var locationId: Int
     var residents: [String]
@@ -23,7 +31,7 @@ struct LocationDetailView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(alignment: .leading) {
                 GeometryReader { geometry in
                            VStack {
                                Rectangle()
@@ -48,12 +56,36 @@ struct LocationDetailView: View {
                                    }
     
                            }
-                           .frame(maxWidth: .infinity, maxHeight: .infinity)
-                       }
+                           .frame(maxWidth: .infinity)
+                }.frame(height: 139).padding(.top, -50)
+                
+                    Text("Residents")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundStyle(Color("Gray1"))
+                        .padding(.horizontal, 16)
+                        .padding(.top, 20)
+                
+                    ScrollView(.vertical, showsIndicators: false) {
+                        LazyVGrid(columns: layout){
+                            ForEach(locationDetailViewModel.characters, id:\.id){ character in
+                            
+                            NavigationLink(destination: CharacterDetailView( characterId: character.id, episodes: character.episode)) {
+                                CharacterCard(status: character.status, name: character.name, img: character.image)
+                            }
+                            
+                            
+                            
+                        }
+                    }
+                }
+                Spacer()
              
             }
             .onAppear{
                 locationDetailViewModel.getLocation(from: locationId)
+                locationDetailViewModel.getResidents(from: residentIds)
+                print(residentIds)
             }
             Spacer()
         }
