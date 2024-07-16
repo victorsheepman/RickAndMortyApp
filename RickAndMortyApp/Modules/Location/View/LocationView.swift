@@ -14,7 +14,7 @@ struct LocationView: View {
     @State private var name: String        = ""
     @State private var type: String        = ""
     @State private var dimension: String   = ""
-
+    
     let layout = [
         GridItem(.flexible(), spacing: 30),
         GridItem(.flexible(), spacing: 30)
@@ -29,25 +29,23 @@ struct LocationView: View {
                             LocationCard(type: location.type ?? "", name: location.name ?? "")
                         }
                     }
-                }
-                
-                .padding(.top, 19)
-                .padding(.horizontal, 16)
-                .background(.white)
-                .navigationTitle("Location")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            isPresented = true
-                        })
-                        {
-                            Text("Filter")
-                                .font(.title2)
-                                .fontWeight(.semibold)
-                                .foregroundStyle(Color("Indigo"))
+                }.padding(.top, 19)
+                    .padding(.horizontal, 16)
+                    .background(.white)
+                    .navigationTitle("Location")
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {
+                                isPresented = true
+                            })
+                            {
+                                Text("Filter")
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(Color("Indigo"))
+                            }
                         }
                     }
-                }
                 
             }.background(Color("Gray7"))
             
