@@ -13,10 +13,18 @@ class EpisodeViewModel: ObservableObject {
     @Published var episodes:[String: [EpisodeDataModel]] = [:]
 
     var cancellables = Set<AnyCancellable>()
-    let baseUrl = Constansts.MainURL.main + Constansts.Endpoints.episodes
+    let baseUrl = Constansts.MainURL.main + Constansts.Endpoints.episodes + "?"
     
     func getEpisodes(from page: String) {
-        let url = URL(string: baseUrl + "/?\(page)")!
+        let url = URL(string: baseUrl + page)!
+        getDataFromApi(url: url)
+    }
+    
+    func getEpisodesFiltered(name: String? = nil, episode: String? = nil) {
+        guard let url = constructURL(name: name, episode: episode) else {
+            print("Invalid URL")
+            return
+        }
         getDataFromApi(url: url)
     }
     
@@ -58,5 +66,26 @@ class EpisodeViewModel: ObservableObject {
         }
 
         return seasons
+    }
+    
+    
+    private func constructURL(name: String?, episode: String?) -> URL? {
+
+        var queryItems = [URLQueryItem]()
+        
+       
+        if let name = name, !name.isEmpty {
+            queryItems.append(URLQueryItem(name: "name", value: name))
+        }
+        
+        if let episode = episode, !episode.isEmpty {
+            queryItems.append(URLQueryItem(name: "episode", value: episode))
+        }
+       
+        var urlComponents = URLComponents(string: self.baseUrl)
+        urlComponents?.queryItems = queryItems
+
+
+        return urlComponents?.url
     }
 }

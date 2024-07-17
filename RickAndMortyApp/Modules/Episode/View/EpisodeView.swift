@@ -10,6 +10,12 @@ import SwiftUI
 struct EpisodeView: View {
     @StateObject var episodeViewModel = EpisodeViewModel()
     
+    
+    @State private var isPresented: Bool    = false
+    @State private var name: String         = ""
+    @State private var episode: String      = ""
+
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -60,7 +66,7 @@ struct EpisodeView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        
+                        isPresented = true
                     })
                     {
                         Text("Filter")
@@ -73,6 +79,13 @@ struct EpisodeView: View {
             .onAppear{
                 
                 episodeViewModel.getEpisodes(from: "")
+            }
+            .fullScreenCover(isPresented: $isPresented, onDismiss: { isPresented = false}){
+                FilterEpisodeView(name:        $name,
+                                  episode:     $episode,
+                                  isPresented: $isPresented,
+                                  manager:     episodeViewModel
+                )
             }
         }
     }

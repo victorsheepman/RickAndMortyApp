@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		84085A6F2C3C33C8001F8DB9 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84085A6E2C3C33C8001F8DB9 /* DetailViewModel.swift */; };
+		841775222C4870B3006C9CD0 /* FilterEpisodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841775212C4870B3006C9CD0 /* FilterEpisodeView.swift */; };
 		8425A4B92C37503B00829EF2 /* FilterCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425A4B82C37503B00829EF2 /* FilterCharacter.swift */; };
 		8425A4BB2C3755F800829EF2 /* CharacterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425A4BA2C3755F800829EF2 /* CharacterCard.swift */; };
 		8433FE5B2C431E5000785B26 /* LocationResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433FE5A2C431E5000785B26 /* LocationResponseDataModel.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		84085A6E2C3C33C8001F8DB9 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		841775212C4870B3006C9CD0 /* FilterEpisodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEpisodeView.swift; sourceTree = "<group>"; };
 		8425A4B82C37503B00829EF2 /* FilterCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCharacter.swift; sourceTree = "<group>"; };
 		8425A4BA2C3755F800829EF2 /* CharacterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCard.swift; sourceTree = "<group>"; };
 		8433FE5A2C431E5000785B26 /* LocationResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationResponseDataModel.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				844BA2312BE43ABA00138F3D /* EpisodeView.swift */,
+				841775212C4870B3006C9CD0 /* FilterEpisodeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				844A90952BE53F6800FD5154 /* EpisodeViewModel.swift in Sources */,
 				8433FE5D2C4321D100785B26 /* LocationCard.swift in Sources */,
 				84DD48E42BE436F700175061 /* RickAndMortyAppApp.swift in Sources */,
+				841775222C4870B3006C9CD0 /* FilterEpisodeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
