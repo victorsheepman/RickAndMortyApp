@@ -53,7 +53,7 @@ struct EpisodeView: View {
                         }   .padding(.leading, 16)
                     }
                 }
-                
+                .background(.white)
             }
             .padding(.top, 19)
             .navigationTitle("Episode")
@@ -69,7 +69,7 @@ struct EpisodeView: View {
                             .foregroundStyle(Color("Indigo"))
                     }
                 }
-            }
+            }.background(Color("Gray7"))
             .onAppear{
                 
                 episodeViewModel.getEpisodes(from: "")
