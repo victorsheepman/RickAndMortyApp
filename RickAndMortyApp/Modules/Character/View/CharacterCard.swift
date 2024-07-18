@@ -42,14 +42,14 @@ struct CharacterCard: View {
             Spacer()
 
         }
-        .frame(width: 163, height: 219)
+        .frame(width: 178, height: 219)
         .background(Color(.systemBackground))
         .cornerRadius(8)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(Color("Gray3"), lineWidth: 1)
         )
-        .padding()
+        
     }
 }
 

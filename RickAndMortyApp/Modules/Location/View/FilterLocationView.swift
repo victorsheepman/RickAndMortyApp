@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-let links:[FilterLink] = [
-    FilterLink(title: "Name", caption: "Give a name")
-]
+
 
 
 struct FilterLocationView: View {
