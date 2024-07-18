@@ -34,7 +34,6 @@ class EpisodeDetailViewModel: ObservableObject {
                 
                    self?.characters = data
                    
-                   print(data)
                }
                
             cancellable.store(in: &cancellables)

@@ -32,7 +32,7 @@ struct EpisodeView: View {
                         Divider()
                         
                         ForEach(episodeViewModel.episodes[season] ?? [], id: \.id) { item in
-                            NavigationLink(destination: DetailView()) {
+                            NavigationLink(destination: EpisodeDetailView(episodeId: item.id ?? 0, residents: item.characters ?? [""])) {
                                 HStack {
                                     VStack(alignment: .leading, spacing: 4) {
                                         Text(item.episode)
