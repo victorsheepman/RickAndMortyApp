@@ -7,26 +7,8 @@
 
 import SwiftUI
 
-enum Status: String {
-    case dead    = "dead"
-    case alive   = "alive"
-    case unknown = "unknown"
-}
-
-enum Gender: String {
-    case male       = "male"
-    case female     = "female"
-    case unknown    = "unknown"
-    case genderless = "genderless"
-
-}
 
 
-struct FilterLink: Identifiable {
-    var id =     UUID()
-    let title:   String
-    let caption: String
-}
 
 struct FilterCharacter: View {
     
@@ -39,10 +21,7 @@ struct FilterCharacter: View {
     @Binding var isPresented: Bool
     
     var manager: CharacterViewModel
-    
-    let links:[FilterLink] = [
-        FilterLink(title: "Name", caption: "Give a name")
-    ]
+
     var body: some View {
         NavigationView{
             VStack(alignment:.leading){
@@ -74,47 +53,17 @@ struct FilterCharacter: View {
                 }
                 Divider()
                     .padding(.top, 15)
-                NavigationLink(destination: Search(textToSearch: $name)) {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text("Name")
-                                        .font(.system(size: 17))
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.black)
-                                    
-                                    Text("Give a name")
-                                        .font(.caption)
-                                        .fontWeight(.regular)
-                                        .foregroundColor(Color.gray)
-                                }
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
-                            }
-                        }.padding(.horizontal, 16)
+                
+                SearchItem(textToSearch: $name, title: "Name", placeholder:"Give a name")
+                
                 Divider()
                 
                 
                 Divider()
                     .padding(.top, 15)
-                NavigationLink(destination: Search(textToSearch: $species)) {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text("Species")
-                                        .font(.system(size: 17))
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.black)
-                                    
-                                    Text("Select one")
-                                        .font(.caption)
-                                        .fontWeight(.regular)
-                                        .foregroundColor(Color.gray)
-                                }
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
-                            }
-                        }.padding(.horizontal, 16)
+                
+                SearchItem(textToSearch: $species, title: "Species", placeholder:"Select one")
+                
                 Divider()
                 
                 Text("Status")
@@ -126,42 +75,24 @@ struct FilterCharacter: View {
                 Divider()
                 
                 VStack(alignment:.leading, spacing: 10){
-                    Toggle(isOn: Binding<Bool>(
-                        get: { status == Status.alive.rawValue },
-                        set: { if $0 { status = Status.alive.rawValue } })
-                    ) {
-                        Text("Alive")
-                            .font(.title3)
-                            .fontWeight(.regular)
-                            .foregroundStyle(.black)
-                    }.toggleStyle(iOSRadioButtonToggleStyle())
-                   
                     
-                    Toggle(isOn: Binding<Bool>(
-                        get: { status == Status.dead.rawValue },
-                        set: { if $0 { status = Status.dead.rawValue } })
-                    ) {
-                        Text("Dead")
-                            .font(.title3)
-                            .fontWeight(.regular)
-                            .foregroundStyle(.black)
-                    }
-                    .toggleStyle(iOSRadioButtonToggleStyle())
+                    EnumToggle(
+                        selectedValue: $status,
+                        toggleValue: Status.alive,
+                        label: "Alive"
+                    )
+                 
+                    EnumToggle(
+                        selectedValue: $status,
+                        toggleValue: Status.dead,
+                        label: "Dead"
+                    )
                     
-                    
-                    
-                    
-                    Toggle(isOn: Binding<Bool>(
-                        get: { status == Status.unknown.rawValue },
-                        set: { if $0 { status = Status.unknown.rawValue } })
-                    ) {
-                        Text("Unknown")
-                            .font(.title3)
-                            .fontWeight(.regular)
-                            .foregroundStyle(.black)
-                    }
-                    .toggleStyle(iOSRadioButtonToggleStyle())
-               
+                    EnumToggle(
+                        selectedValue: $status,
+                        toggleValue: Status.unknown,
+                        label: "Unknown"
+                    )
                     
                 }.padding(.horizontal, 16)
                 
@@ -175,68 +106,37 @@ struct FilterCharacter: View {
                 Divider()
                 
                 VStack(alignment:.leading, spacing: 12){
+                
+                    EnumToggle(
+                        selectedValue: $gender,
+                        toggleValue: Gender.female,
+                        label: "Female"
+                    )
+
+                    EnumToggle(
+                        selectedValue: $gender,
+                        toggleValue: Gender.male,
+                        label: "Male"
+                    )
+                                        
+                    EnumToggle(
+                        selectedValue: $gender,
+                        toggleValue: Gender.genderless,
+                        label: "Genderless"
+                    )
                     
-                    Toggle(isOn: Binding<Bool>(
-                        get: { gender == Gender.female.rawValue },
-                        set: { if $0 { gender = Gender.female.rawValue } })
-                    ) {
-                        Text("Female")
-                            .font(.title3)
-                            .fontWeight(.regular)
-                            .foregroundStyle(.black)
-                    }
-                    .toggleStyle(iOSRadioButtonToggleStyle())
-                    
-                    Toggle(isOn: Binding<Bool>(
-                        get: { gender == Gender.male.rawValue },
-                        set: { if $0 { gender = Gender.male.rawValue } })
-                    ) {
-                        Text("Male")
-                            .font(.title3)
-                            .fontWeight(.regular)
-                            .foregroundStyle(.black)
-                    }
-                    .toggleStyle(iOSRadioButtonToggleStyle())
-                    
-                   
-                 
-                    Toggle(isOn: Binding<Bool>(
-                        get: { gender == Gender.genderless.rawValue },
-                        set: { if $0 { gender = Gender.genderless.rawValue } })
-                    ) {
-                        Text("Genderless")
-                            .font(.title3)
-                            .fontWeight(.regular)
-                            .foregroundStyle(.black)
-                    }
-                    .toggleStyle(iOSRadioButtonToggleStyle())
-                    
-                    Toggle(isOn: Binding<Bool>(
-                        get: { gender == Gender.unknown.rawValue },
-                        set: { if $0 { gender = Gender.unknown.rawValue } })
-                    ) {
-                        Text("Unknown")
-                            .font(.title3)
-                            .fontWeight(.regular)
-                            .foregroundStyle(.black)
-                    }
-                    .toggleStyle(iOSRadioButtonToggleStyle())
+                    EnumToggle(
+                        selectedValue: $gender,
+                        toggleValue: Gender.unknown,
+                        label: "Unknown"
+                    )
 
                 }.padding(.horizontal, 16)
                 
-          
-                
-               
                 Spacer()
 
 
             }
-            
-           
-            
-            
-           
-
         }
     }
     
@@ -252,14 +152,6 @@ struct FilterCharacter: View {
     }
 }
 
-extension Binding where Value == Status {
-    var isAlive: Binding<Bool> {
-        return Binding<Bool>(
-            get: { self.wrappedValue == .alive },
-            set: { self.wrappedValue = $0 ? .alive : .dead }
-        )
-    }
-}
 
 
 
@@ -304,6 +196,8 @@ struct Search: View {
         Spacer()
     }
 }
+
+
 
 #Preview {
     FilterCharacter(

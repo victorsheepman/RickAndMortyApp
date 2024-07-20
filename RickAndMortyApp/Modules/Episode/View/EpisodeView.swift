@@ -32,31 +32,14 @@ struct EpisodeView: View {
                         Divider()
                         
                         ForEach(episodeViewModel.episodes[season] ?? [], id: \.id) { item in
-                            NavigationLink(destination: EpisodeDetailView(episodeId: item.id ?? 0, residents: item.characters ?? [""])) {
-                                HStack {
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Text(item.episode)
-                                            .font(.subheadline)
-                                            .fontWeight(.semibold)
-                                            .foregroundColor(.black)
-                                        
-                                        Text(item.name)
-                                            .font(.system(size: 15))
-                                            .fontWeight(.regular)
-                                            .foregroundColor(Color.gray)
-                                        
-                                        Text(item.airDate)
-                                            .font(.caption)
-                                            .fontWeight(.regular)
-                                            .foregroundColor(Color.gray)
-                                    }
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.gray)
-                                }.padding(.trailing, 16)
-                            }
+                            EpisodeCard(
+                                episode: item.episode,
+                                id:      item.id,
+                                name:    item.name,
+                                airDate: item.airDate
+                            )
                             Divider()
-                        }   .padding(.leading, 16)
+                        }  
                     }
                 }
                 .background(.white)

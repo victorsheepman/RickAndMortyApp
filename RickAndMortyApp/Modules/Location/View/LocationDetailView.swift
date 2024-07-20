@@ -20,15 +20,9 @@ struct LocationDetailView: View {
     @State private var isPresentingDetailResident = false
     
     var locationId: Int
-    var residents: [String]
-    
-    var residentIds: [Int] {
-        return residents.compactMap { url in
-            return url.split(separator: "/").last.flatMap { Int($0) }
-        }
-    }
-    
-    
+
+
+
     var body: some View {
         VStack(alignment: .leading) {
             GeometryReader { geometry in
@@ -69,7 +63,7 @@ struct LocationDetailView: View {
                 LazyVGrid(columns: layout){
                     ForEach(locationDetailViewModel.characters, id:\.id){ character in
                         
-                        NavigationLink(destination: CharacterDetailView( characterId: character.id, episodes: character.episode)) {
+                        NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
                             CharacterCard(status: character.status, name: character.name, img: character.image)
                         }
                         
@@ -82,9 +76,10 @@ struct LocationDetailView: View {
             
         }
         .onAppear{
-            locationDetailViewModel.getLocation(from: locationId)
-            locationDetailViewModel.getResidents(from: residentIds)
-            print(residentIds)
+            locationDetailViewModel.fetchLocationAndResidents(from: locationId)
+            
+            print(locationDetailViewModel.characters)
+           
         }
         Spacer()
     }
@@ -92,8 +87,5 @@ struct LocationDetailView: View {
 
 
 #Preview {
-    LocationDetailView(locationId: 3, residents: [
-        "https://rickandmortyapi.com/api/character/8",
-        "https://rickandmortyapi.com/api/character/14"
-    ])
+    LocationDetailView(locationId: 3)
 }

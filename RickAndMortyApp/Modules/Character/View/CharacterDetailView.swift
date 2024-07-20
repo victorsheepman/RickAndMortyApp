@@ -10,17 +10,17 @@ import SwiftUI
 
 struct CharacterDetailView: View {
     
-    @StateObject var detailViewModel = DetailCharacterViewModel()
+    @StateObject var detailViewModel = CharacterDetailCharacterViewModel()
     
     
     var characterId: Int
-    var episodes: [String]
-    var episodeIds: [Int] {
-        return episodes.compactMap { url in
-            return url.split(separator: "/").last.flatMap { Int($0) }
-        }
+
+    var locationId: Int? {
+        
+        guard let urlString = detailViewModel.character?.location.url else { return nil }
+        
+        return urlString.split(separator: "/").last.flatMap { Int($0) }
     }
-    
     
     var body: some View {
         VStack(alignment:.leading){
@@ -121,7 +121,7 @@ struct CharacterDetailView: View {
                     .foregroundColor(Color.gray)
                 
                 Divider()
-                NavigationLink(destination: DetailView()) {
+                NavigationLink(destination: LocationDetailView(locationId:locationId ?? 0 )) {
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Location")
@@ -153,57 +153,26 @@ struct CharacterDetailView: View {
             ScrollView {
                 VStack {
                     ForEach(detailViewModel.episodes, id:\.id) { item in
-                        
-                        NavigationLink(destination: DetailView()) {
-                            
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(item.episode)
-                                        .font(.subheadline)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.black)
-                                    
-                                    Text(item.name)
-                                        .font(.system(size: 15))
-                                        .fontWeight(.regular)
-                                        .foregroundColor(Color.gray)
-                                    
-                                    Text(item.airDate)
-                                        .font(.caption)
-                                        .fontWeight(.regular)
-                                        .foregroundColor(Color.gray1)
-                                }
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
-                            }
-                        }
+                        EpisodeCard(
+                            episode: item.episode, 
+                            id:      item.id,
+                            name:    item.episode,
+                            airDate: item.airDate
+                        )
                         Divider()
                         
                     }
-                }.padding(.horizontal, 16)
-                
+                }                
             }
         }
         .onAppear(){
-            detailViewModel.getEpisodes(episodes: episodeIds)
-            detailViewModel.getCharacter(from: characterId)
+            
+            detailViewModel.fetchCharactersAndEpisodes(from: characterId)
         }
         Spacer()
     }
 }
 
-struct DetailView: View {
-    var body: some View {
-        Text("Detail View")
-            .font(.largeTitle)
-            .navigationTitle("Details")
-    }
-}
-
 #Preview {
-    CharacterDetailView(characterId: 2, episodes: [
-        "https://rickandmortyapi.com/api/episode/1",
-        "https://rickandmortyapi.com/api/episode/2",
-    ])
+    CharacterDetailView(characterId: 2)
 }

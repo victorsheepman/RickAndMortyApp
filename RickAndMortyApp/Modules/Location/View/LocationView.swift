@@ -25,7 +25,7 @@ struct LocationView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVGrid(columns: layout){
                     ForEach(locationViewModel.locations, id:\.id){ location in
-                        NavigationLink(destination: LocationDetailView(locationId: location.id ?? 0, residents: location.residents ?? [""])) {
+                        NavigationLink(destination: LocationDetailView(locationId: location.id ?? 0)) {
                             LocationCard(type: location.type ?? "", name: location.name ?? "")
                         }
                     }
