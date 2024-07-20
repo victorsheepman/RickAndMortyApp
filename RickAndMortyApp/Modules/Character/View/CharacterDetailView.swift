@@ -160,36 +160,16 @@ struct CharacterDetailView: View {
             ScrollView {
                 VStack {
                     ForEach(detailViewModel.episodes, id:\.id) { item in
-                        
-                        NavigationLink(destination: DetailView()) {
-                            
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(item.episode)
-                                        .font(.subheadline)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.black)
-                                    
-                                    Text(item.name)
-                                        .font(.system(size: 15))
-                                        .fontWeight(.regular)
-                                        .foregroundColor(Color.gray)
-                                    
-                                    Text(item.airDate)
-                                        .font(.caption)
-                                        .fontWeight(.regular)
-                                        .foregroundColor(Color.gray1)
-                                }
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray)
-                            }
-                        }
+                        EpisodeCard(
+                            episode: item.episode, 
+                            id:      item.id,
+                            name:    item.episode,
+                            airDate: item.airDate
+                        )
                         Divider()
                         
                     }
-                }.padding(.horizontal, 16)
-                
+                }                
             }
         }
         .onAppear(){
@@ -197,14 +177,6 @@ struct CharacterDetailView: View {
             detailViewModel.getCharacter(from: characterId)
         }
         Spacer()
-    }
-}
-
-struct DetailView: View {
-    var body: some View {
-        Text("Detail View")
-            .font(.largeTitle)
-            .navigationTitle("Details")
     }
 }
 

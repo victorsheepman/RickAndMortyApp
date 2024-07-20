@@ -13,13 +13,6 @@ struct EpisodeDetailView: View {
     @State private var isPresentingDetailResident   = false
     
     var episodeId: Int
-    var residents: [String]
-    
-    var residentIds: [Int] {
-        return residents.compactMap { url in
-            return url.split(separator: "/").last.flatMap { Int($0) }
-        }
-    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -74,28 +67,14 @@ struct EpisodeDetailView: View {
             
         }
         .onAppear{
-            episodeDetailViewModel.getEpisode(from: episodeId)
-            episodeDetailViewModel.getResidents(from: residentIds)
-            print(residentIds)
+            episodeDetailViewModel.fetchEpisodeAndCharacters(from: episodeId)
+
+          
         }
         Spacer()
     }
 }
 
 #Preview {
-    EpisodeDetailView(episodeId: 4, residents: [
-        "https://rickandmortyapi.com/api/character/1",
-        "https://rickandmortyapi.com/api/character/2",
-        "https://rickandmortyapi.com/api/character/38",
-        "https://rickandmortyapi.com/api/character/87",
-        "https://rickandmortyapi.com/api/character/175",
-        "https://rickandmortyapi.com/api/character/179",
-        "https://rickandmortyapi.com/api/character/181",
-        "https://rickandmortyapi.com/api/character/191",
-        "https://rickandmortyapi.com/api/character/239",
-        "https://rickandmortyapi.com/api/character/241",
-        "https://rickandmortyapi.com/api/character/270",
-        "https://rickandmortyapi.com/api/character/337",
-        "https://rickandmortyapi.com/api/character/338"
-    ])
+    EpisodeDetailView(episodeId: 4)
 }

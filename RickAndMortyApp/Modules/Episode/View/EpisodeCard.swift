@@ -12,10 +12,9 @@ struct EpisodeCard: View {
     var id:      Int
     var name:    String
     var airDate: String
-    var characters: [String]
     
     var body: some View {
-        NavigationLink(destination: EpisodeDetailView(episodeId: id, residents: characters)) {
+        NavigationLink(destination: EpisodeDetailView(episodeId: id)) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(episode)
@@ -36,8 +35,8 @@ struct EpisodeCard: View {
                 Spacer()
                 Image(systemName: "chevron.right")
                     .foregroundColor(.gray)
-            }.padding(.trailing, 16)
-        }
+            }
+        }.padding(.horizontal, 16)
     }
 }
 
@@ -46,10 +45,6 @@ struct EpisodeCard: View {
         episode: "S03E07",
         id: 28,
         name: "The Ricklantis Mixup",
-        airDate:  "September 10, 2017",
-        characters:[
-            "https://rickandmortyapi.com/api/character/1",
-            "https://rickandmortyapi.com/api/character/2",
-          ]
+        airDate:  "September 10, 2017"
     )
 }
