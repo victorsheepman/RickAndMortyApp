@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		84085A6F2C3C33C8001F8DB9 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84085A6E2C3C33C8001F8DB9 /* DetailViewModel.swift */; };
+		84085A6F2C3C33C8001F8DB9 /* CharacterDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84085A6E2C3C33C8001F8DB9 /* CharacterDetailViewModel.swift */; };
 		841775222C4870B3006C9CD0 /* FilterEpisodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841775212C4870B3006C9CD0 /* FilterEpisodeView.swift */; };
 		841775242C4877F8006C9CD0 /* EpisodeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841775232C4877F8006C9CD0 /* EpisodeDetailView.swift */; };
 		841775262C487839006C9CD0 /* EpisodeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841775252C487839006C9CD0 /* EpisodeDetailViewModel.swift */; };
@@ -44,7 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		84085A6E2C3C33C8001F8DB9 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		84085A6E2C3C33C8001F8DB9 /* CharacterDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewModel.swift; sourceTree = "<group>"; };
 		841775212C4870B3006C9CD0 /* FilterEpisodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEpisodeView.swift; sourceTree = "<group>"; };
 		841775232C4877F8006C9CD0 /* EpisodeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailView.swift; sourceTree = "<group>"; };
 		841775252C487839006C9CD0 /* EpisodeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailViewModel.swift; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				844A908D2BE5383800FD5154 /* CharacterViewModel.swift */,
-				84085A6E2C3C33C8001F8DB9 /* DetailViewModel.swift */,
+				84085A6E2C3C33C8001F8DB9 /* CharacterDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -387,7 +387,7 @@
 				8425A4B92C37503B00829EF2 /* FilterCharacter.swift in Sources */,
 				84B33CD02C4446C400E8BB31 /* LocationDetailView.swift in Sources */,
 				84B33CD22C44494200E8BB31 /* LocationDetailViewModel.swift in Sources */,
-				84085A6F2C3C33C8001F8DB9 /* DetailViewModel.swift in Sources */,
+				84085A6F2C3C33C8001F8DB9 /* CharacterDetailViewModel.swift in Sources */,
 				844BA23A2BE43BBA00138F3D /* FavoriteView.swift in Sources */,
 				8473D97B2C34B72300796618 /* LocationViewModel.swift in Sources */,
 				847BC6AF2C408DB900A180F4 /* iOSCheckboxToggleStyle.swift in Sources */,

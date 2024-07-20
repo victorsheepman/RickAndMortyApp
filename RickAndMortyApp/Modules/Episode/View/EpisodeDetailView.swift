@@ -54,7 +54,7 @@ struct EpisodeDetailView: View {
                 LazyVGrid(columns: layout){
                     ForEach(episodeDetailViewModel.characters, id:\.id){ character in
                         
-                        NavigationLink(destination: CharacterDetailView( characterId: character.id, episodes: character.episode)) {
+                        NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
                             CharacterCard(status: character.status, name: character.name, img: character.image)
                         }
                         

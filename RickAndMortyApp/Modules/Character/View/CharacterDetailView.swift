@@ -10,18 +10,11 @@ import SwiftUI
 
 struct CharacterDetailView: View {
     
-    @StateObject var detailViewModel = DetailCharacterViewModel()
+    @StateObject var detailViewModel = CharacterDetailCharacterViewModel()
     
     
     var characterId: Int
-    var episodes: [String]
-    var episodeIds: [Int] {
-        return episodes.compactMap { url in
-            return url.split(separator: "/").last.flatMap { Int($0) }
-        }
-    }
-    
-    
+
     var locationId: Int? {
         
         guard let urlString = detailViewModel.character?.location.url else { return nil }
@@ -173,16 +166,13 @@ struct CharacterDetailView: View {
             }
         }
         .onAppear(){
-            detailViewModel.getEpisodes(episodes: episodeIds)
-            detailViewModel.getCharacter(from: characterId)
+            
+            detailViewModel.fetchCharactersAndEpisodes(from: characterId)
         }
         Spacer()
     }
 }
 
 #Preview {
-    CharacterDetailView(characterId: 2, episodes: [
-        "https://rickandmortyapi.com/api/episode/1",
-        "https://rickandmortyapi.com/api/episode/2",
-    ])
+    CharacterDetailView(characterId: 2)
 }
