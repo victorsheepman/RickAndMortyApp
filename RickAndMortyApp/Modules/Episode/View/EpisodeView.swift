@@ -54,6 +54,7 @@ struct EpisodeView: View {
                                     Image(systemName: "chevron.right")
                                         .foregroundColor(.gray)
                                 }.padding(.trailing, 16)
+                                    
                             }
                             Divider()
                         }   .padding(.leading, 16)

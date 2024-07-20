@@ -40,6 +40,7 @@
 		84DD48E62BE436F700175061 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD48E52BE436F700175061 /* ContentView.swift */; };
 		84DD48E82BE436F800175061 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84DD48E72BE436F800175061 /* Assets.xcassets */; };
 		84DD48EB2BE436F800175061 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84DD48EA2BE436F800175061 /* Preview Assets.xcassets */; };
+		84FC59F52C4C441E0025283B /* EpisodeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC59F42C4C441E0025283B /* EpisodeCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		84DD48E52BE436F700175061 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		84DD48E72BE436F800175061 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84DD48EA2BE436F800175061 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		84FC59F42C4C441E0025283B /* EpisodeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				844BA2312BE43ABA00138F3D /* EpisodeView.swift */,
 				841775212C4870B3006C9CD0 /* FilterEpisodeView.swift */,
 				841775232C4877F8006C9CD0 /* EpisodeDetailView.swift */,
+				84FC59F42C4C441E0025283B /* EpisodeCard.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				844A90852BE5350200FD5154 /* NetworkManager.swift in Sources */,
 				841775242C4877F8006C9CD0 /* EpisodeDetailView.swift in Sources */,
 				84C4E5962C49DBDF0031292A /* SearchItem.swift in Sources */,
+				84FC59F52C4C441E0025283B /* EpisodeCard.swift in Sources */,
 				844A908E2BE5383800FD5154 /* CharacterViewModel.swift in Sources */,
 				84C4E59C2C49E15D0031292A /* FilterCharacterModel.swift in Sources */,
 				844BA23E2BE43D7700138F3D /* SettingView.swift in Sources */,

@@ -22,6 +22,13 @@ struct CharacterDetailView: View {
     }
     
     
+    var locationId: Int? {
+        
+        guard let urlString = detailViewModel.character?.location.url else { return nil }
+        
+        return urlString.split(separator: "/").last.flatMap { Int($0) }
+    }
+    
     var body: some View {
         VStack(alignment:.leading){
             ZStack{
@@ -121,7 +128,7 @@ struct CharacterDetailView: View {
                     .foregroundColor(Color.gray)
                 
                 Divider()
-                NavigationLink(destination: DetailView()) {
+                NavigationLink(destination: LocationDetailView(locationId:locationId ?? 0 )) {
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Location")
