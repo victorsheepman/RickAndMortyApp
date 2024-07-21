@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-
-
-
 struct FilterLocationView: View {
     
     @Binding var name:        String
@@ -23,7 +20,6 @@ struct FilterLocationView: View {
         NavigationView{
             VStack(alignment:.leading){
                 HStack(alignment: .center){
-                    
                     Button("Clear"){
                         cleanData()
                     }
@@ -38,7 +34,11 @@ struct FilterLocationView: View {
                         .foregroundStyle(Color("Black"))
                     Spacer()
                     Button("APPLY"){
-                        manager.getLocationsFiltered(name: name, type: type, dimension: dimension)
+                        manager.getLocationsFiltered(
+                            name: name,
+                            type: type,
+                            dimension: dimension
+                        )
                         isPresented = false
                     }.frame(width:82, height:38)
                         .background(Color("Indigo"))
@@ -51,73 +51,34 @@ struct FilterLocationView: View {
                 Divider()
                     .padding(.top, 15)
              
-                NavigationLink(destination: Search(textToSearch: $name)) {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Name")
-                                .font(.system(size: 17))
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
-                            
-                            Text("Give a name")
-                                .font(.caption)
-                                .fontWeight(.regular)
-                                .foregroundColor(Color.gray)
-                        }
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.gray)
-                    }
-                }.padding(.horizontal, 16)
-                Divider()
-                Divider()
-                    .padding(.top, 15)
-                NavigationLink(destination: Search(textToSearch: $type)) {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Type")
-                                .font(.system(size: 17))
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
-                            
-                            Text("Select One")
-                                .font(.caption)
-                                .fontWeight(.regular)
-                                .foregroundColor(Color.gray)
-                        }
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.gray)
-                    }
-                }.padding(.horizontal, 16)
+                SearchItem(
+                    textToSearch: $name,
+                    title: "Name",
+                    placeholder: "Give a name"
+                )
                 
                 Divider()
                 Divider()
                     .padding(.top, 15)
-                NavigationLink(destination: Search(textToSearch: $dimension)) {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Dimension")
-                                .font(.system(size: 17))
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
-                            
-                            Text("Select One")
-                                .font(.caption)
-                                .fontWeight(.regular)
-                                .foregroundColor(Color.gray)
-                        }
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.gray)
-                    }
-                }.padding(.horizontal, 16)
+                
+                SearchItem(
+                    textToSearch: $type,
+                    title: "Type",
+                    placeholder: "Select one"
+                )
+                
                 Divider()
-
+                Divider()
+                    .padding(.top, 15)
+                
+                SearchItem(
+                    textToSearch: $dimension,
+                    title: "Dimension",
+                    placeholder: "Select one"
+                )
+                Divider()
                 Spacer()
-                
             }
-
         }
     }
     
@@ -129,7 +90,6 @@ struct FilterLocationView: View {
         isPresented = false
     }
 }
-
 
 #Preview {
     FilterLocationView(

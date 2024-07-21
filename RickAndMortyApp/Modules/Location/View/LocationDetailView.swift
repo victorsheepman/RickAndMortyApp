@@ -20,9 +20,7 @@ struct LocationDetailView: View {
     @State private var isPresentingDetailResident = false
     
     var locationId: Int
-
-
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             GeometryReader { geometry in
@@ -62,24 +60,22 @@ struct LocationDetailView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVGrid(columns: layout){
                     ForEach(locationDetailViewModel.characters, id:\.id){ character in
-                        
                         NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
-                            CharacterCard(status: character.status, name: character.name, img: character.image)
+                            CharacterCard(
+                                status: character.status,
+                                name: character.name,
+                                img: character.image
+                            )
                         }
-                        
-                        
-                        
                     }
                 }
             }
-            Spacer()
+            
             
         }
         .onAppear{
             locationDetailViewModel.fetchLocationAndResidents(from: locationId)
-            
-            print(locationDetailViewModel.characters)
-           
+            print(locationId)
         }
         Spacer()
     }
