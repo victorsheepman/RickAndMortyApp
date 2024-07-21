@@ -61,7 +61,6 @@ struct LocationDetailView: View {
                 LazyVGrid(columns: layout){
                     ForEach(locationDetailViewModel.characters, id:\.id){ character in
                         NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
-                            
                             CharacterCard(
                                 status: character.status,
                                 name: character.name,
