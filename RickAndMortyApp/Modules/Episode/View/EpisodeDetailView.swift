@@ -39,8 +39,7 @@ struct EpisodeDetailView: View {
                             }
                         }
                     
-                }
-                .frame(maxWidth: .infinity)
+                }.frame(maxWidth: .infinity)
             }.frame(height: 139).padding(.top, -50)
             
             Text("Residents")
@@ -53,23 +52,20 @@ struct EpisodeDetailView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVGrid(columns: layout){
                     ForEach(episodeDetailViewModel.characters, id:\.id){ character in
-                        
                         NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
-                            CharacterCard(status: character.status, name: character.name, img: character.image)
+                            CharacterCard(
+                                status: character.status,
+                                name: character.name,
+                                img: character.image
+                            )
                         }
-                        
-                        
-                        
                     }
                 }
             }
             Spacer()
-            
         }
         .onAppear{
             episodeDetailViewModel.fetchEpisodeAndCharacters(from: episodeId)
-
-          
         }
         Spacer()
     }

@@ -22,36 +22,17 @@ struct LocationView: View {
     ]
 
     var body: some View {
-        NavigationView {
-            ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: gridLayout){
-                    ForEach(locationViewModel.locations, id:\.id){ location in
-                        NavigationLink(destination: LocationDetailView(locationId: location.id ?? 0)) {
-                            LocationCard(type: location.type ?? "", name: location.name ?? "")
-                        }
+        HeaderContainer(config: HeaderContainerConfiguration(title: "Location", isFilterPresented: $isPresented)){
+            LazyVGrid(columns: gridLayout){
+                ForEach(locationViewModel.locations, id:\.id){ location in
+                    NavigationLink(destination: LocationDetailView(locationId: location.id ?? 0)) {
+                        LocationCard(type: location.type ?? "", name: location.name ?? "")
                     }
-                }.padding(.top, 19)
-                    .padding(.horizontal, 16)
-                    .background(.white)
-                    .navigationTitle("Location")
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Button(action: {
-                                isPresented = true
-                            })
-                            {
-                                Text("Filter")
-                                    .font(.title2)
-                                    .fontWeight(.semibold)
-                                    .foregroundStyle(Color("Indigo"))
-                            }
-                        }
-                    }
-                
-            }.background(Color("Gray7"))
-            
-        }
-        .onAppear{
+                }
+            }.padding(.top, 19)
+                .padding(.horizontal, 16)
+                .background(.white)
+        }.onAppear{
             locationViewModel.getLocations(from: "page=3")
         }
         .fullScreenCover(isPresented: $isPresented, onDismiss: { isPresented = false}){

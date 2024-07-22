@@ -36,6 +36,7 @@
 		84C4E5982C49E07B0031292A /* EnumToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C4E5972C49E07B0031292A /* EnumToggle.swift */; };
 		84C4E59A2C49E0CE0031292A /* InputSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C4E5992C49E0CE0031292A /* InputSearch.swift */; };
 		84C4E59C2C49E15D0031292A /* FilterCharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C4E59B2C49E15D0031292A /* FilterCharacterModel.swift */; };
+		84D3BFDA2C4EFAE0007620E6 /* HeaderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D3BFD92C4EFAE0007620E6 /* HeaderContainer.swift */; };
 		84DD48E42BE436F700175061 /* RickAndMortyAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD48E32BE436F700175061 /* RickAndMortyAppApp.swift */; };
 		84DD48E62BE436F700175061 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD48E52BE436F700175061 /* ContentView.swift */; };
 		84DD48E82BE436F800175061 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84DD48E72BE436F800175061 /* Assets.xcassets */; };
@@ -73,6 +74,7 @@
 		84C4E5972C49E07B0031292A /* EnumToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumToggle.swift; sourceTree = "<group>"; };
 		84C4E5992C49E0CE0031292A /* InputSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSearch.swift; sourceTree = "<group>"; };
 		84C4E59B2C49E15D0031292A /* FilterCharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCharacterModel.swift; sourceTree = "<group>"; };
+		84D3BFD92C4EFAE0007620E6 /* HeaderContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderContainer.swift; sourceTree = "<group>"; };
 		84DD48E02BE436F700175061 /* RickAndMortyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMortyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84DD48E32BE436F700175061 /* RickAndMortyAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RickAndMortyAppApp.swift; sourceTree = "<group>"; };
 		84DD48E52BE436F700175061 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				84C4E5952C49DBDF0031292A /* SearchItem.swift */,
 				84C4E5972C49E07B0031292A /* EnumToggle.swift */,
 				84C4E5992C49E0CE0031292A /* InputSearch.swift */,
+				84D3BFD92C4EFAE0007620E6 /* HeaderContainer.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84D3BFDA2C4EFAE0007620E6 /* HeaderContainer.swift in Sources */,
 				8473D9782C34B68200796618 /* LocationView.swift in Sources */,
 				84DD48E62BE436F700175061 /* ContentView.swift in Sources */,
 				844A90922BE53E3F00FD5154 /* EpisodeResponseDataModel.swift in Sources */,

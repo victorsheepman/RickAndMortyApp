@@ -23,33 +23,19 @@ struct CharacterView: View {
     ]
     
     var body: some View {
-        NavigationView {
-            ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: gridLayout, spacing: 20){
-                    ForEach(characterViewModel.characterModel, id:\.id){ character in
-                        NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
-                            CharacterCard(status: character.status, name: character.name, img: character.image)
-                        }
-                    }
-                }
-                .padding(.top,9)
-                .background(.white)
-                .padding(.bottom, 65)
-            }
-            .navigationTitle("Character")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { isPresented = true }) {
-                        Text("Filter")
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .foregroundColor(Color("Indigo"))
+        HeaderContainer(config: HeaderContainerConfiguration(title: "Character", isFilterPresented: $isPresented)) {
+            LazyVGrid(columns: gridLayout, spacing: 20){
+                ForEach(characterViewModel.characterModel, id:\.id){ character in
+                    NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
+                        CharacterCard(status: character.status, name: character.name, img: character.image)
                     }
                 }
             }
-            .background(Color("Gray7"))
-        }
-        .onAppear{
+            .padding(.top,9)
+            .background(.white)
+            .padding(.bottom, 65)
+    
+        }.onAppear{
             
             characterViewModel.getCharacters(from: "page=19")
         }

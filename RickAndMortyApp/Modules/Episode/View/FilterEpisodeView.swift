@@ -47,49 +47,23 @@ struct FilterEpisodeView: View {
                 Divider()
                     .padding(.top, 15)
                 
-                NavigationLink(destination: Search(textToSearch: $name)) {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Name")
-                                .font(.system(size: 17))
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
-                            
-                            Text("Give a name")
-                                .font(.caption)
-                                .fontWeight(.regular)
-                                .foregroundColor(Color.gray)
-                        }
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.gray)
-                    }
-                }.padding(.horizontal, 16)
+                SearchItem(
+                    textToSearch: $name,
+                    title: "Name",
+                    placeholder: "Give a name"
+                )
                 Divider()
                 Divider()
                     .padding(.top, 15)
-                NavigationLink(destination: Search(textToSearch: $episode)) {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Episode")
-                                .font(.system(size: 17))
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
-                            
-                            Text("Select One")
-                                .font(.caption)
-                                .fontWeight(.regular)
-                                .foregroundColor(Color.gray)
-                        }
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.gray)
-                    }
-                }.padding(.horizontal, 16)
+            
+                SearchItem(
+                    textToSearch: $name,
+                    title: "Episode",
+                    placeholder: "Select one"
+                )
                 
                 Divider()
-                
-                
+
                 Spacer()
                 
             }
