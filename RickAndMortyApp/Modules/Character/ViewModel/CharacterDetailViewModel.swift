@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class CharacterDetailCharacterViewModel: ObservableObject {
+class CharacterDetailViewModel: ObservableObject {
     @Published var episodes:[EpisodeDataModel] = []
     @Published var character: CharacterDataModel?
     

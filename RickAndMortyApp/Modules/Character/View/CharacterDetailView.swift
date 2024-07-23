@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CharacterDetailView: View {
     
-    @StateObject var detailViewModel = CharacterDetailCharacterViewModel()
+    @StateObject var detailViewModel = CharacterDetailViewModel()
     
     
     var characterId: Int
