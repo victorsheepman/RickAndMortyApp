@@ -24,8 +24,6 @@
 		844A90952BE53F6800FD5154 /* EpisodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A90942BE53F6800FD5154 /* EpisodeViewModel.swift */; };
 		844BA2322BE43ABA00138F3D /* EpisodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA2312BE43ABA00138F3D /* EpisodeView.swift */; };
 		844BA2372BE43B4600138F3D /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA2362BE43B4600138F3D /* CharacterView.swift */; };
-		844BA23A2BE43BBA00138F3D /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA2392BE43BBA00138F3D /* FavoriteView.swift */; };
-		844BA23E2BE43D7700138F3D /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA23D2BE43D7700138F3D /* SettingView.swift */; };
 		8473D9782C34B68200796618 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473D9772C34B68200796618 /* LocationView.swift */; };
 		8473D97B2C34B72300796618 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473D97A2C34B72300796618 /* LocationViewModel.swift */; };
 		847BC6AF2C408DB900A180F4 /* iOSCheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BC6AE2C408DB900A180F4 /* iOSCheckboxToggleStyle.swift */; };
@@ -62,8 +60,6 @@
 		844A90942BE53F6800FD5154 /* EpisodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewModel.swift; sourceTree = "<group>"; };
 		844BA2312BE43ABA00138F3D /* EpisodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeView.swift; sourceTree = "<group>"; };
 		844BA2362BE43B4600138F3D /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
-		844BA2392BE43BBA00138F3D /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
-		844BA23D2BE43D7700138F3D /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		8473D9772C34B68200796618 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		8473D97A2C34B72300796618 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		847BC6AE2C408DB900A180F4 /* iOSCheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCheckboxToggleStyle.swift; sourceTree = "<group>"; };
@@ -144,8 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				8473D9752C34B66700796618 /* Location */,
-				844BA23B2BE43D6200138F3D /* Setting */,
-				844BA2382BE43B9F00138F3D /* Favorite */,
 				844BA2342BE43B3100138F3D /* Character */,
 				844BA2302BE43AA800138F3D /* Episode */,
 			);
@@ -190,30 +184,6 @@
 				84453D8C2C3B014F00F234B4 /* CharacterDetailView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		844BA2382BE43B9F00138F3D /* Favorite */ = {
-			isa = PBXGroup;
-			children = (
-				844BA2392BE43BBA00138F3D /* FavoriteView.swift */,
-			);
-			path = Favorite;
-			sourceTree = "<group>";
-		};
-		844BA23B2BE43D6200138F3D /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-				844BA23C2BE43D6B00138F3D /* View */,
-			);
-			path = Setting;
-			sourceTree = "<group>";
-		};
-		844BA23C2BE43D6B00138F3D /* View */ = {
-			isa = PBXGroup;
-			children = (
-				844BA23D2BE43D7700138F3D /* SettingView.swift */,
-			);
-			name = View;
 			sourceTree = "<group>";
 		};
 		8473D9752C34B66700796618 /* Location */ = {
@@ -385,14 +355,12 @@
 				84FC59F52C4C441E0025283B /* EpisodeCard.swift in Sources */,
 				844A908E2BE5383800FD5154 /* CharacterViewModel.swift in Sources */,
 				84C4E59C2C49E15D0031292A /* FilterCharacterModel.swift in Sources */,
-				844BA23E2BE43D7700138F3D /* SettingView.swift in Sources */,
 				841775262C487839006C9CD0 /* EpisodeDetailViewModel.swift in Sources */,
 				84B33CCE2C443D9F00E8BB31 /* FilterLocationView.swift in Sources */,
 				8425A4B92C37503B00829EF2 /* FilterCharacter.swift in Sources */,
 				84B33CD02C4446C400E8BB31 /* LocationDetailView.swift in Sources */,
 				84B33CD22C44494200E8BB31 /* LocationDetailViewModel.swift in Sources */,
 				84085A6F2C3C33C8001F8DB9 /* CharacterDetailViewModel.swift in Sources */,
-				844BA23A2BE43BBA00138F3D /* FavoriteView.swift in Sources */,
 				8473D97B2C34B72300796618 /* LocationViewModel.swift in Sources */,
 				847BC6AF2C408DB900A180F4 /* iOSCheckboxToggleStyle.swift in Sources */,
 				844A90952BE53F6800FD5154 /* EpisodeViewModel.swift in Sources */,
