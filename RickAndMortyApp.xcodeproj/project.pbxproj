@@ -21,12 +21,13 @@
 		844A90852BE5350200FD5154 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A90842BE5350200FD5154 /* NetworkManager.swift */; };
 		844A908B2BE5361300FD5154 /* CharacterResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A908A2BE5361300FD5154 /* CharacterResponseDataModel.swift */; };
 		844A908E2BE5383800FD5154 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A908D2BE5383800FD5154 /* CharacterViewModel.swift */; };
-		844A90922BE53E3F00FD5154 /* EpisodeResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A90912BE53E3F00FD5154 /* EpisodeResponseDataModel.swift */; };
 		844A90952BE53F6800FD5154 /* EpisodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A90942BE53F6800FD5154 /* EpisodeViewModel.swift */; };
 		844BA2322BE43ABA00138F3D /* EpisodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA2312BE43ABA00138F3D /* EpisodeView.swift */; };
 		844BA2372BE43B4600138F3D /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA2362BE43B4600138F3D /* CharacterView.swift */; };
 		84601A422C515EC2009259A9 /* Constansts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84601A412C515EC2009259A9 /* Constansts.swift */; };
 		84601A442C515EE8009259A9 /* iOSCheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84601A432C515EE8009259A9 /* iOSCheckboxToggleStyle.swift */; };
+		84601A462C515F92009259A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84601A452C515F92009259A9 /* Assets.xcassets */; };
+		84601A482C515FCA009259A9 /* EpisodeResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84601A472C515FCA009259A9 /* EpisodeResponseDataModel.swift */; };
 		8473D9782C34B68200796618 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473D9772C34B68200796618 /* LocationView.swift */; };
 		8473D97B2C34B72300796618 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473D97A2C34B72300796618 /* LocationViewModel.swift */; };
 		84B33CCE2C443D9F00E8BB31 /* FilterLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B33CCD2C443D9F00E8BB31 /* FilterLocationView.swift */; };
@@ -39,7 +40,6 @@
 		84D3BFDA2C4EFAE0007620E6 /* HeaderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D3BFD92C4EFAE0007620E6 /* HeaderContainer.swift */; };
 		84DD48E42BE436F700175061 /* RickAndMortyAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD48E32BE436F700175061 /* RickAndMortyAppApp.swift */; };
 		84DD48E62BE436F700175061 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD48E52BE436F700175061 /* ContentView.swift */; };
-		84DD48E82BE436F800175061 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84DD48E72BE436F800175061 /* Assets.xcassets */; };
 		84DD48EB2BE436F800175061 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84DD48EA2BE436F800175061 /* Preview Assets.xcassets */; };
 		84FC59F52C4C441E0025283B /* EpisodeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC59F42C4C441E0025283B /* EpisodeCard.swift */; };
 /* End PBXBuildFile section */
@@ -70,12 +70,13 @@
 		844A90842BE5350200FD5154 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		844A908A2BE5361300FD5154 /* CharacterResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterResponseDataModel.swift; sourceTree = "<group>"; };
 		844A908D2BE5383800FD5154 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
-		844A90912BE53E3F00FD5154 /* EpisodeResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeResponseDataModel.swift; sourceTree = "<group>"; };
 		844A90942BE53F6800FD5154 /* EpisodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewModel.swift; sourceTree = "<group>"; };
 		844BA2312BE43ABA00138F3D /* EpisodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeView.swift; sourceTree = "<group>"; };
 		844BA2362BE43B4600138F3D /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
 		84601A412C515EC2009259A9 /* Constansts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constansts.swift; sourceTree = "<group>"; };
 		84601A432C515EE8009259A9 /* iOSCheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCheckboxToggleStyle.swift; sourceTree = "<group>"; };
+		84601A452C515F92009259A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../Desktop/Assets.xcassets; sourceTree = "<group>"; };
+		84601A472C515FCA009259A9 /* EpisodeResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeResponseDataModel.swift; sourceTree = "<group>"; };
 		8473D9772C34B68200796618 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		8473D97A2C34B72300796618 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		84B33CCD2C443D9F00E8BB31 /* FilterLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterLocationView.swift; sourceTree = "<group>"; };
@@ -89,7 +90,6 @@
 		84DD48E02BE436F700175061 /* RickAndMortyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMortyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84DD48E32BE436F700175061 /* RickAndMortyAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RickAndMortyAppApp.swift; sourceTree = "<group>"; };
 		84DD48E52BE436F700175061 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		84DD48E72BE436F800175061 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84DD48EA2BE436F800175061 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		84FC59F42C4C441E0025283B /* EpisodeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,9 +133,9 @@
 			isa = PBXGroup;
 			children = (
 				844A908A2BE5361300FD5154 /* CharacterResponseDataModel.swift */,
-				844A90912BE53E3F00FD5154 /* EpisodeResponseDataModel.swift */,
 				8433FE5A2C431E5000785B26 /* LocationResponseDataModel.swift */,
 				84C4E59B2C49E15D0031292A /* FilterCharacterModel.swift */,
+				84601A472C515FCA009259A9 /* EpisodeResponseDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -285,7 +285,7 @@
 				844BA22F2BE43A7600138F3D /* Modules */,
 				84DD48E32BE436F700175061 /* RickAndMortyAppApp.swift */,
 				84DD48E52BE436F700175061 /* ContentView.swift */,
-				84DD48E72BE436F800175061 /* Assets.xcassets */,
+				84601A452C515F92009259A9 /* Assets.xcassets */,
 				84DD48E92BE436F800175061 /* Preview Content */,
 			);
 			path = RickAndMortyApp;
@@ -388,7 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84DD48EB2BE436F800175061 /* Preview Assets.xcassets in Resources */,
-				84DD48E82BE436F800175061 /* Assets.xcassets in Resources */,
+				84601A462C515F92009259A9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,8 +411,8 @@
 				84D3BFDA2C4EFAE0007620E6 /* HeaderContainer.swift in Sources */,
 				8473D9782C34B68200796618 /* LocationView.swift in Sources */,
 				84DD48E62BE436F700175061 /* ContentView.swift in Sources */,
-				844A90922BE53E3F00FD5154 /* EpisodeResponseDataModel.swift in Sources */,
 				844A908B2BE5361300FD5154 /* CharacterResponseDataModel.swift in Sources */,
+				84601A482C515FCA009259A9 /* EpisodeResponseDataModel.swift in Sources */,
 				84601A422C515EC2009259A9 /* Constansts.swift in Sources */,
 				84601A442C515EE8009259A9 /* iOSCheckboxToggleStyle.swift in Sources */,
 				844BA2322BE43ABA00138F3D /* EpisodeView.swift in Sources */,
