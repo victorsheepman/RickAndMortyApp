@@ -17,9 +17,14 @@ class CharacterViewModel: ObservableObject {
     
     let baseURL = Constansts.MainURL.main + Constansts.Endpoints.characters + "/?"
     
+    init() {
+        getCharacters(from: "page=19")
+      }
+    
     func getCharacters(from page: String) {
         let url = URL(string: self.baseURL + page)!
         getDataFromApi(url: url)
+        print("arranco la app")
     }
     
     func getCharacterFiltered(gender: String? = nil, status: String? = nil, species: String? = nil, name: String? = nil) {

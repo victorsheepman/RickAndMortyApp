@@ -35,9 +35,6 @@ struct CharacterView: View {
             .background(.white)
             .padding(.bottom, 65)
     
-        }.onAppear{
-            
-            characterViewModel.getCharacters(from: "page=19")
         }
         .fullScreenCover(isPresented: $isPresented, onDismiss: { isPresented = false}){
             FilterCharacter(status: $status,
