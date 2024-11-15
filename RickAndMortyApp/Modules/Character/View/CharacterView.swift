@@ -12,12 +12,12 @@ struct CharacterView: View {
     @StateObject private var characterViewModel = CharacterViewModel()
     
     @State private var isPresented: Bool = false
+    
     @State private var gender:    String = ""
     @State private var species:   String = ""
     @State private var name:      String = ""
     @State private var status:    String = ""
     
-  
     var body: some View {
         HeaderContainer(config: HeaderContainerConfiguration(title: "Character", isFilterPresented: $isPresented)) {
             LazyVGrid(columns: Constansts.gridLayout, spacing: 20){

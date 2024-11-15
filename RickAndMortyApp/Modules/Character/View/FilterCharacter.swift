@@ -167,13 +167,16 @@ struct FilterCharacter: View {
         if !isApplyDisabled {
             manager.getCharacters(from: "page=19")
         }
-        
-        gender      = ""
-        status      = ""
-        species     = ""
-        name        = ""
+       resetFilters()
     }
     
+    private func resetFilters() {
+        gender = ""
+        status = ""
+        species = ""
+        name = ""
+    }
+
     private func apply()->Void{
         manager.getCharacterFiltered(gender: gender, status: status, species: species, name:name)
     }
