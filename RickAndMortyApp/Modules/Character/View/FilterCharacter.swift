@@ -12,8 +12,6 @@ import SwiftUI
 
 struct FilterCharacter: View {
     
-  
-    
     @Environment(\.dismiss) private var dismiss
     
     @Binding var status: String
@@ -21,14 +19,11 @@ struct FilterCharacter: View {
     @Binding var species:     String
     @Binding var name:        String
     
-    
     var manager: CharacterViewModel
     
     private var isApplyDisabled: Bool {
-        return status.isEmpty &&
-        gender.isEmpty &&
-        species.isEmpty &&
-        name.isEmpty
+        [status, gender, species, name]
+            .allSatisfy { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
     }
     
     var body: some View {
@@ -162,12 +157,11 @@ struct FilterCharacter: View {
         }
     }
     
-    
     private func clean() -> Void {
         if !isApplyDisabled {
             manager.getCharacters(from: "page=19")
         }
-       resetFilters()
+        resetFilters()
     }
     
     private func resetFilters() {
@@ -176,12 +170,10 @@ struct FilterCharacter: View {
         species = ""
         name = ""
     }
-
+    
     private func apply()->Void{
         manager.getCharacterFiltered(gender: gender, status: status, species: species, name:name)
     }
-    
-    
 }
 
 #Preview {
