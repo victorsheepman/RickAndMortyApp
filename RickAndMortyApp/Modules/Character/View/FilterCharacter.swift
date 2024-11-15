@@ -13,22 +13,20 @@ import SwiftUI
 struct FilterCharacter: View {
     
     @State private var isOn = false
-    
-    @Binding var status:      String
+    @Environment(\.dismiss) private var dismiss
+    @State private var status: String = ""
     @Binding var gender:      String
     @Binding var species:     String
     @Binding var name:        String
     @Binding var isPresented: Bool
     
+    @State var localGender: String = ""
+    
     var manager: CharacterViewModel
 
     var body: some View {
-        NavigationView{
+        NavigationStack{
             VStack(alignment:.leading){
-                header
-                Divider()
-                    .padding(.top, 15)
-                
                 SearchItem(
                     textToSearch: $name,
                     title: "Name",
@@ -52,47 +50,43 @@ struct FilterCharacter: View {
                 Spacer()
 
 
+            }.onAppear {
+                localGender = gender
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Clear"){
+                        clean()
+                    }
+                    .tint(.indigo)
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("Filter")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("APPLY"){
+                       apply()
+                    }
+                    .tint(.indigo)
+                    .font(.headline)
+                    .buttonBorderShape(.capsule)
+                    .buttonStyle(.borderedProminent)
+                    
+                }
             }
         }
     }
-    
-    private var header: some View {
-        HStack(alignment: .center){
-            
-            Button("Clear"){
-                cleanData()
-            }
-            .foregroundStyle(Color("Indigo"))
-            .font(.callout)
-            .fontWeight(.regular)
-            .padding(.leading, 20)
-            Spacer()
-            Text("Filter")
-                .font(.title3)
-                .fontWeight(.semibold)
-                .foregroundStyle(Color("Black"))
-            Spacer()
-            
-            Button("APPLY"){
-                manager.getCharacterFiltered(gender: gender, status: status, species: species, name:name)
-                isPresented = false
-            }
-            .tint(.indigo)
-            .font(.headline)
-            .buttonBorderShape(.capsule)
-            .buttonStyle(.borderedProminent)
-            .padding(.trailing, 20)
-        }
-    }
-    
+  
     private var statusSection: some View {
         VStack(alignment:.leading) {
             Text("Status")
                 .font(.headline)
-                .fontWeight(.bold)
-                .foregroundStyle(.gray3)
+                .foregroundStyle(.gray2)
                 .padding(.horizontal, 16)
-                .padding(.top, 10)
+                
             Divider()
             
             VStack(alignment:.leading, spacing: 10){
@@ -115,18 +109,18 @@ struct FilterCharacter: View {
                     label: "Unknown"
                 )
                 
-            }.padding(.horizontal, 16)
+            }
+            .padding(.horizontal, 16)
         }
+        .padding(.vertical)
     }
     
     private var genderSection: some View {
         VStack(alignment:.leading) {
             Text("Gender")
                 .font(.headline)
-                .fontWeight(.bold)
-                .foregroundStyle(.gray3)
+                .foregroundStyle(.gray2)
                 .padding(.horizontal, 16)
-                .padding(.top, 10)
             Divider()
             
             VStack(alignment:.leading, spacing: 12){
@@ -160,21 +154,26 @@ struct FilterCharacter: View {
     }
     
     
-    private func cleanData() -> Void {
-        manager.getCharacters(from: "page=19")
+    private func clean() -> Void {
         gender      = ""
         status      = ""
         species     = ""
         name        = ""
-        isPresented = false
         
-
+        dismiss()
     }
+    
+    private func apply()->Void{
+        gender = localGender
+        manager.getCharacterFiltered(gender: gender, status: status, species: species, name:name)
+        isPresented = false
+    }
+    
+    
 }
 
 #Preview {
     FilterCharacter(
-        status:  .constant("unknown"),
         gender:  .constant("unknown"),
         species: .constant(""),
         name:    .constant(""), 
