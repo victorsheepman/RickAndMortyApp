@@ -17,14 +17,10 @@ struct CharacterView: View {
     @State private var species:   String = ""
     @State private var name:      String = ""
     
-    let gridLayout = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
-    
+  
     var body: some View {
         HeaderContainer(config: HeaderContainerConfiguration(title: "Character", isFilterPresented: $isPresented)) {
-            LazyVGrid(columns: gridLayout, spacing: 20){
+            LazyVGrid(columns: Constansts.gridLayout, spacing: 20){
                 ForEach(characterViewModel.characterModel, id:\.id){ character in
                     NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
                         CharacterCard(status: character.status, name: character.name, img: character.image)
