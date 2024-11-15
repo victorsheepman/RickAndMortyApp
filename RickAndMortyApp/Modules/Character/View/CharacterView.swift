@@ -15,6 +15,7 @@ struct CharacterView: View {
     @State private var gender:    String = ""
     @State private var species:   String = ""
     @State private var name:      String = ""
+    @State private var status:    String = ""
     
   
     var body: some View {
@@ -33,10 +34,10 @@ struct CharacterView: View {
         }
         .fullScreenCover(isPresented: $isPresented, onDismiss: { isPresented = false}){
             FilterCharacter(
+                status: $status,
                 gender: $gender,
                 species: $species,
                 name: $name,
-                isPresented: $isPresented,
                 manager: characterViewModel
             )
         }

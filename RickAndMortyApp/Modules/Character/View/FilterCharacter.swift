@@ -12,18 +12,25 @@ import SwiftUI
 
 struct FilterCharacter: View {
     
-    @State private var isOn = false
+  
+    
     @Environment(\.dismiss) private var dismiss
-    @State private var status: String = ""
+    
+    @Binding var status: String
     @Binding var gender:      String
     @Binding var species:     String
     @Binding var name:        String
-    @Binding var isPresented: Bool
     
-    @State var localGender: String = ""
     
     var manager: CharacterViewModel
-
+    
+    private var isApplyDisabled: Bool {
+        return status.isEmpty &&
+        gender.isEmpty &&
+        species.isEmpty &&
+        name.isEmpty
+    }
+    
     var body: some View {
         NavigationStack{
             VStack(alignment:.leading){
@@ -38,7 +45,7 @@ struct FilterCharacter: View {
                 
                 SearchItem(
                     textToSearch: $species,
-                    title: "Species", 
+                    title: "Species",
                     placeholder:"Select one")
                 
                 Divider()
@@ -48,15 +55,14 @@ struct FilterCharacter: View {
                 genderSection
                 
                 Spacer()
-
-
-            }.onAppear {
-                localGender = gender
+                
+                
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Clear"){
                         clean()
+                        dismiss()
                     }
                     .tint(.indigo)
                 }
@@ -64,29 +70,32 @@ struct FilterCharacter: View {
                     Text("Filter")
                         .font(.title3)
                         .fontWeight(.semibold)
-                        
+                    
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("APPLY"){
-                       apply()
+                        apply()
+                        dismiss()
                     }
                     .tint(.indigo)
                     .font(.headline)
                     .buttonBorderShape(.capsule)
                     .buttonStyle(.borderedProminent)
+                    .disabled(isApplyDisabled)
                     
                 }
+                
             }
         }
     }
-  
+    
     private var statusSection: some View {
         VStack(alignment:.leading) {
             Text("Status")
                 .font(.headline)
                 .foregroundStyle(.gray2)
                 .padding(.horizontal, 16)
-                
+            
             Divider()
             
             VStack(alignment:.leading, spacing: 10){
@@ -96,7 +105,7 @@ struct FilterCharacter: View {
                     toggleValue: Status.alive,
                     label: "Alive"
                 )
-             
+                
                 EnumToggle(
                     selectedValue: $status,
                     toggleValue: Status.dead,
@@ -124,19 +133,19 @@ struct FilterCharacter: View {
             Divider()
             
             VStack(alignment:.leading, spacing: 12){
-            
+                
                 EnumToggle(
                     selectedValue: $gender,
                     toggleValue: Gender.female,
                     label: "Female"
                 )
-
+                
                 EnumToggle(
                     selectedValue: $gender,
                     toggleValue: Gender.male,
                     label: "Male"
                 )
-                                    
+                
                 EnumToggle(
                     selectedValue: $gender,
                     toggleValue: Gender.genderless,
@@ -148,25 +157,25 @@ struct FilterCharacter: View {
                     toggleValue: Gender.unknown,
                     label: "Unknown"
                 )
-
+                
             }.padding(.horizontal, 16)
         }
     }
     
     
     private func clean() -> Void {
+        if !isApplyDisabled {
+            manager.getCharacters(from: "page=19")
+        }
+        
         gender      = ""
         status      = ""
         species     = ""
         name        = ""
-        
-        dismiss()
     }
     
     private func apply()->Void{
-        gender = localGender
         manager.getCharacterFiltered(gender: gender, status: status, species: species, name:name)
-        isPresented = false
     }
     
     
@@ -174,10 +183,10 @@ struct FilterCharacter: View {
 
 #Preview {
     FilterCharacter(
-        gender:  .constant("unknown"),
+        status: .constant(""),
+        gender:  .constant(""),
         species: .constant(""),
-        name:    .constant(""), 
-        isPresented: .constant(false),
+        name:    .constant(""),
         manager: CharacterViewModel()
     )
 }
