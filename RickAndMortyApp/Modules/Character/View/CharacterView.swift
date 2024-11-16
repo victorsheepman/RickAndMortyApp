@@ -12,7 +12,6 @@ struct CharacterView: View {
     @StateObject private var characterViewModel = CharacterViewModel()
     
     @State private var isPresented: Bool = false
-    
     @State private var filters = CharacterFilters()
     
     var body: some View {
@@ -29,20 +28,13 @@ struct CharacterView: View {
             .padding(.bottom, 65)
     
         }
-        .fullScreenCover(isPresented: $isPresented, onDismiss: { isPresented = false}){
+        .fullScreenCover(isPresented: $isPresented){
             FilterCharacter(
                 filters: $filters,
                 manager: characterViewModel
             )
         }
     }
-}
-
-struct CharacterFilters {
-    var status = String()
-    var gender = String()
-    var species = String()
-    var name = String()
 }
 
 #Preview {
