@@ -26,7 +26,7 @@ struct CharacterDetailView: View {
         VStack(alignment:.leading){
             banner
             
-            Text("Informations")
+          /*  Text("Informations")
                 .font(.title3.bold())
                 .foregroundStyle(.gray)
                 .padding(.horizontal)
@@ -88,6 +88,9 @@ struct CharacterDetailView: View {
                 }
                 
             }.padding(.horizontal, 16)
+           */
+           list
+
             Divider()
             
             Text("Episodes")
@@ -161,6 +164,28 @@ struct CharacterDetailView: View {
         .padding(.top, -50)
     }
     
+    var list: some View {
+        List {
+            Section(header: Text("Información")
+                .font(.title3.bold())
+                .foregroundStyle(.gray)
+                .padding(.vertical, 5)) {
+                    InfoRowView(title: "Gender", value: detailViewModel.character?.gender)
+                    InfoRowView(title: "Origin", value: detailViewModel.character?.origin.name)
+                    InfoRowView(
+                        title: "Type",
+                        value: (detailViewModel.character?.type.isEmpty ?? true ? "Unknown" : detailViewModel.character?.type)
+                    )
+                    NavigationLink(destination: LocationDetailView(locationId: locationId ?? 0)) {
+                        InfoRowView(
+                            title: "Location",
+                            value: detailViewModel.character?.location.name
+                        )
+                    }
+                }
+        }.listStyle(.plain)
+    }
+    
 }
 
 
@@ -199,6 +224,24 @@ fileprivate struct CharacterImageView: View {
                 RoundedRectangle(cornerRadius: 110)
                     .stroke(Color.white, lineWidth: 2)
             )
+    }
+}
+
+fileprivate struct InfoRowView: View {
+    var title: String
+    var value: String?
+    
+    var body: some View {
+        VStack(alignment:.leading){
+            Text(title)
+                .font(.headline)
+                .fontWeight(.semibold)
+                .foregroundStyle(.black)
+            
+            Text(value ?? "Unkown")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+        }
     }
 }
 
