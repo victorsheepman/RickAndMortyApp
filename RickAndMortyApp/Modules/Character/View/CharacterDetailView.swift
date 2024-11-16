@@ -21,6 +21,10 @@ struct CharacterDetailView: View {
         return urlString.split(separator: "/").last.flatMap { Int($0) }
     }
     
+    var charactersDictionary: [RowItem] {
+        detailViewModel.character?.toSections() ?? []
+    }
+    
     var body: some View {
         VStack(alignment:.leading){
             banner
@@ -78,21 +82,18 @@ struct CharacterDetailView: View {
     
     var list: some View {
         List {
-            Section(header: Text("Información")
+            Section(header: Text("Informations")
                 .font(.title3.bold())
                 .foregroundStyle(.gray)
                 .padding(.vertical, 5)) {
-                    InfoRowView(title: "Gender", value: detailViewModel.character?.gender)
-                    InfoRowView(title: "Origin", value: detailViewModel.character?.origin.name)
-                    InfoRowView(
-                        title: "Type",
-                        value: (detailViewModel.character?.type.isEmpty ?? true ? "Unknown" : detailViewModel.character?.type)
-                    )
-                    NavigationLink(destination: LocationDetailView(locationId: locationId ?? 0)) {
-                        InfoRowView(
-                            title: "Location",
-                            value: detailViewModel.character?.location.name
-                        )
+                    ForEach(charactersDictionary, id: \.id) { row in
+                        if row.hasNav {
+                            NavigationLink(destination: LocationDetailView(locationId: locationId ?? 0)) {
+                                InfoRowView(title: row.title, value: row.value)
+                            }
+                        } else {
+                            InfoRowView(title: row.title, value: row.value)
+                        }
                     }
                 }
             Section(header:Text("Episodes")
@@ -170,6 +171,57 @@ fileprivate struct InfoRowView: View {
     }
 }
 
+struct SectionItem {
+    let header: String
+    let rows: [RowItem]
+}
+
+struct RowItem {
+    let id = UUID()
+    let title: String
+    let value: String?
+    
+    var hasNav: Bool {
+        title == "Location"
+    }
+    
+}
+
+
+
+extension CharacterDataModel {
+    func toSections() -> [RowItem] {
+        return [
+            RowItem(title: "Name", value: name),
+            RowItem(title: "Status", value: status),
+            RowItem(title: "Species", value: species),
+            RowItem(title: "Type", value: type.isEmpty ? "Unknown" : type),
+            RowItem(title: "Gender", value: gender),
+            RowItem(title: "Location", value: location.name)
+        ]
+    }
+}
+
+/*
+fileprivate struct InfoRowWithNav: View {
+    var title: String
+    var value: String?
+    var hasNav: Bool
+    var locationId: Int?
+    
+    @ViewBuilder
+    var body: some View {
+        if hasNav {
+            NavigationLink(destination: LocationDetailView(locationId: locationId ?? 0)) {
+                InfoRowView(title: title, value: value)
+            }
+        } else {
+            InfoRowView(title: title, value: value)
+        }
+    }
+}
+
+*/
 
 
 #Preview {
