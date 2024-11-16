@@ -33,10 +33,8 @@ struct EpisodeCard: View {
                         .foregroundColor(Color.gray)
                 }
                 Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.gray)
             }
-        }.padding(.horizontal, 16)
+        }
     }
 }
 
