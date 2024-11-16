@@ -24,55 +24,7 @@ struct CharacterDetailView: View {
     
     var body: some View {
         VStack(alignment:.leading){
-            ZStack{
-                VStack(spacing: 0){
-                    
-                    Image("Banner")
-                        .resizable()
-                        .frame(width:.infinity, height: 84)
-                    Rectangle()
-                        .fill(Color("Gray6"))
-                        .frame(width:.infinity, height: 170)
-                }
-                VStack{
-                    
-                    AsyncImage(url:URL(string: detailViewModel.character?.image ?? "")){ phase in
-                        phase
-                            .resizable()
-                            .frame(width: 130, height: 130)
-                            .clipShape(RoundedRectangle(cornerRadius: 110))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 110)
-                                    .stroke(Color("White"), lineWidth: 5)
-                            )
-                    }placeholder: {
-                        Image("image")
-                            .resizable()
-                            .frame(width: 130, height: 130)
-                            .clipShape(RoundedRectangle(cornerRadius: 110))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 110)
-                                    .stroke(Color("White"), lineWidth: 2)
-                            )
-                        
-                    }
-                    
-                    Text(detailViewModel.character?.status ?? "")
-                        .font(.caption2)
-                        .foregroundStyle(.gray2)
-                        .padding(.top, 10)
-                    
-                    Text(detailViewModel.character?.name ?? "")
-                        .font(.title.bold())
-                    
-                    Text(detailViewModel.character?.species ?? "")
-                        .font(.footnote)
-                        .fontWeight(.medium)
-                        .foregroundStyle(.gray1)
-                    
-                }
-            }
-            .padding(.top, -50)
+            banner
             
             Text("Informations")
                 .font(.title3.bold())
@@ -159,13 +111,97 @@ struct CharacterDetailView: View {
                 }                
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(detailViewModel.character?.name ?? "")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+            }
+        }
         .onAppear(){
             
             detailViewModel.fetchCharactersAndEpisodes(from: characterId)
         }
         Spacer()
     }
+    
+    var banner: some View {
+        ZStack {
+           
+            VStack(spacing: 0){
+                Image("Banner")
+                    .resizable()
+                    .frame(height: 84)
+                    .blur(radius: 2)
+                Rectangle()
+                    .fill(Color("Gray6"))
+                    .frame(width:.infinity, height: 170)
+            }
+            
+            VStack {
+                
+                CharacterImageView(imageUrl: detailViewModel.character?.image ?? "")
+                
+                Text(detailViewModel.character?.status ?? "")
+                    .font(.caption2)
+                    .foregroundStyle(.gray2)
+                    .padding(.top, 10)
+                   
+                
+                Text(detailViewModel.character?.name ?? "")
+                    .font(.title.bold())
+                
+                Text(detailViewModel.character?.species ?? "")
+                    .font(.footnote)
+                    .fontWeight(.medium)
+                    .foregroundStyle(.gray1)
+            }
+           
+        }
+        .padding(.top, -50)
+    }
+    
 }
+
+
+fileprivate struct CharacterImageView: View {
+    let imageUrl: String
+    
+    @ViewBuilder
+    var body: some View {
+        AsyncImage(url: URL(string: imageUrl)) { phase in
+            switch phase {
+            case .empty:
+                placeholderImage
+            case .success(let image):
+                image
+                    .resizable()
+                    .frame(width: 130, height: 130)
+                    .clipShape(RoundedRectangle(cornerRadius: 110))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 110)
+                            .stroke(Color("White"), lineWidth: 5)
+                    )
+            case .failure:
+                placeholderImage
+            @unknown default:
+                placeholderImage
+            }
+        }
+    }
+    
+    private var placeholderImage: some View {
+        Image("image")
+            .resizable()
+            .frame(width: 130, height: 130)
+            .clipShape(RoundedRectangle(cornerRadius: 110))
+            .overlay(
+                RoundedRectangle(cornerRadius: 110)
+                    .stroke(Color.white, lineWidth: 2)
+            )
+    }
+}
+
 
 
 #Preview {
