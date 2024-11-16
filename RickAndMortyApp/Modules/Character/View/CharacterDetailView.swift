@@ -77,48 +77,46 @@ struct CharacterDetailView: View {
             .padding(.top, -50)
             
             Text("Informations")
-                .font(.headline)
-                .fontWeight(.bold)
-                .foregroundStyle(.gray1)
-                .padding(.horizontal, 16)
-                .padding(.top, 10)
+                .font(.title3.bold())
+                .foregroundStyle(.gray)
+                .padding(.horizontal)
+                .padding(.top, 5)
+            
             Divider()
+            
             VStack(alignment: .leading){
                 
                 Text("Gender")
-                    .font(.system(size: 17))
+                    .font(.headline)
                     .fontWeight(.semibold)
                     .foregroundStyle(.black)
                 
                 Text(detailViewModel.character?.gender ?? "")
-                    .font(.caption)
-                    .fontWeight(.regular)
-                    .foregroundColor(Color.gray)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
                 
                 Divider()
                 
                 Text("Origin")
-                    .font(.system(size: 17))
+                    .font(.headline)
                     .fontWeight(.semibold)
                     .foregroundStyle(.black)
                 
                 Text(detailViewModel.character?.origin.name ?? "")
-                    .font(.caption)
-                    .fontWeight(.regular)
-                    .foregroundColor(Color.gray)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
                 
                 
                 Divider()
                 
                 Text("Type")
-                    .font(.system(size: 17))
+                    .font(.headline)
                     .fontWeight(.semibold)
                     .foregroundStyle(.black)
                 
                 Text((detailViewModel.character?.type.isEmpty ?? true ? "Unknown" : detailViewModel.character?.type) ?? "Unknown")
-                    .font(.caption)
-                    .fontWeight(.regular)
-                    .foregroundColor(Color.gray)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
                 
                 Divider()
                 NavigationLink(destination: LocationDetailView(locationId:locationId ?? 0 )) {
