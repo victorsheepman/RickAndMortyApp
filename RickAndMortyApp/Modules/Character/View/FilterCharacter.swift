@@ -168,13 +168,8 @@ struct FilterCharacter: View {
         filters.name = ""
     }
     
-    private func apply()->Void{
-        manager.getCharacterFiltered(
-            gender: filters.gender,
-            status: filters.status,
-            species: filters.species,
-            name: filters.name
-        )
+    private func apply() -> Void {
+        manager.getCharacterFiltered(by: filters)
     }
 }
 
