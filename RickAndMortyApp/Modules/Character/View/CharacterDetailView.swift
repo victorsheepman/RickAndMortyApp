@@ -58,17 +58,15 @@ struct CharacterDetailView: View {
                     }
                     
                     Text(detailViewModel.character?.status ?? "")
-                        .font(.caption)
-                        .fontWeight(.regular)
+                        .font(.caption2)
                         .foregroundStyle(.gray2)
                         .padding(.top, 10)
                     
                     Text(detailViewModel.character?.name ?? "")
-                        .font(.title2)
-                        .fontWeight(.bold)
+                        .font(.title.bold())
                     
                     Text(detailViewModel.character?.species ?? "")
-                        .font(.subheadline)
+                        .font(.footnote)
                         .fontWeight(.medium)
                         .foregroundStyle(.gray1)
                     
@@ -123,14 +121,13 @@ struct CharacterDetailView: View {
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Location")
-                                .font(.system(size: 17))
+                                .font(.headline)
                                 .fontWeight(.semibold)
-                                .foregroundColor(.black)
+                                .foregroundStyle(.black)
                             
                             Text(detailViewModel.character?.location.name ?? "")
-                                .font(.caption)
-                                .fontWeight(.regular)
-                                .foregroundColor(Color.gray)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
                         }
                         Spacer()
                         Image(systemName: "chevron.right")
@@ -142,14 +139,14 @@ struct CharacterDetailView: View {
             Divider()
             
             Text("Episodes")
-                .font(.headline)
-                .fontWeight(.bold)
-                .foregroundStyle(.gray1)
-                .padding(.horizontal, 16)
-                .padding(.top, 10)
+                .font(.title3.bold())
+                .foregroundStyle(.gray)
+                .padding(.horizontal)
+                .padding(.top, 5)
+            
             Divider()
             ScrollView {
-                VStack {
+                LazyVStack {
                     ForEach(detailViewModel.episodes, id:\.id) { item in
                         EpisodeCard(
                             episode: item.episode, 
@@ -158,7 +155,6 @@ struct CharacterDetailView: View {
                             airDate: item.airDate
                         )
                         Divider()
-                        
                     }
                 }                
             }
@@ -170,6 +166,7 @@ struct CharacterDetailView: View {
         Spacer()
     }
 }
+
 
 #Preview {
     CharacterDetailView(characterId: 2)
