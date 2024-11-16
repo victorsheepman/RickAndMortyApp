@@ -12,7 +12,6 @@ struct CharacterDetailView: View {
     
     @StateObject var detailViewModel = CharacterDetailViewModel()
     
-    
     var characterId: Int
 
     var locationId: Int? {
@@ -25,7 +24,7 @@ struct CharacterDetailView: View {
     var body: some View {
         VStack(alignment:.leading){
             banner
-           list
+            list
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
