@@ -13,7 +13,7 @@ struct CharacterView: View {
     
     @State private var isPresented: Bool = false
     
-    @State private var filters = CharacterFilters(status: "", gender: "", species: "", name: "")
+    @State private var filters = CharacterFilters()
     
     var body: some View {
         HeaderContainer(config: HeaderContainerConfiguration(title: "Character", isFilterPresented: $isPresented)) {
@@ -39,10 +39,10 @@ struct CharacterView: View {
 }
 
 struct CharacterFilters {
-    var status: String
-    var gender: String
-    var species: String
-    var name: String
+    var status = String()
+    var gender = String()
+    var species = String()
+    var name = String()
 }
 
 #Preview {
