@@ -31,10 +31,7 @@ struct CharacterView: View {
         }
         .fullScreenCover(isPresented: $isPresented, onDismiss: { isPresented = false}){
             FilterCharacter(
-                status: $filters.status,
-                gender: $filters.gender,
-                species: $filters.species,
-                name: $filters.name,
+                filters: $filters,
                 manager: characterViewModel
             )
         }

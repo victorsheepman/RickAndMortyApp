@@ -14,15 +14,12 @@ struct FilterCharacter: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @Binding var status: String
-    @Binding var gender:      String
-    @Binding var species:     String
-    @Binding var name:        String
+    @Binding var filters: CharacterFilters
     
     var manager: CharacterViewModel
     
     private var isApplyDisabled: Bool {
-        [status, gender, species, name]
+        [filters.status, filters.gender, filters.species, filters.name]
             .allSatisfy { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
     }
     
@@ -30,7 +27,7 @@ struct FilterCharacter: View {
         NavigationStack{
             VStack(alignment:.leading){
                 SearchItem(
-                    textToSearch: $name,
+                    textToSearch: $filters.name,
                     title: "Name",
                     placeholder:"Give a name"
                 )
@@ -39,7 +36,7 @@ struct FilterCharacter: View {
                     .padding(.top, 15)
                 
                 SearchItem(
-                    textToSearch: $species,
+                    textToSearch: $filters.species,
                     title: "Species",
                     placeholder:"Select one")
                 
@@ -96,19 +93,19 @@ struct FilterCharacter: View {
             VStack(alignment:.leading, spacing: 10){
                 
                 EnumToggle(
-                    selectedValue: $status,
+                    selectedValue: $filters.status,
                     toggleValue: Status.alive,
                     label: "Alive"
                 )
                 
                 EnumToggle(
-                    selectedValue: $status,
+                    selectedValue: $filters.status,
                     toggleValue: Status.dead,
                     label: "Dead"
                 )
                 
                 EnumToggle(
-                    selectedValue: $status,
+                    selectedValue: $filters.status,
                     toggleValue: Status.unknown,
                     label: "Unknown"
                 )
@@ -130,25 +127,25 @@ struct FilterCharacter: View {
             VStack(alignment:.leading, spacing: 12){
                 
                 EnumToggle(
-                    selectedValue: $gender,
+                    selectedValue: $filters.gender,
                     toggleValue: Gender.female,
                     label: "Female"
                 )
                 
                 EnumToggle(
-                    selectedValue: $gender,
+                    selectedValue: $filters.gender,
                     toggleValue: Gender.male,
                     label: "Male"
                 )
                 
                 EnumToggle(
-                    selectedValue: $gender,
+                    selectedValue: $filters.gender,
                     toggleValue: Gender.genderless,
                     label: "Genderless"
                 )
                 
                 EnumToggle(
-                    selectedValue: $gender,
+                    selectedValue: $filters.gender,
                     toggleValue: Gender.unknown,
                     label: "Unknown"
                 )
@@ -165,23 +162,25 @@ struct FilterCharacter: View {
     }
     
     private func resetFilters() {
-        gender = ""
-        status = ""
-        species = ""
-        name = ""
+        filters.gender = ""
+        filters.status = ""
+        filters.species = ""
+        filters.name = ""
     }
     
     private func apply()->Void{
-        manager.getCharacterFiltered(gender: gender, status: status, species: species, name:name)
+        manager.getCharacterFiltered(
+            gender: filters.gender,
+            status: filters.status,
+            species: filters.species,
+            name: filters.name
+        )
     }
 }
 
 #Preview {
     FilterCharacter(
-        status: .constant(""),
-        gender:  .constant(""),
-        species: .constant(""),
-        name:    .constant(""),
+        filters: .constant(CharacterFilters(status: "", gender: "", species: "", name: "")),
         manager: CharacterViewModel()
     )
 }
