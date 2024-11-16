@@ -13,10 +13,7 @@ struct CharacterView: View {
     
     @State private var isPresented: Bool = false
     
-    @State private var gender:    String = ""
-    @State private var species:   String = ""
-    @State private var name:      String = ""
-    @State private var status:    String = ""
+    @State private var filters = CharacterFilters(status: "", gender: "", species: "", name: "")
     
     var body: some View {
         HeaderContainer(config: HeaderContainerConfiguration(title: "Character", isFilterPresented: $isPresented)) {
@@ -34,14 +31,21 @@ struct CharacterView: View {
         }
         .fullScreenCover(isPresented: $isPresented, onDismiss: { isPresented = false}){
             FilterCharacter(
-                status: $status,
-                gender: $gender,
-                species: $species,
-                name: $name,
+                status: $filters.status,
+                gender: $filters.gender,
+                species: $filters.species,
+                name: $filters.name,
                 manager: characterViewModel
             )
         }
     }
+}
+
+struct CharacterFilters {
+    var status: String
+    var gender: String
+    var species: String
+    var name: String
 }
 
 #Preview {
