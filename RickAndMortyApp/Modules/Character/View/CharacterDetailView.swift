@@ -25,94 +25,7 @@ struct CharacterDetailView: View {
     var body: some View {
         VStack(alignment:.leading){
             banner
-            
-          /*  Text("Informations")
-                .font(.title3.bold())
-                .foregroundStyle(.gray)
-                .padding(.horizontal)
-                .padding(.top, 5)
-            
-            Divider()
-            
-            VStack(alignment: .leading){
-                
-                Text("Gender")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(.black)
-                
-                Text(detailViewModel.character?.gender ?? "")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                
-                Divider()
-                
-                Text("Origin")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(.black)
-                
-                Text(detailViewModel.character?.origin.name ?? "")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                
-                
-                Divider()
-                
-                Text("Type")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(.black)
-                
-                Text((detailViewModel.character?.type.isEmpty ?? true ? "Unknown" : detailViewModel.character?.type) ?? "Unknown")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                
-                Divider()
-                NavigationLink(destination: LocationDetailView(locationId:locationId ?? 0 )) {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Location")
-                                .font(.headline)
-                                .fontWeight(.semibold)
-                                .foregroundStyle(.black)
-                            
-                            Text(detailViewModel.character?.location.name ?? "")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                        }
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.gray)
-                    }
-                }
-                
-            }.padding(.horizontal, 16)
-           */
            list
-
-            Divider()
-            
-            Text("Episodes")
-                .font(.title3.bold())
-                .foregroundStyle(.gray)
-                .padding(.horizontal)
-                .padding(.top, 5)
-            
-            Divider()
-            ScrollView {
-                LazyVStack {
-                    ForEach(detailViewModel.episodes, id:\.id) { item in
-                        EpisodeCard(
-                            episode: item.episode, 
-                            id:      item.id,
-                            name:    item.episode,
-                            airDate: item.airDate
-                        )
-                        Divider()
-                    }
-                }                
-            }
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -180,6 +93,19 @@ struct CharacterDetailView: View {
                         InfoRowView(
                             title: "Location",
                             value: detailViewModel.character?.location.name
+                        )
+                    }
+                }
+            Section(header:Text("Episodes")
+                .font(.title3.bold())
+                .foregroundStyle(.gray)
+                .padding(.vertical, 5)){
+                    ForEach(detailViewModel.episodes, id:\.id) { episode in
+                        EpisodeCard(
+                            episode: episode.episode,
+                            id:      episode.id,
+                            name:    episode.episode,
+                            airDate: episode.airDate
                         )
                     }
                 }
