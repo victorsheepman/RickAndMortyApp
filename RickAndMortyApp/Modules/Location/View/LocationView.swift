@@ -34,9 +34,7 @@ struct LocationView: View {
         }
         .fullScreenCover(isPresented: $isPresented){
             FilterLocationView(
-                name: $filter.name,
-                type: $filter.type,
-                dimension: $filter.dimension,
+                filter: $filter,
                 manager: locationViewModel
             )
         }
