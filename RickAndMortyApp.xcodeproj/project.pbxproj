@@ -232,7 +232,6 @@
 			isa = PBXGroup;
 			children = (
 				8473D9772C34B68200796618 /* LocationView.swift */,
-				8433FE5C2C4321D100785B26 /* LocationCard.swift */,
 				84B33CCD2C443D9F00E8BB31 /* FilterLocationView.swift */,
 				84B33CCF2C4446C400E8BB31 /* LocationDetailView.swift */,
 			);
@@ -251,6 +250,7 @@
 		849E04652CEB7D4200EAD973 /* CommonViews */ = {
 			isa = PBXGroup;
 			children = (
+				8433FE5C2C4321D100785B26 /* LocationCard.swift */,
 				8425A4BA2C3755F800829EF2 /* CharacterCard.swift */,
 				84FC59F42C4C441E0025283B /* EpisodeCard.swift */,
 			);

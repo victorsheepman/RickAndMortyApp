@@ -14,24 +14,24 @@ struct LocationCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
-            Text(type)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .lineLimit(1)
-                .truncationMode(.tail)
-                .padding(.top, 10)
             
-            Text(name)
-                .font(.headline)
-                .fontWeight(.semibold)
-                .foregroundColor(.primary)
-                .lineLimit(1)
-                .truncationMode(.tail)
-            
+            Group {
+                Text(type)
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+                    .padding(.top, 12)
+                Text(name)
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+            }
+            .padding(.horizontal)
+        
             Spacer()
         }
         .frame(width: 163, height: 80, alignment: .leading)
-        .padding(.horizontal, 10)
         .background(Color(.systemBackground))
         .cornerRadius(8)
         .overlay(
