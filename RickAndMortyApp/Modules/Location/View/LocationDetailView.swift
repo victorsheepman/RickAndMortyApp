@@ -24,7 +24,7 @@ struct LocationDetailView: View {
                     .padding([.horizontal,.top])
                 CharacterListView(characters: viewModel.characters)
             }
-            
+            Spacer()
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
