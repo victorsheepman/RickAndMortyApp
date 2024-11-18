@@ -16,6 +16,11 @@ class LocationViewModel: ObservableObject {
     
     let baseURL = Constansts.MainURL.main + Constansts.Endpoints.locations + "?"
     
+    init() {
+        getLocations(from: "page=3")
+    }
+    
+    
     func getLocations(from page: String) {
         let url = URL(string: self.baseURL + page)!
         getDataFromApi(url: url)

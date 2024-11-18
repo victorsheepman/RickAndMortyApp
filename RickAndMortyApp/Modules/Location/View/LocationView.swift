@@ -26,11 +26,10 @@ struct LocationView: View {
                         LocationCard(type: location.type ?? "", name: location.name ?? "")
                     }
                 }
-            }.padding(.top, 19)
-                .padding(.horizontal, 16)
-                .background(.white)
-        }.onAppear{
-            locationViewModel.getLocations(from: "page=3")
+            }
+            .padding(.top, 19)
+            .padding(.horizontal, 16)
+            .background(.white)
         }
         .fullScreenCover(isPresented: $isPresented){
             FilterLocationView(
