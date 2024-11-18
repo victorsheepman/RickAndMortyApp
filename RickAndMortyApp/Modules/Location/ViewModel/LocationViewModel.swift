@@ -22,8 +22,8 @@ class LocationViewModel: ObservableObject {
         print("Se ejecuto getLocation")
     }
     
-    func getLocationsFiltered(name: String? = nil, type: String? = nil, dimension: String? = nil) {
-        guard let url = constructURL(name: name, type: type, dimension: dimension) else {
+    func getLocationsFiltered(by filter: LocationFilter) {
+        guard let url = constructURL(filter) else {
             print("Invalid URL")
             return
         }
@@ -49,19 +49,19 @@ class LocationViewModel: ObservableObject {
         cancellable.store(in: &cancellables)
     }
     
-    private func constructURL(name: String?, type: String?, dimension: String?) -> URL? {
+    private func constructURL(_ filter: LocationFilter) -> URL? {
 
         var queryItems = [URLQueryItem]()
         
        
-        if let name = name, !name.isEmpty {
-            queryItems.append(URLQueryItem(name: "name", value: name))
+        if !filter.name.isEmpty {
+            queryItems.append(URLQueryItem(name: "name", value: filter.name))
         }
-        if let type = type, !type.isEmpty {
-            queryItems.append(URLQueryItem(name: "type", value: type))
+        if !filter.type.isEmpty {
+            queryItems.append(URLQueryItem(name: "type", value: filter.type))
         }
-        if let dimension = dimension, !dimension.isEmpty {
-            queryItems.append(URLQueryItem(name: "dimension", value: dimension))
+        if !filter.dimension.isEmpty {
+            queryItems.append(URLQueryItem(name: "dimension", value: filter.dimension))
         }
       
         

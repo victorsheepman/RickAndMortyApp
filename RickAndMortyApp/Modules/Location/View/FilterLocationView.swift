@@ -94,11 +94,7 @@ struct FilterLocationView: View {
     }
     
     private func apply() -> Void {
-        manager.getLocationsFiltered(
-            name: filter.name,
-            type: filter.type,
-            dimension: filter.dimension
-        )
+        manager.getLocationsFiltered(by: filter)
     }
 }
 
