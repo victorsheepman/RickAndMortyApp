@@ -39,7 +39,6 @@ struct CharacterCard: View {
         )
     }
     
-    @ViewBuilder
     private func characterImage(url: String) -> some View {
         AsyncImage(url: URL(string: url)) { phase in
             switch phase {

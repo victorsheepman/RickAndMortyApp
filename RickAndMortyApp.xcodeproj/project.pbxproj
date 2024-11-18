@@ -214,7 +214,6 @@
 			children = (
 				844BA2362BE43B4600138F3D /* CharacterView.swift */,
 				8425A4B82C37503B00829EF2 /* FilterCharacter.swift */,
-				8425A4BA2C3755F800829EF2 /* CharacterCard.swift */,
 				84453D8C2C3B014F00F234B4 /* CharacterDetailView.swift */,
 			);
 			path = View;
@@ -252,6 +251,7 @@
 		849E04652CEB7D4200EAD973 /* CommonViews */ = {
 			isa = PBXGroup;
 			children = (
+				8425A4BA2C3755F800829EF2 /* CharacterCard.swift */,
 				84FC59F42C4C441E0025283B /* EpisodeCard.swift */,
 			);
 			path = CommonViews;
