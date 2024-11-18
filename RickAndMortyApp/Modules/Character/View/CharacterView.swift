@@ -16,7 +16,7 @@ struct CharacterView: View {
     
     var body: some View {
         HeaderContainer(config: HeaderContainerConfiguration(title: "Character", isFilterPresented: $isPresented)) {
-            LazyVGrid(columns: Constansts.gridLayout, spacing: 20){
+            LazyVGrid(columns: Constansts.gridLayout){
                 ForEach(characterViewModel.characterModel, id:\.id){ character in
                     NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
                         CharacterCard(status: character.status, name: character.name, img: character.image)
