@@ -12,9 +12,9 @@ struct LocationView: View {
     @StateObject var locationViewModel = LocationViewModel()
     
     @State private var isPresented: Bool   = false
-    @State private var name: String        = ""
-    @State private var type: String        = ""
-    @State private var dimension: String   = ""
+    
+ 
+    @State private var filter = LocationFilter()
    
    
 
@@ -32,17 +32,23 @@ struct LocationView: View {
         }.onAppear{
             locationViewModel.getLocations(from: "page=3")
         }
-        .fullScreenCover(isPresented: $isPresented, onDismiss: { isPresented = false}){
+        .fullScreenCover(isPresented: $isPresented){
             FilterLocationView(
-                name: $name, 
-                type: $type,
-                dimension: $dimension,
-                isPresented: $isPresented,
+                name: $filter.name,
+                type: $filter.type,
+                dimension: $filter.dimension,
                 manager: locationViewModel
             )
         }
     }
 }
+
+struct LocationFilter {
+    var name = String()
+    var type = String()
+    var dimension = String()
+}
+
 
 #Preview {
     LocationView()

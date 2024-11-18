@@ -8,49 +8,18 @@
 import SwiftUI
 
 struct FilterLocationView: View {
+    @Environment(\.dismiss) private var dismiss
     
     @Binding var name:        String
     @Binding var type:        String
     @Binding var dimension:   String
-    @Binding var isPresented: Bool
     
     var manager: LocationViewModel
     
     var body: some View {
-        NavigationView{
+        NavigationStack{
             VStack(alignment:.leading){
-                HStack(alignment: .center){
-                    Button("Clear"){
-                        cleanData()
-                    }
-                    .foregroundStyle(Color("Indigo"))
-                    .font(.callout)
-                    .fontWeight(.regular)
-                    .padding(.leading, 20)
-                    Spacer()
-                    Text("Filter")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(Color("Black"))
-                    Spacer()
-                    Button("APPLY"){
-                        manager.getLocationsFiltered(
-                            name: name,
-                            type: type,
-                            dimension: dimension
-                        )
-                        isPresented = false
-                    }.frame(width:82, height:38)
-                        .background(Color("Indigo"))
-                        .cornerRadius(20)
-                        .foregroundStyle(Color("White"))
-                        .font(.callout)
-                        .fontWeight(.semibold)
-                        .padding(.trailing, 20)
-                }
                 Divider()
-                    .padding(.top, 15)
-             
                 SearchItem(
                     textToSearch: $name,
                     title: "Name",
@@ -79,15 +48,48 @@ struct FilterLocationView: View {
                 Divider()
                 Spacer()
             }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Clear"){
+                        clean()
+                        dismiss()
+                    }
+                    .tint(.indigo)
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("Filter")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                    
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("APPLY"){
+                        //apply()
+                        dismiss()
+                        
+                        manager.getLocationsFiltered(
+                            name: name,
+                            type: type,
+                            dimension: dimension
+                        )
+                    }
+                    .tint(.indigo)
+                    .font(.headline)
+                    .buttonBorderShape(.capsule)
+                    .buttonStyle(.borderedProminent)
+                    //.disabled(isApplyDisabled)
+                    
+                }
+                
+            }
         }
     }
     
-    private func cleanData() -> Void {
+    private func clean() -> Void {
         manager.getLocations(from: "page=3")
         name        = ""
         type        = ""
         dimension   = ""
-        isPresented = false
     }
 }
 
@@ -95,7 +97,6 @@ struct FilterLocationView: View {
     FilterLocationView(
         name: .constant(""),
         type: .constant(""),
-        dimension: .constant(""), 
-        isPresented: .constant(true),
+        dimension: .constant(""),
         manager: LocationViewModel() )
 }
