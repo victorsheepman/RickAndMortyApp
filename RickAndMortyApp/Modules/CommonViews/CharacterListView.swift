@@ -1,21 +1,37 @@
 //
-//  CharacterCard.swift
+//  CharacterListView.swift
 //  RickAndMortyApp
 //
-//  Created by Victor Marquez on 4/7/24.
+//  Created by Victor Marquez on 18/11/24.
 //
 
 import SwiftUI
 
-struct CharacterCard: View {
-    var status: String
-    var name:   String
-    var img:    String
+struct CharacterListView: View {
+    
+    var characters: [CharacterDataModel]
     
     var body: some View {
+        ScrollView(.vertical, showsIndicators: false) {
+            LazyVGrid(columns: Constansts.gridLayout){
+                ForEach(characters, id:\.id){ character in
+                    NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
+                        CharacterCard(
+                            character.status,
+                            character.name,
+                            character.image
+                        )
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    private func CharacterCard(_ status: String,_ name: String,_ img:String)-> some View {
         VStack(alignment: .leading) {
             
-            characterImage(url: img)
+            characterImage(url: img, name: name)
             
             Text(status)
                 .font(.subheadline)
@@ -39,7 +55,8 @@ struct CharacterCard: View {
         )
     }
     
-    private func characterImage(url: String) -> some View {
+    
+    private func characterImage(url: String, name: String) -> some View {
         AsyncImage(url: URL(string: url)) { phase in
             switch phase {
             case .empty:
@@ -59,13 +76,12 @@ struct CharacterCard: View {
         .clipped()
         .accessibilityLabel("Image of \(name)")
     }
+    
     private var placeholderImage: some View {
         Image("image")
             .resizable()
             .scaledToFill()
     }
+    
 }
 
-#Preview {
-    CharacterCard(status: "Status", name: "Planet Blue", img: "https://rickandmortyapi.com/api/character/avatar/1.jpeg")
-}

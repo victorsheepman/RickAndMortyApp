@@ -22,7 +22,7 @@ struct LocationDetailView: View {
                     .font(.title3.bold())
                     .foregroundStyle(.gray)
                     .padding([.horizontal,.top])
-                residentList
+                CharacterListView(characters: locationDetailViewModel.characters)
             }
             
         }
@@ -63,22 +63,6 @@ struct LocationDetailView: View {
         }
         .frame(height: 139)
         .padding(.top, -50)
-    }
-    
-    var residentList: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            LazyVGrid(columns: Constansts.gridLayout){
-                ForEach(locationDetailViewModel.characters, id:\.id){ character in
-                    NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
-                        CharacterCard(
-                            status: character.status,
-                            name: character.name,
-                            img: character.image
-                        )
-                    }
-                }
-            }
-        }
     }
 }
 
