@@ -12,200 +12,170 @@ import SwiftUI
 
 struct FilterCharacter: View {
     
-    @State private var isOn = false
+    @Environment(\.dismiss) private var dismiss
     
-    @Binding var status:      String
-    @Binding var gender:      String
-    @Binding var species:     String
-    @Binding var name:        String
-    @Binding var isPresented: Bool
+    @Binding var filters: CharacterFilters
     
     var manager: CharacterViewModel
-
+    
+    private var isApplyDisabled: Bool {
+        [filters.status, filters.gender, filters.species, filters.name]
+            .allSatisfy { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+    }
+    
     var body: some View {
-        NavigationView{
+        NavigationStack{
             VStack(alignment:.leading){
-                HStack(alignment: .center){
-                    
+                SearchItem(
+                    textToSearch: $filters.name,
+                    title: "Name",
+                    placeholder:"Give a name"
+                )
+                
+                Divider()
+                    .padding(.top, 15)
+                
+                SearchItem(
+                    textToSearch: $filters.species,
+                    title: "Species",
+                    placeholder:"Select one")
+                
+                Divider()
+                
+                statusSection
+                
+                genderSection
+                
+                Spacer()
+                
+                
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
                     Button("Clear"){
-                        cleanData()
+                        clean()
+                        dismiss()
                     }
-                    .foregroundStyle(Color("Indigo"))
-                    .font(.callout)
-                    .fontWeight(.regular)
-                    .padding(.leading, 20)
-                    Spacer()
+                    .tint(.indigo)
+                }
+                ToolbarItem(placement: .principal) {
                     Text("Filter")
                         .font(.title3)
                         .fontWeight(.semibold)
-                        .foregroundStyle(Color("Black"))
-                    Spacer()
-                    Button("APPLY"){
-                        manager.getCharacterFiltered(gender: gender, status: status, species: species, name:name)
-                        isPresented = false
-                    }.frame(width:82, height:38)
-                    .background(Color("Indigo"))
-                    .cornerRadius(20)
-                    .foregroundStyle(Color("White"))
-                    .font(.callout)
-                    .fontWeight(.semibold)
-                    .padding(.trailing, 20)
+                    
                 }
-                Divider()
-                    .padding(.top, 15)
-                
-                SearchItem(textToSearch: $name, title: "Name", placeholder:"Give a name")
-                
-                Divider()
-                
-                
-                Divider()
-                    .padding(.top, 15)
-                
-                SearchItem(textToSearch: $species, title: "Species", placeholder:"Select one")
-                
-                Divider()
-                
-                Text("Status")
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("APPLY"){
+                        apply()
+                        dismiss()
+                    }
+                    .tint(.indigo)
                     .font(.headline)
-                    .fontWeight(.bold)
-                    .foregroundStyle(.gray3)
-                    .padding(.horizontal, 16)
-                    .padding(.top, 10)
-                Divider()
-                
-                VStack(alignment:.leading, spacing: 10){
+                    .buttonBorderShape(.capsule)
+                    .buttonStyle(.borderedProminent)
+                    .disabled(isApplyDisabled)
                     
-                    EnumToggle(
-                        selectedValue: $status,
-                        toggleValue: Status.alive,
-                        label: "Alive"
-                    )
-                 
-                    EnumToggle(
-                        selectedValue: $status,
-                        toggleValue: Status.dead,
-                        label: "Dead"
-                    )
-                    
-                    EnumToggle(
-                        selectedValue: $status,
-                        toggleValue: Status.unknown,
-                        label: "Unknown"
-                    )
-                    
-                }.padding(.horizontal, 16)
+                }
                 
-                
-                Text("Gender")
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .foregroundStyle(.gray3)
-                    .padding(.horizontal, 16)
-                    .padding(.top, 10)
-                Divider()
-                
-                VStack(alignment:.leading, spacing: 12){
-                
-                    EnumToggle(
-                        selectedValue: $gender,
-                        toggleValue: Gender.female,
-                        label: "Female"
-                    )
-
-                    EnumToggle(
-                        selectedValue: $gender,
-                        toggleValue: Gender.male,
-                        label: "Male"
-                    )
-                                        
-                    EnumToggle(
-                        selectedValue: $gender,
-                        toggleValue: Gender.genderless,
-                        label: "Genderless"
-                    )
-                    
-                    EnumToggle(
-                        selectedValue: $gender,
-                        toggleValue: Gender.unknown,
-                        label: "Unknown"
-                    )
-
-                }.padding(.horizontal, 16)
-                
-                Spacer()
-
-
             }
         }
     }
     
-    private func cleanData() -> Void {
-        manager.getCharacters(from: "page=19")
-        gender      = ""
-        status      = ""
-        species     = ""
-        name        = ""
-        isPresented = false
-        
-
+    private var statusSection: some View {
+        VStack(alignment:.leading) {
+            Text("Status")
+                .font(.headline)
+                .foregroundStyle(.gray2)
+                .padding(.horizontal, 16)
+            
+            Divider()
+            
+            VStack(alignment:.leading, spacing: 10){
+                
+                EnumToggle(
+                    selectedValue: $filters.status,
+                    toggleValue: Status.alive,
+                    label: "Alive"
+                )
+                
+                EnumToggle(
+                    selectedValue: $filters.status,
+                    toggleValue: Status.dead,
+                    label: "Dead"
+                )
+                
+                EnumToggle(
+                    selectedValue: $filters.status,
+                    toggleValue: Status.unknown,
+                    label: "Unknown"
+                )
+                
+            }
+            .padding(.horizontal, 16)
+        }
+        .padding(.vertical)
+    }
+    
+    private var genderSection: some View {
+        VStack(alignment:.leading) {
+            Text("Gender")
+                .font(.headline)
+                .foregroundStyle(.gray2)
+                .padding(.horizontal, 16)
+            Divider()
+            
+            VStack(alignment:.leading, spacing: 12){
+                
+                EnumToggle(
+                    selectedValue: $filters.gender,
+                    toggleValue: Gender.female,
+                    label: "Female"
+                )
+                
+                EnumToggle(
+                    selectedValue: $filters.gender,
+                    toggleValue: Gender.male,
+                    label: "Male"
+                )
+                
+                EnumToggle(
+                    selectedValue: $filters.gender,
+                    toggleValue: Gender.genderless,
+                    label: "Genderless"
+                )
+                
+                EnumToggle(
+                    selectedValue: $filters.gender,
+                    toggleValue: Gender.unknown,
+                    label: "Unknown"
+                )
+                
+            }.padding(.horizontal, 16)
+        }
+    }
+    
+    private func clean() -> Void {
+        if !isApplyDisabled {
+            manager.getCharacters(from: "page=19")
+        }
+        resetFilters()
+    }
+    
+    private func resetFilters() {
+        filters.gender = ""
+        filters.status = ""
+        filters.species = ""
+        filters.name = ""
+    }
+    
+    private func apply() -> Void {
+        manager.getCharacterFiltered(by: filters)
     }
 }
-
-
-
-
-
-struct Search: View {
-    @Binding var textToSearch:String
-   
-    @State private var isSearching: Bool = false
-    var body: some View {
-        HStack {
-                    TextField(
-                        "Search",
-                        text: $textToSearch
-                    )
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 8)
-                    .background(Color(.systemGray6))
-                    .cornerRadius(8)
-                    .textInputAutocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .onTapGesture {
-                        isSearching = true
-                    }
-                    .onChange(of: textToSearch) { newValue in
-                        textToSearch = newValue.lowercased()
-                    }
-                    
-                    if isSearching {
-                        Button(action: {
-                            isSearching = false
-                           
-                        }) {
-                            Text("Cancel")
-                                .foregroundColor(.blue)
-                                .padding(.trailing, 8)
-                        }
-                        .transition(.move(edge: .trailing))
-                        .animation(.default)
-                    }
-                }
-                .padding(.horizontal)
-        Spacer()
-    }
-}
-
-
 
 #Preview {
     FilterCharacter(
-        status:  .constant("unknown"),
-        gender:  .constant("unknown"),
-        species: .constant(""),
-        name:    .constant(""), 
-        isPresented: .constant(false),
+        filters: .constant(CharacterFilters(status: "", gender: "", species: "", name: "")),
         manager: CharacterViewModel()
     )
 }

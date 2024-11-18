@@ -22,21 +22,18 @@ struct EpisodeCard: View {
                         .fontWeight(.semibold)
                         .foregroundColor(.black)
                     
-                    Text(name)
-                        .font(.system(size: 15))
-                        .fontWeight(.regular)
-                        .foregroundColor(Color.gray)
-                    
-                    Text(airDate)
-                        .font(.caption)
-                        .fontWeight(.regular)
-                        .foregroundColor(Color.gray)
+                    Group {
+                        Text(name)
+                            .font(.callout)
+      
+                        Text(airDate)
+                            .font(.caption)
+                    }
+                    .foregroundStyle(.gray)
                 }
                 Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.gray)
             }
-        }.padding(.horizontal, 16)
+        }
     }
 }
 

@@ -29,6 +29,7 @@
 		8473D9782C34B68200796618 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473D9772C34B68200796618 /* LocationView.swift */; };
 		8473D97B2C34B72300796618 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473D97A2C34B72300796618 /* LocationViewModel.swift */; };
 		847BC6AF2C408DB900A180F4 /* iOSCheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BC6AE2C408DB900A180F4 /* iOSCheckboxToggleStyle.swift */; };
+		849E04642CEB795600EAD973 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E04632CEB795600EAD973 /* Extensions.swift */; };
 		84B33CCE2C443D9F00E8BB31 /* FilterLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B33CCD2C443D9F00E8BB31 /* FilterLocationView.swift */; };
 		84B33CD02C4446C400E8BB31 /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B33CCF2C4446C400E8BB31 /* LocationDetailView.swift */; };
 		84B33CD22C44494200E8BB31 /* LocationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B33CD12C44494200E8BB31 /* LocationDetailViewModel.swift */; };
@@ -78,6 +79,7 @@
 		8473D9772C34B68200796618 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		8473D97A2C34B72300796618 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		847BC6AE2C408DB900A180F4 /* iOSCheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCheckboxToggleStyle.swift; sourceTree = "<group>"; };
+		849E04632CEB795600EAD973 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		84B33CCD2C443D9F00E8BB31 /* FilterLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterLocationView.swift; sourceTree = "<group>"; };
 		84B33CCF2C4446C400E8BB31 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
 		84B33CD12C44494200E8BB31 /* LocationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewModel.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			children = (
 				844A90882BE5356E00FD5154 /* Constansts.swift */,
 				847BC6AE2C408DB900A180F4 /* iOSCheckboxToggleStyle.swift */,
+				849E04632CEB795600EAD973 /* Extensions.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 		844BA22F2BE43A7600138F3D /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				849E04652CEB7D4200EAD973 /* CommonViews */,
 				8473D9752C34B66700796618 /* Location */,
 				844BA2342BE43B3100138F3D /* Character */,
 				844BA2302BE43AA800138F3D /* Episode */,
@@ -192,7 +196,6 @@
 				844BA2312BE43ABA00138F3D /* EpisodeView.swift */,
 				841775212C4870B3006C9CD0 /* FilterEpisodeView.swift */,
 				841775232C4877F8006C9CD0 /* EpisodeDetailView.swift */,
-				84FC59F42C4C441E0025283B /* EpisodeCard.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -211,7 +214,6 @@
 			children = (
 				844BA2362BE43B4600138F3D /* CharacterView.swift */,
 				8425A4B82C37503B00829EF2 /* FilterCharacter.swift */,
-				8425A4BA2C3755F800829EF2 /* CharacterCard.swift */,
 				84453D8C2C3B014F00F234B4 /* CharacterDetailView.swift */,
 			);
 			path = View;
@@ -244,6 +246,15 @@
 				84B33CD12C44494200E8BB31 /* LocationDetailViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		849E04652CEB7D4200EAD973 /* CommonViews */ = {
+			isa = PBXGroup;
+			children = (
+				8425A4BA2C3755F800829EF2 /* CharacterCard.swift */,
+				84FC59F42C4C441E0025283B /* EpisodeCard.swift */,
+			);
+			path = CommonViews;
 			sourceTree = "<group>";
 		};
 		84C4E5942C49DBBF0031292A /* Components */ = {
@@ -435,6 +446,7 @@
 				84085A6F2C3C33C8001F8DB9 /* CharacterDetailViewModel.swift in Sources */,
 				8473D97B2C34B72300796618 /* LocationViewModel.swift in Sources */,
 				847BC6AF2C408DB900A180F4 /* iOSCheckboxToggleStyle.swift in Sources */,
+				849E04642CEB795600EAD973 /* Extensions.swift in Sources */,
 				844A90952BE53F6800FD5154 /* EpisodeViewModel.swift in Sources */,
 				8433FE5D2C4321D100785B26 /* LocationCard.swift in Sources */,
 				84DD48E42BE436F700175061 /* RickAndMortyAppApp.swift in Sources */,

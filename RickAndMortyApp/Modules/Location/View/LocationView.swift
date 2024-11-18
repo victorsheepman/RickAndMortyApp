@@ -16,14 +16,11 @@ struct LocationView: View {
     @State private var type: String        = ""
     @State private var dimension: String   = ""
    
-    let gridLayout = [
-        GridItem(.flexible(), spacing: 30),
-        GridItem(.flexible(), spacing: 30)
-    ]
+   
 
     var body: some View {
         HeaderContainer(config: HeaderContainerConfiguration(title: "Location", isFilterPresented: $isPresented)){
-            LazyVGrid(columns: gridLayout){
+            LazyVGrid(columns: Constansts.gridLayout){
                 ForEach(locationViewModel.locations, id:\.id){ location in
                     NavigationLink(destination: LocationDetailView(locationId: location.id ?? 0)) {
                         LocationCard(type: location.type ?? "", name: location.name ?? "")

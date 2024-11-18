@@ -38,3 +38,11 @@ struct Location: Codable {
     let name: String
     let url: String
 }
+
+
+struct CharacterFilters {
+    var status = String()
+    var gender = String()
+    var species = String()
+    var name = String()
+}
