@@ -12,12 +12,8 @@ struct LocationView: View {
     @StateObject var locationViewModel = LocationViewModel()
     
     @State private var isPresented: Bool   = false
-    
- 
     @State private var filter = LocationFilter()
    
-   
-
     var body: some View {
         HeaderContainer(config: HeaderContainerConfiguration(title: "Location", isFilterPresented: $isPresented)){
             LazyVGrid(columns: Constansts.gridLayout){
