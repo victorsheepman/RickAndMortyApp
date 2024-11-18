@@ -14,9 +14,7 @@
 		841775242C4877F8006C9CD0 /* EpisodeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841775232C4877F8006C9CD0 /* EpisodeDetailView.swift */; };
 		841775262C487839006C9CD0 /* EpisodeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841775252C487839006C9CD0 /* EpisodeDetailViewModel.swift */; };
 		8425A4B92C37503B00829EF2 /* FilterCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425A4B82C37503B00829EF2 /* FilterCharacter.swift */; };
-		8425A4BB2C3755F800829EF2 /* CharacterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425A4BA2C3755F800829EF2 /* CharacterCard.swift */; };
 		8433FE5B2C431E5000785B26 /* LocationResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433FE5A2C431E5000785B26 /* LocationResponseDataModel.swift */; };
-		8433FE5D2C4321D100785B26 /* LocationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433FE5C2C4321D100785B26 /* LocationCard.swift */; };
 		84453D8D2C3B014F00F234B4 /* CharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84453D8C2C3B014F00F234B4 /* CharacterDetailView.swift */; };
 		844A90852BE5350200FD5154 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A90842BE5350200FD5154 /* NetworkManager.swift */; };
 		844A90892BE5356E00FD5154 /* Constansts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A90882BE5356E00FD5154 /* Constansts.swift */; };
@@ -30,6 +28,7 @@
 		8473D97B2C34B72300796618 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473D97A2C34B72300796618 /* LocationViewModel.swift */; };
 		847BC6AF2C408DB900A180F4 /* iOSCheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BC6AE2C408DB900A180F4 /* iOSCheckboxToggleStyle.swift */; };
 		849E04642CEB795600EAD973 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E04632CEB795600EAD973 /* Extensions.swift */; };
+		849E04672CEB9F5700EAD973 /* CharacterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E04662CEB9F5700EAD973 /* CharacterListView.swift */; };
 		84B33CCE2C443D9F00E8BB31 /* FilterLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B33CCD2C443D9F00E8BB31 /* FilterLocationView.swift */; };
 		84B33CD02C4446C400E8BB31 /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B33CCF2C4446C400E8BB31 /* LocationDetailView.swift */; };
 		84B33CD22C44494200E8BB31 /* LocationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B33CD12C44494200E8BB31 /* LocationDetailViewModel.swift */; };
@@ -64,9 +63,7 @@
 		841775232C4877F8006C9CD0 /* EpisodeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailView.swift; sourceTree = "<group>"; };
 		841775252C487839006C9CD0 /* EpisodeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailViewModel.swift; sourceTree = "<group>"; };
 		8425A4B82C37503B00829EF2 /* FilterCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCharacter.swift; sourceTree = "<group>"; };
-		8425A4BA2C3755F800829EF2 /* CharacterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCard.swift; sourceTree = "<group>"; };
 		8433FE5A2C431E5000785B26 /* LocationResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationResponseDataModel.swift; sourceTree = "<group>"; };
-		8433FE5C2C4321D100785B26 /* LocationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCard.swift; sourceTree = "<group>"; };
 		84453D8C2C3B014F00F234B4 /* CharacterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailView.swift; sourceTree = "<group>"; };
 		844A90842BE5350200FD5154 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		844A90882BE5356E00FD5154 /* Constansts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constansts.swift; sourceTree = "<group>"; };
@@ -80,6 +77,7 @@
 		8473D97A2C34B72300796618 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		847BC6AE2C408DB900A180F4 /* iOSCheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCheckboxToggleStyle.swift; sourceTree = "<group>"; };
 		849E04632CEB795600EAD973 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		849E04662CEB9F5700EAD973 /* CharacterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListView.swift; sourceTree = "<group>"; };
 		84B33CCD2C443D9F00E8BB31 /* FilterLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterLocationView.swift; sourceTree = "<group>"; };
 		84B33CCF2C4446C400E8BB31 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
 		84B33CD12C44494200E8BB31 /* LocationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewModel.swift; sourceTree = "<group>"; };
@@ -232,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				8473D9772C34B68200796618 /* LocationView.swift */,
-				8433FE5C2C4321D100785B26 /* LocationCard.swift */,
 				84B33CCD2C443D9F00E8BB31 /* FilterLocationView.swift */,
 				84B33CCF2C4446C400E8BB31 /* LocationDetailView.swift */,
 			);
@@ -251,8 +248,8 @@
 		849E04652CEB7D4200EAD973 /* CommonViews */ = {
 			isa = PBXGroup;
 			children = (
-				8425A4BA2C3755F800829EF2 /* CharacterCard.swift */,
 				84FC59F42C4C441E0025283B /* EpisodeCard.swift */,
+				849E04662CEB9F5700EAD973 /* CharacterListView.swift */,
 			);
 			path = CommonViews;
 			sourceTree = "<group>";
@@ -419,6 +416,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849E04672CEB9F5700EAD973 /* CharacterListView.swift in Sources */,
 				84D3BFDA2C4EFAE0007620E6 /* HeaderContainer.swift in Sources */,
 				8473D9782C34B68200796618 /* LocationView.swift in Sources */,
 				84DD48E62BE436F700175061 /* ContentView.swift in Sources */,
@@ -428,7 +426,6 @@
 				84C4E5982C49E07B0031292A /* EnumToggle.swift in Sources */,
 				84C4E59A2C49E0CE0031292A /* InputSearch.swift in Sources */,
 				84453D8D2C3B014F00F234B4 /* CharacterDetailView.swift in Sources */,
-				8425A4BB2C3755F800829EF2 /* CharacterCard.swift in Sources */,
 				844BA2372BE43B4600138F3D /* CharacterView.swift in Sources */,
 				844A90892BE5356E00FD5154 /* Constansts.swift in Sources */,
 				8433FE5B2C431E5000785B26 /* LocationResponseDataModel.swift in Sources */,
@@ -448,7 +445,6 @@
 				847BC6AF2C408DB900A180F4 /* iOSCheckboxToggleStyle.swift in Sources */,
 				849E04642CEB795600EAD973 /* Extensions.swift in Sources */,
 				844A90952BE53F6800FD5154 /* EpisodeViewModel.swift in Sources */,
-				8433FE5D2C4321D100785B26 /* LocationCard.swift in Sources */,
 				84DD48E42BE436F700175061 /* RickAndMortyAppApp.swift in Sources */,
 				841775222C4870B3006C9CD0 /* FilterEpisodeView.swift in Sources */,
 			);

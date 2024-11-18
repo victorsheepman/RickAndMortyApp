@@ -7,77 +7,62 @@
 
 import SwiftUI
 
-let layout = [
-    GridItem(.flexible()),
-    GridItem(.flexible())
-]
-
-
 
 struct LocationDetailView: View {
     
-    @StateObject private var locationDetailViewModel = LocationDetailViewModel()
-    @State private var isPresentingDetailResident = false
-    
     var locationId: Int
-    
+
+    @StateObject private var viewModel = LocationDetailViewModel()
+   
     var body: some View {
         VStack(alignment: .leading) {
-            GeometryReader { geometry in
-                VStack {
-                    Rectangle()
-                        .fill(Color("Gray6"))
-                        .frame(width: geometry.size.width, height: 139)
-                        .overlay {
-                            VStack {
-                                Text(locationDetailViewModel.location?.type ?? "")
-                                    .font(.caption)
-                                    .fontWeight(.regular)
-                                    .foregroundStyle(.gray2)
-                                
-                                Text(locationDetailViewModel.location?.name ?? "")
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                                
-                                Text(locationDetailViewModel.location?.dimension ?? "")
-                                    .font(.subheadline)
-                                    .fontWeight(.medium)
-                                    .foregroundStyle(.gray1)
-                            }
-                        }
-                    
-                }
-                .frame(maxWidth: .infinity)
-            }.frame(height: 139).padding(.top, -50)
-            
-            Text("Residents")
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundStyle(Color("Gray1"))
-                .padding(.horizontal, 16)
-                .padding(.top, 20)
-            
-            ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: layout){
-                    ForEach(locationDetailViewModel.characters, id:\.id){ character in
-                        NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
-                            CharacterCard(
-                                status: character.status,
-                                name: character.name,
-                                img: character.image
-                            )
-                        }
-                    }
-                }
+            banner
+            if !viewModel.characters.isEmpty {
+                Text("Residents")
+                    .font(.title3.bold())
+                    .foregroundStyle(.gray)
+                    .padding([.horizontal,.top])
+                CharacterListView(characters: viewModel.characters)
             }
             
-            
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(viewModel.location?.name ?? "")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+            }
         }
         .onAppear{
-            locationDetailViewModel.fetchLocationAndResidents(from: locationId)
-            print(locationId)
+            viewModel.fetchLocationAndResidents(from: locationId)
         }
-        Spacer()
+        
+    }
+    
+    private var banner: some View {
+        GeometryReader { geometry in
+            Rectangle()
+                .fill(Color("Gray6"))
+                .frame(width: geometry.size.width, height: 139)
+                .overlay {
+                    VStack {
+                        Text(viewModel.location?.type ?? "")
+                            .font(.caption2)
+                            .foregroundStyle(.gray2)
+                        
+                        Text(viewModel.location?.name ?? "")
+                            .font(.title.bold())
+                        
+                        Text(viewModel.location?.dimension ?? "")
+                            .font(.footnote)
+                            .fontWeight(.medium)
+                            .foregroundStyle(.gray1)
+                    }
+                }
+            
+        }
+        .frame(height: 139)
+        .padding(.top, -50)
     }
 }
 
