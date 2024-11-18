@@ -7,77 +7,78 @@
 
 import SwiftUI
 
-let layout = [
-    GridItem(.flexible()),
-    GridItem(.flexible())
-]
-
-
 
 struct LocationDetailView: View {
     
-    @StateObject private var locationDetailViewModel = LocationDetailViewModel()
-    @State private var isPresentingDetailResident = false
-    
     var locationId: Int
-    
+
+    @StateObject private var locationDetailViewModel = LocationDetailViewModel()
+   
     var body: some View {
         VStack(alignment: .leading) {
-            GeometryReader { geometry in
-                VStack {
-                    Rectangle()
-                        .fill(Color("Gray6"))
-                        .frame(width: geometry.size.width, height: 139)
-                        .overlay {
-                            VStack {
-                                Text(locationDetailViewModel.location?.type ?? "")
-                                    .font(.caption)
-                                    .fontWeight(.regular)
-                                    .foregroundStyle(.gray2)
-                                
-                                Text(locationDetailViewModel.location?.name ?? "")
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                                
-                                Text(locationDetailViewModel.location?.dimension ?? "")
-                                    .font(.subheadline)
-                                    .fontWeight(.medium)
-                                    .foregroundStyle(.gray1)
-                            }
-                        }
-                    
-                }
-                .frame(maxWidth: .infinity)
-            }.frame(height: 139).padding(.top, -50)
-            
-            Text("Residents")
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundStyle(Color("Gray1"))
-                .padding(.horizontal, 16)
-                .padding(.top, 20)
-            
-            ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: layout){
-                    ForEach(locationDetailViewModel.characters, id:\.id){ character in
-                        NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
-                            CharacterCard(
-                                status: character.status,
-                                name: character.name,
-                                img: character.image
-                            )
-                        }
-                    }
-                }
+            banner
+            if !locationDetailViewModel.characters.isEmpty {
+                Text("Residents")
+                    .font(.title3.bold())
+                    .foregroundStyle(.gray)
+                    .padding([.horizontal,.top])
+                residentList
             }
             
-            
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(locationDetailViewModel.location?.name ?? "")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+            }
         }
         .onAppear{
             locationDetailViewModel.fetchLocationAndResidents(from: locationId)
-            print(locationId)
         }
-        Spacer()
+        
+    }
+    
+    var banner: some View {
+        GeometryReader { geometry in
+            Rectangle()
+                .fill(Color("Gray6"))
+                .frame(width: geometry.size.width, height: 139)
+                .overlay {
+                    VStack {
+                        Text(locationDetailViewModel.location?.type ?? "")
+                            .font(.caption2)
+                            .foregroundStyle(.gray2)
+                        
+                        Text(locationDetailViewModel.location?.name ?? "")
+                            .font(.title.bold())
+                        
+                        Text(locationDetailViewModel.location?.dimension ?? "")
+                            .font(.footnote)
+                            .fontWeight(.medium)
+                            .foregroundStyle(.gray1)
+                    }
+                }
+            
+        }
+        .frame(height: 139)
+        .padding(.top, -50)
+    }
+    
+    var residentList: some View {
+        ScrollView(.vertical, showsIndicators: false) {
+            LazyVGrid(columns: Constansts.gridLayout){
+                ForEach(locationDetailViewModel.characters, id:\.id){ character in
+                    NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
+                        CharacterCard(
+                            status: character.status,
+                            name: character.name,
+                            img: character.image
+                        )
+                    }
+                }
+            }
+        }
     }
 }
 

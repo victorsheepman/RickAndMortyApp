@@ -50,7 +50,7 @@ struct EpisodeDetailView: View {
                 .padding(.top, 20)
             
             ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: layout){
+                LazyVGrid(columns: Constansts.gridLayout){
                     ForEach(episodeDetailViewModel.characters, id:\.id){ character in
                         NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
                             CharacterCard(
