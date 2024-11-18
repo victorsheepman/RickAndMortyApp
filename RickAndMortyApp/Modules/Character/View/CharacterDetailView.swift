@@ -29,7 +29,6 @@ struct CharacterDetailView: View {
         .onAppear(){
             viewModel.fetchCharactersAndEpisodes(from: characterId)
         }
-        Spacer()
     }
     
     var banner: some View {
