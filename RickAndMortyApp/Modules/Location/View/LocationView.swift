@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LocationView: View {
     
-    @StateObject var locationViewModel = LocationViewModel()
+    @StateObject var viewModel = LocationViewModel()
     
     @State private var isPresented: Bool   = false
     @State private var filter = LocationFilter()
@@ -17,9 +17,9 @@ struct LocationView: View {
     var body: some View {
         HeaderContainer(config: HeaderContainerConfiguration(title: "Location", isFilterPresented: $isPresented)){
             LazyVGrid(columns: Constansts.gridLayout){
-                ForEach(locationViewModel.locations, id:\.id){ location in
+                ForEach(viewModel.locations, id:\.id){ location in
                     NavigationLink(destination: LocationDetailView(locationId: location.id ?? 0)) {
-                        LocationCard(type: location.type ?? "", name: location.name ?? "")
+                        card(location.type ?? "", location.name ?? "")
                     }
                 }
             }
@@ -30,9 +30,37 @@ struct LocationView: View {
         .fullScreenCover(isPresented: $isPresented){
             FilterLocationView(
                 filter: $filter,
-                manager: locationViewModel
+                manager: viewModel
             )
         }
+    }
+    
+    private func card(_ type: String, _ name: String)-> some View {
+        VStack(alignment: .leading, spacing: 5) {
+            
+            Group {
+                Text(type)
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+                    .padding(.top, 12)
+                Text(name)
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+            }
+            .padding(.horizontal)
+        
+            Spacer()
+        }
+        .frame(width: 163, height: 80, alignment: .leading)
+        .background(Color(.systemBackground))
+        .cornerRadius(8)
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color("Gray5"), lineWidth: 1)
+        )
     }
 }
 
