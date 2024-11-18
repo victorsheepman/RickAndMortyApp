@@ -59,7 +59,7 @@ struct CharacterDetailView: View {
             
             VStack {
                 
-                CharacterImageView(imageUrl: detailViewModel.character?.image ?? "")
+                createCharacterImageView(imageUrl:  detailViewModel.character?.image  ?? "")
                 
                 Text(detailViewModel.character?.status ?? "")
                     .font(.caption2)
@@ -87,12 +87,12 @@ struct CharacterDetailView: View {
                 .foregroundStyle(.gray)
                 .padding(.vertical, 5)) {
                     ForEach(charactersDictionary, id: \.id) { row in
-                        if row.hasNav {
-                            NavigationLink(destination: LocationDetailView(locationId: locationId ?? 0)) {
-                                InfoRowView(title: row.title, value: row.value)
+                        if row.hasNav, let id = locationId {
+                            NavigationLink(destination: LocationDetailView(locationId: id)) {
+                                infoRow(row.title, row.value)
                             }
                         } else {
-                            InfoRowView(title: row.title, value: row.value)
+                            infoRow(row.title, row.value)
                         }
                     }
                 }
@@ -112,52 +112,7 @@ struct CharacterDetailView: View {
         }.listStyle(.plain)
     }
     
-}
-
-
-fileprivate struct CharacterImageView: View {
-    let imageUrl: String
-    
-    @ViewBuilder
-    var body: some View {
-        AsyncImage(url: URL(string: imageUrl)) { phase in
-            switch phase {
-            case .empty:
-                placeholderImage
-            case .success(let image):
-                image
-                    .resizable()
-                    .frame(width: 130, height: 130)
-                    .clipShape(RoundedRectangle(cornerRadius: 110))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 110)
-                            .stroke(Color("White"), lineWidth: 5)
-                    )
-            case .failure:
-                placeholderImage
-            @unknown default:
-                placeholderImage
-            }
-        }
-    }
-    
-    private var placeholderImage: some View {
-        Image("image")
-            .resizable()
-            .frame(width: 130, height: 130)
-            .clipShape(RoundedRectangle(cornerRadius: 110))
-            .overlay(
-                RoundedRectangle(cornerRadius: 110)
-                    .stroke(Color.white, lineWidth: 2)
-            )
-    }
-}
-
-fileprivate struct InfoRowView: View {
-    var title: String
-    var value: String?
-    
-    var body: some View {
+    private func infoRow(_ title: String, _ value: String?) -> some View {
         VStack(alignment:.leading){
             Text(title)
                 .font(.headline)
@@ -169,7 +124,42 @@ fileprivate struct InfoRowView: View {
                 .foregroundColor(.gray)
         }
     }
+    private func createCharacterImageView(imageUrl: String) -> some View {
+        AsyncImage(url: URL(string: imageUrl)) { phase in
+            switch phase {
+            case .empty:
+                placeholderImage()
+            case .success(let image):
+                image
+                    .resizable()
+                    .frame(width: 130, height: 130)
+                    .clipShape(RoundedRectangle(cornerRadius: 110))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 110)
+                            .stroke(Color("White"), lineWidth: 5)
+                    )
+            case .failure:
+                placeholderImage()
+            @unknown default:
+                placeholderImage()
+            }
+        }
+    }
+
+    private func placeholderImage() -> some View {
+        Image("image")
+            .resizable()
+            .frame(width: 130, height: 130)
+            .clipShape(RoundedRectangle(cornerRadius: 110))
+            .overlay(
+                RoundedRectangle(cornerRadius: 110)
+                    .stroke(Color.white, lineWidth: 2)
+            )
+    }
+
 }
+
+
 
 struct SectionItem {
     let header: String
@@ -184,44 +174,10 @@ struct RowItem {
     var hasNav: Bool {
         title == "Location"
     }
-    
 }
 
 
 
-extension CharacterDataModel {
-    func toSections() -> [RowItem] {
-        return [
-            RowItem(title: "Name", value: name),
-            RowItem(title: "Status", value: status),
-            RowItem(title: "Species", value: species),
-            RowItem(title: "Type", value: type.isEmpty ? "Unknown" : type),
-            RowItem(title: "Gender", value: gender),
-            RowItem(title: "Location", value: location.name)
-        ]
-    }
-}
-
-/*
-fileprivate struct InfoRowWithNav: View {
-    var title: String
-    var value: String?
-    var hasNav: Bool
-    var locationId: Int?
-    
-    @ViewBuilder
-    var body: some View {
-        if hasNav {
-            NavigationLink(destination: LocationDetailView(locationId: locationId ?? 0)) {
-                InfoRowView(title: title, value: value)
-            }
-        } else {
-            InfoRowView(title: title, value: value)
-        }
-    }
-}
-
-*/
 
 
 #Preview {
