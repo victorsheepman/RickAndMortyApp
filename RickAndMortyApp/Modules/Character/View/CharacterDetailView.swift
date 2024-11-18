@@ -10,20 +10,9 @@ import SwiftUI
 
 struct CharacterDetailView: View {
     
-    @StateObject var detailViewModel = CharacterDetailViewModel()
-    
     var characterId: Int
-
-    var locationId: Int? {
-        
-        guard let urlString = detailViewModel.character?.location.url else { return nil }
-        
-        return urlString.split(separator: "/").last.flatMap { Int($0) }
-    }
     
-    var charactersDictionary: [RowItem] {
-        detailViewModel.character?.toSections() ?? []
-    }
+    @StateObject var viewModel = ViewModel()
     
     var body: some View {
         VStack(alignment:.leading){
@@ -32,14 +21,13 @@ struct CharacterDetailView: View {
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text(detailViewModel.character?.name ?? "")
+                Text(viewModel.character?.name ?? "")
                     .font(.title3)
                     .fontWeight(.semibold)
             }
         }
         .onAppear(){
-            
-            detailViewModel.fetchCharactersAndEpisodes(from: characterId)
+            viewModel.fetchCharactersAndEpisodes(from: characterId)
         }
         Spacer()
     }
@@ -59,18 +47,18 @@ struct CharacterDetailView: View {
             
             VStack {
                 
-                createCharacterImageView(imageUrl:  detailViewModel.character?.image  ?? "")
+                createCharacterImageView(imageUrl: viewModel.character?.image  ?? "")
                 
-                Text(detailViewModel.character?.status ?? "")
+                Text(viewModel.character?.status ?? "")
                     .font(.caption2)
                     .foregroundStyle(.gray2)
                     .padding(.top, 10)
                    
                 
-                Text(detailViewModel.character?.name ?? "")
+                Text(viewModel.character?.name ?? "")
                     .font(.title.bold())
                 
-                Text(detailViewModel.character?.species ?? "")
+                Text(viewModel.character?.species ?? "")
                     .font(.footnote)
                     .fontWeight(.medium)
                     .foregroundStyle(.gray1)
@@ -86,8 +74,8 @@ struct CharacterDetailView: View {
                 .font(.title3.bold())
                 .foregroundStyle(.gray)
                 .padding(.vertical, 5)) {
-                    ForEach(charactersDictionary, id: \.id) { row in
-                        if row.hasNav, let id = locationId {
+                    ForEach(viewModel.charactersDictionary, id: \.id) { row in
+                        if row.hasNav, let id = viewModel.locationId {
                             NavigationLink(destination: LocationDetailView(locationId: id)) {
                                 infoRow(row.title, row.value)
                             }
@@ -100,7 +88,7 @@ struct CharacterDetailView: View {
                 .font(.title3.bold())
                 .foregroundStyle(.gray)
                 .padding(.vertical, 5)){
-                    ForEach(detailViewModel.episodes, id:\.id) { episode in
+                    ForEach(viewModel.episodes, id:\.id) { episode in
                         EpisodeCard(
                             episode: episode.episode,
                             id:      episode.id,

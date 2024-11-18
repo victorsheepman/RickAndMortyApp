@@ -22,15 +22,20 @@ struct EpisodeCard: View {
                         .fontWeight(.semibold)
                         .foregroundColor(.black)
                     
-                    Text(name)
-                        .font(.system(size: 15))
-                        .fontWeight(.regular)
+                    Group {
+                        Text(name)
+                            .font(.system(size: 15))
+                            .fontWeight(.regular)
                         .foregroundColor(Color.gray)
+                        
+                        Text(airDate)
+                            .font(.caption)
+                            .fontWeight(.regular)
+                            .foregroundColor(Color.gray)
+                    }
+                    .foregroundStyle(.gray)
                     
-                    Text(airDate)
-                        .font(.caption)
-                        .fontWeight(.regular)
-                        .foregroundColor(Color.gray)
+                 
                 }
                 Spacer()
             }

@@ -173,6 +173,7 @@
 		844BA22F2BE43A7600138F3D /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				849E04652CEB7D4200EAD973 /* CommonViews */,
 				8473D9752C34B66700796618 /* Location */,
 				844BA2342BE43B3100138F3D /* Character */,
 				844BA2302BE43AA800138F3D /* Episode */,
@@ -195,7 +196,6 @@
 				844BA2312BE43ABA00138F3D /* EpisodeView.swift */,
 				841775212C4870B3006C9CD0 /* FilterEpisodeView.swift */,
 				841775232C4877F8006C9CD0 /* EpisodeDetailView.swift */,
-				84FC59F42C4C441E0025283B /* EpisodeCard.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -247,6 +247,14 @@
 				84B33CD12C44494200E8BB31 /* LocationDetailViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		849E04652CEB7D4200EAD973 /* CommonViews */ = {
+			isa = PBXGroup;
+			children = (
+				84FC59F42C4C441E0025283B /* EpisodeCard.swift */,
+			);
+			path = CommonViews;
 			sourceTree = "<group>";
 		};
 		84C4E5942C49DBBF0031292A /* Components */ = {
