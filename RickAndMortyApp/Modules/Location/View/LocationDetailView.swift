@@ -39,7 +39,7 @@ struct LocationDetailView: View {
         
     }
     
-    var banner: some View {
+    private var banner: some View {
         GeometryReader { geometry in
             Rectangle()
                 .fill(Color("Gray6"))
