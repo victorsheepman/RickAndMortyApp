@@ -12,29 +12,29 @@ struct LocationDetailView: View {
     
     var locationId: Int
 
-    @StateObject private var locationDetailViewModel = LocationDetailViewModel()
+    @StateObject private var viewModel = LocationDetailViewModel()
    
     var body: some View {
         VStack(alignment: .leading) {
             banner
-            if !locationDetailViewModel.characters.isEmpty {
+            if !viewModel.characters.isEmpty {
                 Text("Residents")
                     .font(.title3.bold())
                     .foregroundStyle(.gray)
                     .padding([.horizontal,.top])
-                CharacterListView(characters: locationDetailViewModel.characters)
+                CharacterListView(characters: viewModel.characters)
             }
             
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text(locationDetailViewModel.location?.name ?? "")
+                Text(viewModel.location?.name ?? "")
                     .font(.title3)
                     .fontWeight(.semibold)
             }
         }
         .onAppear{
-            locationDetailViewModel.fetchLocationAndResidents(from: locationId)
+            viewModel.fetchLocationAndResidents(from: locationId)
         }
         
     }
@@ -46,14 +46,14 @@ struct LocationDetailView: View {
                 .frame(width: geometry.size.width, height: 139)
                 .overlay {
                     VStack {
-                        Text(locationDetailViewModel.location?.type ?? "")
+                        Text(viewModel.location?.type ?? "")
                             .font(.caption2)
                             .foregroundStyle(.gray2)
                         
-                        Text(locationDetailViewModel.location?.name ?? "")
+                        Text(viewModel.location?.name ?? "")
                             .font(.title.bold())
                         
-                        Text(locationDetailViewModel.location?.dimension ?? "")
+                        Text(viewModel.location?.dimension ?? "")
                             .font(.footnote)
                             .fontWeight(.medium)
                             .foregroundStyle(.gray1)

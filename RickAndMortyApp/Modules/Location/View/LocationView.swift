@@ -35,9 +35,8 @@ struct LocationView: View {
         }
     }
     
-    private func card(_ type: String, _ name: String)-> some View {
+    private func card(_ type: String, _ name: String) -> some View {
         VStack(alignment: .leading, spacing: 5) {
-            
             Group {
                 Text(type)
                     .font(.caption2)
