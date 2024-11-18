@@ -24,18 +24,12 @@ struct EpisodeCard: View {
                     
                     Group {
                         Text(name)
-                            .font(.system(size: 15))
-                            .fontWeight(.regular)
-                        .foregroundColor(Color.gray)
-                        
+                            .font(.callout)
+      
                         Text(airDate)
                             .font(.caption)
-                            .fontWeight(.regular)
-                            .foregroundColor(Color.gray)
                     }
                     .foregroundStyle(.gray)
-                    
-                 
                 }
                 Spacer()
             }
