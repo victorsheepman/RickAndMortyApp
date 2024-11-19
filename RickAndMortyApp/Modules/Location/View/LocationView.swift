@@ -16,16 +16,18 @@ struct LocationView: View {
    
     var body: some View {
         HeaderContainer(config: HeaderContainerConfiguration(title: "Location", isFilterPresented: $isPresented)){
-            LazyVGrid(columns: Constansts.gridLayout){
-                ForEach(viewModel.locations, id:\.id){ location in
-                    NavigationLink(destination: LocationDetailView(locationId: location.id ?? 0)) {
-                        card(location.type ?? "", location.name ?? "")
+            ScrollView {
+                LazyVGrid(columns: Constansts.gridLayout){
+                    ForEach(viewModel.locations, id:\.id){ location in
+                        NavigationLink(destination: LocationDetailView(locationId: location.id ?? 0)) {
+                            card(location.type ?? "", location.name ?? "")
+                        }
                     }
                 }
+                .padding(.top, 19)
+                .padding(.horizontal, 16)
+                .background(.white)
             }
-            .padding(.top, 19)
-            .padding(.horizontal, 16)
-            .background(.white)
         }
         .fullScreenCover(isPresented: $isPresented){
             FilterLocationView(
