@@ -12,20 +12,16 @@ struct EpisodeView: View {
     
     
     @State private var isPresented: Bool    = false
-    @State private var name: String         = ""
-    @State private var episode: String      = ""
-    
+    @State private var filter = EpisodeFilter()
     
     var body: some View {
         HeaderContainer(config: HeaderContainerConfiguration(title: "Episode", isFilterPresented: $isPresented)) {
             list
         }
-        .fullScreenCover(isPresented: $isPresented, onDismiss: { isPresented = false}){
+        .fullScreenCover(isPresented: $isPresented){
             FilterEpisodeView(
-                name:        $name,
-                episode:     $episode,
-                isPresented: $isPresented,
-                manager:     episodeViewModel
+                filter: $filter,
+                manager: episodeViewModel
             )
         }
     }
@@ -53,6 +49,13 @@ struct EpisodeView: View {
         .background(.white)
     }
 }
+
+struct EpisodeFilter {
+    var name = String()
+    var episode = String()
+}
+
+
 
 
 
