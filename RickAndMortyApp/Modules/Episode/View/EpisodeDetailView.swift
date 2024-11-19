@@ -23,16 +23,14 @@ struct EpisodeDetailView: View {
                     .overlay {
                         VStack {
                             Text(episodeDetailViewModel.episode?.airDate ?? "")
-                                .font(.caption)
-                                .fontWeight(.regular)
+                                .font(.caption2)
                                 .foregroundStyle(.gray2)
                             
                             Text(episodeDetailViewModel.episode?.name ?? "")
-                                .font(.title2)
-                                .fontWeight(.bold)
+                                .font(.title.bold())
                             
                             Text(episodeDetailViewModel.episode?.episode ?? "")
-                                .font(.subheadline)
+                                .font(.footnote)
                                 .fontWeight(.medium)
                                 .foregroundStyle(.gray1)
                         }
