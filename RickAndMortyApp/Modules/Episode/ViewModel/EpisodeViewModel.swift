@@ -30,8 +30,8 @@ class EpisodeViewModel: ObservableObject {
         getDataFromApi(url: url)
     }
     
-    func getEpisodesFiltered(name: String? = nil, episode: String? = nil) {
-        guard let url = constructURL(name: name, episode: episode) else {
+    func getEpisodesFiltered(by filter: EpisodeFilter) {
+        guard let url = constructURL(name: filter.name, episode: filter.episode) else {
             print("Invalid URL")
             return
         }

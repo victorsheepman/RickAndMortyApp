@@ -89,7 +89,7 @@ struct FilterEpisodeView: View {
     }
     
     private func apply() -> Void {
-      //  manager.getCharacterFiltered(by: filters)
+        manager.getEpisodesFiltered(by: filter)
     }
 }
 
