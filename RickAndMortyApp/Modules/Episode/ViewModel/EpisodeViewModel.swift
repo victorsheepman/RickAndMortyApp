@@ -28,7 +28,6 @@ class EpisodeViewModel: ObservableObject {
     func getEpisodes(from page: String) {
         let url = URL(string: baseUrl + page)!
         getDataFromApi(url: url)
-        print(seasons)
     }
     
     func getEpisodesFiltered(name: String? = nil, episode: String? = nil) {
@@ -56,7 +55,6 @@ class EpisodeViewModel: ObservableObject {
             } receiveValue: { [weak self] dataModel in
                 DispatchQueue.main.async { // Fuerza el cambio en el hilo principal
                      self?.seasons = dataModel
-                     print("Seasons updated: \(dataModel)") // Verifica el contenido
                  }
             }
         
