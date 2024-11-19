@@ -21,13 +21,11 @@ struct EpisodeDetailView: View {
                 title: viewModel.episode?.name ?? "",
                 footnote: viewModel.episode?.episode ?? ""
             )
-            if !viewModel.characters.isEmpty{
+            if !viewModel.characters.isEmpty {
                 Text("Residents")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundStyle(Color("Gray1"))
-                    .padding(.horizontal, 16)
-                    .padding(.top, 20)
+                    .font(.title3.bold())
+                    .foregroundStyle(.gray)
+                    .padding([.horizontal,.top])
                 
                 CharacterListView(characters: viewModel.characters)
             }
