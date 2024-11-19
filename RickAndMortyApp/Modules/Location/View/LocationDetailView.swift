@@ -16,7 +16,11 @@ struct LocationDetailView: View {
    
     var body: some View {
         VStack(alignment: .leading) {
-            banner
+            HeaderView(
+                caption: viewModel.location?.type ?? "",
+                title:   viewModel.location?.name ?? "",
+                footnote: viewModel.location?.dimension ?? ""
+            )
             if !viewModel.characters.isEmpty {
                 Text("Residents")
                     .font(.title3.bold())
@@ -37,32 +41,6 @@ struct LocationDetailView: View {
             viewModel.fetchLocationAndResidents(from: locationId)
         }
         
-    }
-    
-    private var banner: some View {
-        GeometryReader { geometry in
-            Rectangle()
-                .fill(Color("Gray6"))
-                .frame(width: geometry.size.width, height: 139)
-                .overlay {
-                    VStack {
-                        Text(viewModel.location?.type ?? "")
-                            .font(.caption2)
-                            .foregroundStyle(.gray2)
-                        
-                        Text(viewModel.location?.name ?? "")
-                            .font(.title.bold())
-                        
-                        Text(viewModel.location?.dimension ?? "")
-                            .font(.footnote)
-                            .fontWeight(.medium)
-                            .foregroundStyle(.gray1)
-                    }
-                }
-            
-        }
-        .frame(height: 139)
-        .padding(.top, -50)
     }
 }
 

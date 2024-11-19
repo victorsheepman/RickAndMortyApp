@@ -9,54 +9,39 @@ import SwiftUI
 
 struct EpisodeDetailView: View {
     
-    @StateObject private var episodeDetailViewModel = EpisodeDetailViewModel()
+    @StateObject private var viewModel = EpisodeDetailViewModel()
     @State private var isPresentingDetailResident   = false
     
     var episodeId: Int
     
     var body: some View {
         VStack(alignment: .leading) {
-            GeometryReader { geometry in
-                Rectangle()
-                    .fill(Color("Gray6"))
-                    .frame(width: geometry.size.width)
-                    .overlay {
-                        VStack {
-                            Text(episodeDetailViewModel.episode?.airDate ?? "")
-                                .font(.caption2)
-                                .foregroundStyle(.gray2)
-                            
-                            Text(episodeDetailViewModel.episode?.name ?? "")
-                                .font(.title.bold())
-                            
-                            Text(episodeDetailViewModel.episode?.episode ?? "")
-                                .font(.footnote)
-                                .fontWeight(.medium)
-                                .foregroundStyle(.gray1)
-                        }
-                    }
-            }.frame(minHeight: 105, maxHeight: 139)
-                .padding(.top, -50)
-            
-            Text("Residents")
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundStyle(Color("Gray1"))
-                .padding(.horizontal, 16)
-                .padding(.top, 20)
-            
-            CharacterListView(characters: episodeDetailViewModel.characters)
+            HeaderView(
+                caption: viewModel.episode?.airDate ?? "",
+                title: viewModel.episode?.name ?? "",
+                footnote: viewModel.episode?.episode ?? ""
+            )
+            if !viewModel.characters.isEmpty{
+                Text("Residents")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundStyle(Color("Gray1"))
+                    .padding(.horizontal, 16)
+                    .padding(.top, 20)
+                
+                CharacterListView(characters: viewModel.characters)
+            }
             Spacer()
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text(episodeDetailViewModel.episode?.name ?? "")
+                Text(viewModel.episode?.name ?? "")
                     .font(.title3)
                     .fontWeight(.semibold)
             }
         }
         .onAppear{
-            episodeDetailViewModel.fetchEpisodeAndCharacters(from: episodeId)
+            viewModel.fetchEpisodeAndCharacters(from: episodeId)
         }
         Spacer()
     }
