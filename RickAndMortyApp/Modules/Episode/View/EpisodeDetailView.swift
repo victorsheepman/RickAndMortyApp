@@ -26,7 +26,6 @@ struct EpisodeDetailView: View {
                     .font(.title3.bold())
                     .foregroundStyle(.gray)
                     .padding([.horizontal,.top])
-                
                 CharacterListView(characters: viewModel.characters)
             }
             Spacer()
