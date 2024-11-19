@@ -17,39 +17,40 @@ struct EpisodeView: View {
     
     
     var body: some View {
-        NavigationView {
-                list
+        HeaderContainer(config: HeaderContainerConfiguration(title: "Episode", isFilterPresented: $isPresented)) {
+            list
         }
         .fullScreenCover(isPresented: $isPresented, onDismiss: { isPresented = false}){
-            FilterEpisodeView(name:        $name,
-                              episode:     $episode,
-                              isPresented: $isPresented,
-                              manager:     episodeViewModel
+            FilterEpisodeView(
+                name:        $name,
+                episode:     $episode,
+                isPresented: $isPresented,
+                manager:     episodeViewModel
             )
         }
     }
     
     var list: some View {
-        
         List {
-            ForEach(episodeViewModel.seasons, id: \.name) { region in
-                Section(header: Text(region.name)
+            ForEach(episodeViewModel.seasons, id: \.name) { season in
+                Section(header: Text(season.name)
                     .font(.title3.bold())
                     .foregroundStyle(.gray)
                     .padding(.vertical, 5))
                 {
-                    ForEach(region.episodes, id: \.id) { sea in
+                    ForEach(season.episodes, id: \.id) { episode in
                         EpisodeCard(
-                            episode: sea.episode,
-                            id:      sea.id,
-                            name:    sea.name,
-                            airDate: sea.airDate
+                            episode: episode.episode,
+                            id:      episode.id,
+                            name:    episode.name,
+                            airDate: episode.airDate
                         )
                     }
                 }
             }
-            
         }
+        .listStyle(.plain)
+        .background(.white)
     }
 }
 

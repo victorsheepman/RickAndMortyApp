@@ -20,9 +20,9 @@ struct HeaderContainer<Content: View>: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
+        
                 content()
-            }
+            
             .padding(.top, 19)
             .navigationTitle(config.title)
             .toolbar {
