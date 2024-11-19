@@ -24,7 +24,6 @@ class LocationViewModel: ObservableObject {
     func getLocations(from page: String) {
         let url = URL(string: self.baseURL + page)!
         getDataFromApi(url: url)
-        print("Se ejecuto getLocation")
     }
     
     func getLocationsFiltered(by filter: LocationFilter) {
