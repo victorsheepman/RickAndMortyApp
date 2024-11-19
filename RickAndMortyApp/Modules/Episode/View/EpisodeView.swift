@@ -12,51 +12,50 @@ struct EpisodeView: View {
     
     
     @State private var isPresented: Bool    = false
-    @State private var name: String         = ""
-    @State private var episode: String      = ""
-    
+    @State private var filter = EpisodeFilter()
     
     var body: some View {
         HeaderContainer(config: HeaderContainerConfiguration(title: "Episode", isFilterPresented: $isPresented)) {
-            VStack(alignment: .leading){
-                ForEach(Array(episodeViewModel.episodes.keys).sorted(), id: \.self) { season in
-                    Text(season)
-                        .foregroundStyle(Color("Gray1"))
-                        .fontWeight(.bold)
-                        .font(.title3)
-                        .padding(.top, 20)
-                        .padding(.horizontal, 16)
-                    
-                    Divider()
-                    
-                    ForEach(episodeViewModel.episodes[season] ?? [], id: \.id) { item in
-                        EpisodeCard(
-                            episode: item.episode,
-                            id:      item.id,
-                            name:    item.name,
-                            airDate: item.airDate
-                        )
-                        Divider()
-                    }
-                }
-            }
-            .background(.white)
-            
+            list
         }
-        
-        .onAppear{
-            
-            episodeViewModel.getEpisodes(from: "")
-        }
-        .fullScreenCover(isPresented: $isPresented, onDismiss: { isPresented = false}){
-            FilterEpisodeView(name:        $name,
-                              episode:     $episode,
-                              isPresented: $isPresented,
-                              manager:     episodeViewModel
+        .fullScreenCover(isPresented: $isPresented){
+            FilterEpisodeView(
+                filter: $filter,
+                manager: episodeViewModel
             )
         }
     }
+    
+    var list: some View {
+        List {
+            ForEach(episodeViewModel.seasons, id: \.name) { season in
+                Section(header: Text(season.name)
+                    .font(.title3.bold())
+                    .foregroundStyle(.gray)
+                    .padding(.vertical, 5))
+                {
+                    ForEach(season.episodes, id: \.id) { episode in
+                        EpisodeCard(
+                            episode: episode.episode,
+                            id:      episode.id,
+                            name:    episode.name,
+                            airDate: episode.airDate
+                        )
+                    }
+                }
+            }
+        }
+        .listStyle(.plain)
+        .background(.white)
+    }
 }
+
+struct EpisodeFilter {
+    var name = String()
+    var episode = String()
+}
+
+
 
 
 

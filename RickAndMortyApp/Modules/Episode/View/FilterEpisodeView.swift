@@ -9,46 +9,24 @@ import SwiftUI
 
 struct FilterEpisodeView: View {
     
-    @Binding var name:        String
-    @Binding var episode:     String
-    @Binding var isPresented: Bool
+    @Environment(\.dismiss) private var dismiss
+    
+    @Binding var filter: EpisodeFilter
     
     var manager: EpisodeViewModel
     
+    private var isApplyDisabled: Bool {
+        [filter.episode, filter.name]
+            .allSatisfy { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+    }
     var body: some View {
-        NavigationView{
+        NavigationStack{
             VStack(alignment:.leading){
-                HStack(alignment: .center){
-                    
-                    Button("Clear"){
-                        cleanData()
-                    }
-                    .foregroundStyle(Color("Indigo"))
-                    .font(.callout)
-                    .fontWeight(.regular)
-                    .padding(.leading, 20)
-                    Spacer()
-                    Text("Filter")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(Color("Black"))
-                    Spacer()
-                    Button("APPLY"){
-                        manager.getEpisodesFiltered(name: name, episode: episode)
-                        isPresented = false
-                    }.frame(width:82, height:38)
-                        .background(Color("Indigo"))
-                        .cornerRadius(20)
-                        .foregroundStyle(Color("White"))
-                        .font(.callout)
-                        .fontWeight(.semibold)
-                        .padding(.trailing, 20)
-                }
                 Divider()
                     .padding(.top, 15)
                 
                 SearchItem(
-                    textToSearch: $name,
+                    textToSearch: $filter.name,
                     title: "Name",
                     placeholder: "Give a name"
                 )
@@ -57,7 +35,7 @@ struct FilterEpisodeView: View {
                     .padding(.top, 15)
             
                 SearchItem(
-                    textToSearch: $name,
+                    textToSearch: $filter.episode,
                     title: "Episode",
                     placeholder: "Select one"
                 )
@@ -66,25 +44,58 @@ struct FilterEpisodeView: View {
 
                 Spacer()
                 
+            }.toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Clear"){
+                        clean()
+                        dismiss()
+                    }
+                    .tint(.indigo)
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("Filter")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                    
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("APPLY"){
+                        apply()
+                        dismiss()
+                    }
+                    .tint(.indigo)
+                    .font(.headline)
+                    .buttonBorderShape(.capsule)
+                    .buttonStyle(.borderedProminent)
+                    .disabled(isApplyDisabled)
+                    
+                }
             }
-            
-            
         }
     }
     
-    private func cleanData() -> Void {
-        manager.getEpisodes(from: "")
-        name    = ""
-        episode = ""
-        isPresented = false
+
+    
+    private func clean() -> Void {
+        if !isApplyDisabled {
+            manager.getEpisodes(from: "page=1")
+        }
+        resetFilters()
+    }
+    
+    private func resetFilters() {
+        filter.name    = ""
+        filter.episode = ""
+    }
+    
+    private func apply() -> Void {
+        manager.getEpisodesFiltered(by: filter)
     }
 }
 
 #Preview {
     FilterEpisodeView(
-        name:        .constant(""),
-        episode:     .constant(""),
-        isPresented: .constant(true),
+        filter: .constant(EpisodeFilter()),
         manager:     EpisodeViewModel()
     )
 }

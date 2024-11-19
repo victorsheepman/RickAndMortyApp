@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct EpisodeCard: View {
+   
     var episode: String
-    var id:      Int
-    var name:    String
+    var id: Int
+    var name: String
     var airDate: String
     
     var body: some View {
@@ -31,6 +32,7 @@ struct EpisodeCard: View {
                     }
                     .foregroundStyle(.gray)
                 }
+                
                 Spacer()
             }
         }

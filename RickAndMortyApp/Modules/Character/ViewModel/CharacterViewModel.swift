@@ -25,7 +25,6 @@ class CharacterViewModel: ObservableObject {
     func getCharacters(from page: String) {
         let url = URL(string: self.baseURL + page)!
         getDataFromApi(url: url)
-        print("arranco la app")
     }
     
     func getCharacterFiltered(by filters: CharacterFilters) {
