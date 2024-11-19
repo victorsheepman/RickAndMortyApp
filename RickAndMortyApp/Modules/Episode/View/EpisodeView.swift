@@ -17,36 +17,8 @@ struct EpisodeView: View {
     
     
     var body: some View {
-        HeaderContainer(config: HeaderContainerConfiguration(title: "Episode", isFilterPresented: $isPresented)) {
-            VStack(alignment: .leading){
-                ForEach(Array(episodeViewModel.episodes.keys).sorted(), id: \.self) { season in
-                    Text(season)
-                        .foregroundStyle(Color("Gray1"))
-                        .fontWeight(.bold)
-                        .font(.title3)
-                        .padding(.top, 20)
-                        .padding(.horizontal, 16)
-                    
-                    Divider()
-                    
-                    ForEach(episodeViewModel.episodes[season] ?? [], id: \.id) { item in
-                        EpisodeCard(
-                            episode: item.episode,
-                            id:      item.id,
-                            name:    item.name,
-                            airDate: item.airDate
-                        )
-                        Divider()
-                    }
-                }
-            }
-            .background(.white)
-            
-        }
-        
-        .onAppear{
-            
-            episodeViewModel.getEpisodes(from: "")
+        NavigationView {
+                list
         }
         .fullScreenCover(isPresented: $isPresented, onDismiss: { isPresented = false}){
             FilterEpisodeView(name:        $name,
@@ -54,6 +26,29 @@ struct EpisodeView: View {
                               isPresented: $isPresented,
                               manager:     episodeViewModel
             )
+        }
+    }
+    
+    var list: some View {
+        
+        List {
+            ForEach(episodeViewModel.seasons, id: \.name) { region in
+                Section(header: Text(region.name)
+                    .font(.title3.bold())
+                    .foregroundStyle(.gray)
+                    .padding(.vertical, 5))
+                {
+                    ForEach(region.episodes, id: \.id) { sea in
+                        EpisodeCard(
+                            episode: sea.episode,
+                            id:      sea.id,
+                            name:    sea.name,
+                            airDate: sea.airDate
+                        )
+                    }
+                }
+            }
+            
         }
     }
 }
