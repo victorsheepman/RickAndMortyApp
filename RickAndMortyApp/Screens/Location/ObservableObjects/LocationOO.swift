@@ -11,10 +11,8 @@ import Combine
 
 class LocationOO: ObservableObject {
     
-    @Published var locations:[LocationDO] = []
-    
-    var cancellables = Set<AnyCancellable>()
-    
+    @Published var locations: [LocationDO] = []
+
     let baseURL = Constansts.MainURL.main + Constansts.Endpoints.locations + "?"
     
     init() {
@@ -23,8 +21,11 @@ class LocationOO: ObservableObject {
     
     
     func getLocations(from page: String) {
-        let url = URL(string: self.baseURL + page)!
-        getDataFromApi(url: url)
+        guard let url = URL(string: self.baseURL + page) else {
+            print("Invalid URL")
+            return
+        }
+        fetchData(url: url)
     }
     
     func getLocationsFiltered(by filter: LocationFilter) {
@@ -32,11 +33,12 @@ class LocationOO: ObservableObject {
             print("Invalid URL")
             return
         }
-        getDataFromApi(url: url)
+        fetchData(url: url)
     }
     
     
-    private func getDataFromApi(url:URL){
+    private func fetchData(url:URL) {
+        var cancellables = Set<AnyCancellable>()
         let cancellable = NetworkManager.shared.fetchData(from: url, responseType: LocationResponseDO.self)
             .receive(on: DispatchQueue.main)
             .sink { completion in
@@ -54,26 +56,18 @@ class LocationOO: ObservableObject {
         cancellable.store(in: &cancellables)
     }
     
-    private func constructURL(_ filter: LocationFilter) -> URL? {
-
-        var queryItems = [URLQueryItem]()
+    private func constructURL(_ filters: LocationFilter) -> URL? {
+        var queryItems: [URLQueryItem] = [
+            filters.name.isEmpty      ? nil : URLQueryItem(name: "name",      value: filters.name),
+            filters.type.isEmpty      ? nil : URLQueryItem(name: "type",      value: filters.type),
+            filters.dimension.isEmpty ? nil : URLQueryItem(name: "dimension", value: filters.dimension),
+            
+        ].compactMap { $0 }
         
-       
-        if !filter.name.isEmpty {
-            queryItems.append(URLQueryItem(name: "name", value: filter.name))
-        }
-        if !filter.type.isEmpty {
-            queryItems.append(URLQueryItem(name: "type", value: filter.type))
-        }
-        if !filter.dimension.isEmpty {
-            queryItems.append(URLQueryItem(name: "dimension", value: filter.dimension))
-        }
-      
+        guard !queryItems.isEmpty else { return nil }
         
         var urlComponents = URLComponents(string: self.baseURL)
         urlComponents?.queryItems = queryItems
-
-
         return urlComponents?.url
     }
 }
