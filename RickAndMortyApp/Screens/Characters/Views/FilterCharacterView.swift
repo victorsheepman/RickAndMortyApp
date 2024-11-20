@@ -12,12 +12,15 @@ struct FilterCharacterView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @Binding var filters: CharacterFilter
+    @SceneStorage("statusCharacter") var status: String = ""
+    @SceneStorage("genderCharacter") var gender: String = ""
+    @SceneStorage("speciesCharacter") var species: String = ""
+    @SceneStorage("nameCharacter") var name: String = ""
     
     var manager: CharacterOO
     
     private var isApplyDisabled: Bool {
-        [filters.status, filters.gender, filters.species, filters.name]
+        [status, gender, species, name]
             .allSatisfy { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
     }
     
@@ -25,7 +28,7 @@ struct FilterCharacterView: View {
         NavigationStack{
             VStack(alignment:.leading){
                 SearchItem(
-                    textToSearch: $filters.name,
+                    textToSearch: $name,
                     title: "Name",
                     placeholder:"Give a name"
                 )
@@ -34,7 +37,7 @@ struct FilterCharacterView: View {
                     .padding(.top, 15)
                 
                 SearchItem(
-                    textToSearch: $filters.species,
+                    textToSearch: $species,
                     title: "Species",
                     placeholder:"Select one")
                 
@@ -91,19 +94,19 @@ struct FilterCharacterView: View {
             VStack(alignment:.leading, spacing: 10){
                 
                 EnumToggle(
-                    selectedValue: $filters.status,
+                    selectedValue: $status,
                     toggleValue: Status.alive,
                     label: "Alive"
                 )
                 
                 EnumToggle(
-                    selectedValue: $filters.status,
+                    selectedValue: $status,
                     toggleValue: Status.dead,
                     label: "Dead"
                 )
                 
                 EnumToggle(
-                    selectedValue: $filters.status,
+                    selectedValue: $status,
                     toggleValue: Status.unknown,
                     label: "Unknown"
                 )
@@ -125,25 +128,25 @@ struct FilterCharacterView: View {
             VStack(alignment:.leading, spacing: 12){
                 
                 EnumToggle(
-                    selectedValue: $filters.gender,
+                    selectedValue: $gender,
                     toggleValue: Gender.female,
                     label: "Female"
                 )
                 
                 EnumToggle(
-                    selectedValue: $filters.gender,
+                    selectedValue: $gender,
                     toggleValue: Gender.male,
                     label: "Male"
                 )
                 
                 EnumToggle(
-                    selectedValue: $filters.gender,
+                    selectedValue: $gender,
                     toggleValue: Gender.genderless,
                     label: "Genderless"
                 )
                 
                 EnumToggle(
-                    selectedValue: $filters.gender,
+                    selectedValue: $gender,
                     toggleValue: Gender.unknown,
                     label: "Unknown"
                 )
@@ -160,20 +163,20 @@ struct FilterCharacterView: View {
     }
     
     private func resetFilters() {
-        filters.gender = ""
-        filters.status = ""
-        filters.species = ""
-        filters.name = ""
+        gender = ""
+        status = ""
+        species = ""
+        name = ""
     }
     
     private func apply() -> Void {
-        manager.getCharacterFiltered(by: filters)
+        var filter = CharacterFilter(status: status, gender: gender, species: species, name: name)
+        manager.getCharacterFiltered(by: filter)
     }
 }
 
 #Preview {
     FilterCharacterView(
-        filters: .constant(CharacterFilter(status: "", gender: "", species: "", name: "")),
         manager: CharacterOO()
     )
 }
