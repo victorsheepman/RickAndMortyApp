@@ -38,7 +38,7 @@ struct EpisodeDetailView: View {
             }
         }
         .onAppear{
-            viewModel.fetchEpisodeAndCharacters(from: episodeId)
+            viewModel.getEpisode(from: episodeId)
         }
         Spacer()
     }

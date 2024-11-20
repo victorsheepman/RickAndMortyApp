@@ -23,10 +23,12 @@ struct CharacterView: View {
     
     var body: some View {
         HeaderContainer(config: HeaderContainerConfiguration(title: "Character", isFilterPresented: $isPresented)) {
-            CharacterListView(characters: viewModel.characterModel)
-            .padding(.top,9)
-            .background(.white)
-            .padding(.bottom, 65)
+            ScrollView {
+                CharacterListView(characters: viewModel.characters)
+                    .padding(.top,9)
+                    .background(.white)
+                    .padding(.bottom, 65)
+            }
     
         }
         .fullScreenCover(isPresented: $isPresented){

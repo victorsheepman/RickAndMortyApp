@@ -13,16 +13,20 @@ class EpisodeOO: ObservableObject {
     
     @Published var seasons: [SeasonDO] = []
     
+    let baseURL = Constansts.MainURL.main + Constansts.Endpoints.episodes + "?"
+    
     var cancellables = Set<AnyCancellable>()
-    let baseUrl = Constansts.MainURL.main + Constansts.Endpoints.episodes + "?"
     
     init(){
         getEpisodes(from: "page=1")
     }
     
     func getEpisodes(from page: String) {
-        let url = URL(string: baseUrl + page)!
-        getDataFromApi(url: url)
+        guard let url = URL(string: baseURL + page) else {
+            print("Invalid URL")
+            return
+        }
+        fetchData(from: url)
     }
     
     func getEpisodesFiltered(by filter: EpisodeFilter) {
@@ -30,10 +34,11 @@ class EpisodeOO: ObservableObject {
             print("Invalid URL")
             return
         }
-        getDataFromApi(url: url)
+        fetchData(from: url)
     }
     
-    private func getDataFromApi(url:URL){
+    private func fetchData(from url:URL){
+        
         let cancellable = NetworkManager.shared.fetchData(from: url, responseType:  EpisodeResponseDO.self)
             .map { $0.results }
             .map { [weak self] episodes in
@@ -63,14 +68,14 @@ class EpisodeOO: ObservableObject {
             let seasonPrefix = String(episode.episode.prefix(3)) // "S01" de "S01E01"
             let seasonName = "Season \(seasonPrefix.dropFirst())"
             
-            // Verificar si ya existe una temporada con este nombre
+
             if let index = seasons.firstIndex(where: { $0.name == seasonName }) {
-                // Si existe, añadir el episodio a la temporada correspondiente
+              
                 var updatedSeason = seasons[index]
                 updatedSeason.episodes.append(episode)
                 seasons[index] = updatedSeason
             } else {
-                // Si no existe, crear una nueva temporada y añadirla al arreglo
+    
                 let newSeason = SeasonDO(name: seasonName, episodes: [episode])
                 seasons.append(newSeason)
             }
@@ -78,27 +83,17 @@ class EpisodeOO: ObservableObject {
         
         return seasons
     }
-    
-    
-    
-    
-    private func constructURL(name: String?, episode: String?) -> URL? {
+
+    private func constructURL(name: String, episode: String) -> URL? {
+        var queryItems: [URLQueryItem] = [
+            name.isEmpty    ? nil : URLQueryItem(name: "name",    value: name),
+            episode.isEmpty ? nil : URLQueryItem(name: "status",  value: episode)
+        ].compactMap { $0 }
         
-        var queryItems = [URLQueryItem]()
+        guard !queryItems.isEmpty else { return nil }
         
-        
-        if let name = name, !name.isEmpty {
-            queryItems.append(URLQueryItem(name: "name", value: name))
-        }
-        
-        if let episode = episode, !episode.isEmpty {
-            queryItems.append(URLQueryItem(name: "episode", value: episode))
-        }
-        
-        var urlComponents = URLComponents(string: self.baseUrl)
+        var urlComponents = URLComponents(string: self.baseURL)
         urlComponents?.queryItems = queryItems
-        
-        
         return urlComponents?.url
     }
 }

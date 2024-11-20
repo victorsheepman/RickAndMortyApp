@@ -15,82 +15,72 @@ class LocationDetailOO: ObservableObject {
     
     let baseURL          = Constansts.MainURL.main + Constansts.Endpoints.locations
     let baseURLCharacter = Constansts.MainURL.main + Constansts.Endpoints.characters
-    var cancellables     = Set<AnyCancellable>()
     
-    func fetchLocationAndResidents(from id: Int) {
-        let url = URL(string: self.baseURL + "/\(id)")!
+    var cancellables = Set<AnyCancellable>()
+    
+    func getLocations(from id: Int) {
+        guard let url = URL(string: self.baseURL + "/\(id)") else {
+            print("Invalid URL")
+            return
+        }
         
-        NetworkManager.shared.fetchData(from: url, responseType: LocationDO.self)
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    print("error: \(error.localizedDescription)")
-                }
-            } receiveValue: { [weak self] data in
-                self?.location = data
-                
-                if let residents = data.residents {
-                    let residentIds = self?.getResidentIds(from: residents) ?? []
-                    
-                    if residentIds.count == 1 {
-                        self?.getResident(from: residentIds[0])
-                    } else {
-                        self?.getResidents(from: residentIds)
-                    }
-                    
-                }
+        fetchData(url: url, responseType:  LocationDO.self) { response in
+            switch response {
+            case .success(let response):
+                self.handleResponse(response)
+            case .failure(let error):
+                print("Error fetching character: \(error.localizedDescription)")
             }
-            .store(in: &cancellables)
-    }
-    
-    
-    private func getResidentIds(from residents: [String]) -> [String] {
-        return residents.compactMap { url in
-            return url.split(separator: "/").last.flatMap  { String($0) }
         }
     }
     
+    private func handleResponse(_ data: LocationDO) {
+        self.location = data
+        
+        
+        let residentIds = data.residents?.compactMap { $0.split(separator: "/").last.map(String.init) }
+        
+        guard let ids = residentIds else {
+            return
+        }
+        
+        if !ids.isEmpty {
+            self.getResidents(from: ids)
+        }
+        
+        
+    }
     
     private func getResidents(from ids: [String]) {
         
-        let url = URL(string: self.baseURLCharacter + "/\(ids)")!
+        guard let url = URL(string: self.baseURLCharacter + "/\(ids)") else {
+            print("Invalid URL")
+            return
+        }
         
-        NetworkManager.shared.fetchData(from: url, responseType: [CharacterDO].self)
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    print("error: \(error.localizedDescription)")
-                }
-            } receiveValue: { [weak self] data in
-                self?.characters = data
-                
+        fetchData(url: url, responseType: [CharacterDO].self) { response in
+            switch response {
+            case .success(let data):
+                self.characters = data
+            case .failure(let error):
+                print("Error fetching character: \(error.localizedDescription)")
             }
-            .store(in: &cancellables)
+        }
     }
     
-    private func getResident(from id: String) {
-        
-        let url = URL(string: self.baseURLCharacter + "/\(id)")!
-        
-        NetworkManager.shared.fetchData(from: url, responseType: CharacterDO.self)
+    private func fetchData<T: Decodable>(url: URL, responseType: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
+        NetworkManager.shared.fetchData(from: url, responseType: responseType)
             .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
+            .sink { completionResult in
+                switch completionResult {
                 case .finished:
                     break
                 case .failure(let error):
-                    print("error: \(error.localizedDescription)")
+                    print("Error fetching data: \(error.localizedDescription)")
+                    completion(.failure(error)) // Retorna el error si ocurre
                 }
-            } receiveValue: { [weak self] data in
-                
-                self?.characters.append(data)
-                
+            } receiveValue: { data in
+                completion(.success(data)) // Retorna los datos
             }
             .store(in: &cancellables)
     }

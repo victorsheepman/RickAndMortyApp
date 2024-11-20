@@ -38,7 +38,7 @@ struct LocationDetailView: View {
             }
         }
         .onAppear{
-            viewModel.fetchLocationAndResidents(from: locationId)
+            viewModel.getLocations(from: locationId)
         }
         
     }

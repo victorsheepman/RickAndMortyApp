@@ -15,7 +15,7 @@ struct CharacterListView: View {
         ScrollView(.vertical, showsIndicators: false) {
             LazyVGrid(columns: Constansts.gridLayout){
                 ForEach(characters, id:\.id){ character in
-                    NavigationLink(destination: CharacterDetailView( characterId: character.id)) {
+                    NavigationLink(destination: CharacterDetailView(id: character.id)) {
                         CharacterCard(
                             character.status,
                             character.name,

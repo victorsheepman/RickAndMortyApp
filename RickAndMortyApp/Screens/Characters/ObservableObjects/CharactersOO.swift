@@ -11,7 +11,7 @@ import Combine
 
 class CharacterOO: ObservableObject {
     
-    @Published var characterModel:[CharacterDO] = []
+    @Published var characters: [CharacterDO] = []
     
     var cancellables = Set<AnyCancellable>()
     
@@ -22,8 +22,11 @@ class CharacterOO: ObservableObject {
     }
     
     func getCharacters(from page: String) {
-        let url = URL(string: self.baseURL + page)!
-        getDataFromApi(url: url)
+        guard let url = URL(string: self.baseURL + page) else {
+            print("Invalid URL")
+            return
+        }
+        fetchData(from: url)
     }
     
     func getCharacterFiltered(by filters: CharacterFilter) {
@@ -31,49 +34,38 @@ class CharacterOO: ObservableObject {
             print("Invalid URL")
             return
         }
-        getDataFromApi(url: url)
+        fetchData(from: url)
     }
     
-    
-    private func getDataFromApi(url:URL){
-        let cancellable = NetworkManager.shared.fetchData(from: url, responseType: CharacterResponseDO.self)
+    private func fetchData(from url: URL) {
+        NetworkManager.shared.fetchData(from: url, responseType: CharacterResponseDO.self)
+            .map { $0.results }
             .receive(on: DispatchQueue.main)
-            .sink { completion in
+            .sink { [weak self] completion in
                 switch completion {
                 case .finished:
                     break
                 case .failure(let error):
                     print("error: \(error.localizedDescription)")
                 }
-            } receiveValue: { [weak self] characterDO in
-                self?.characterModel =  characterDO.results
-                
+            } receiveValue: { [weak self] response in
+                self?.characters = response
             }
-        
-        cancellable.store(in: &cancellables)
+            .store(in: &cancellables)
     }
     
     private func constructURL(_ filters: CharacterFilter) -> URL? {
+        var queryItems: [URLQueryItem] = [
+            filters.name.isEmpty    ? nil : URLQueryItem(name: "name",    value: filters.name),
+            filters.status.isEmpty  ? nil : URLQueryItem(name: "status",  value: filters.status),
+            filters.species.isEmpty ? nil : URLQueryItem(name: "species", value: filters.species),
+            filters.gender.isEmpty  ? nil : URLQueryItem(name: "gender",  value: filters.gender)
+        ].compactMap { $0 }
         
-        var queryItems = [URLQueryItem]()
-        
-        if !filters.name.isEmpty {
-            queryItems.append(URLQueryItem(name: "name", value: filters.name))
-        }
-        if !filters.status.isEmpty {
-            queryItems.append(URLQueryItem(name: "status", value: filters.status))
-        }
-        if !filters.species.isEmpty {
-            queryItems.append(URLQueryItem(name: "species", value: filters.species))
-        }
-        if !filters.gender.isEmpty {
-            queryItems.append(URLQueryItem(name: "gender", value: filters.gender))
-        }
-        
+        guard !queryItems.isEmpty else { return nil }
         
         var urlComponents = URLComponents(string: self.baseURL)
         urlComponents?.queryItems = queryItems
-        
         return urlComponents?.url
     }
     
