@@ -8,9 +8,8 @@
 import Foundation
 import Combine
 
-
 class CharacterDetailOO: ObservableObject {
-    @Published var episodes:[EpisodeDO] = []
+    @Published var episodes: [EpisodeDO] = []
     @Published var character: CharacterDO?
     
     var cancellables = Set<AnyCancellable>()
@@ -43,16 +42,12 @@ class CharacterDetailOO: ObservableObject {
     
     private func handleResponse(_ data: CharacterDO) {
         self.character = data
-        let episodeIds = getEpisodeIds(from: data.episode)
+        let episodeIds = data.episode.compactMap { $0.split(separator: "/").last.map(String.init) }
         if !episodeIds.isEmpty {
             getEpisodes(from: episodeIds)
         }
     }
-    
-    private func getEpisodeIds(from episodes: [String]) -> [String] {
-        return episodes.compactMap { $0.split(separator: "/").last.map(String.init) }
-    }
-    
+        
     private func getEpisodes(from ids: [String]) {
         guard !ids.isEmpty else {
             print("No episode IDs to fetch")
@@ -74,6 +69,8 @@ class CharacterDetailOO: ObservableObject {
         }
     }
     
+   
+    
     private func fetchData<T: Decodable>(url: URL, responseType: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
         NetworkManager.shared.fetchData(from: url, responseType: responseType)
             .receive(on: DispatchQueue.main)
@@ -90,10 +87,6 @@ class CharacterDetailOO: ObservableObject {
             }
             .store(in: &cancellables)
     }
-    
-    
-    
-    
 }
 
 
