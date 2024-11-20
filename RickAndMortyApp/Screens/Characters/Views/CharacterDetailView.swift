@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CharacterDetailView: View {
     
-    var characterId: Int
+    var id: Int
     
     @StateObject var viewModel = CharacterDetailOO()
     
@@ -27,7 +27,7 @@ struct CharacterDetailView: View {
             }
         }
         .onAppear(){
-            viewModel.fetchCharactersAndEpisodes(from: characterId)
+            viewModel.getCharacter(from: id)
         }
     }
     
@@ -168,5 +168,5 @@ struct RowItem {
 
 
 #Preview {
-    CharacterDetailView(characterId: 2)
+    CharacterDetailView(id: 2)
 }
