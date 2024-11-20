@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - LocationResponseDataModel
 struct LocationResponseDO: Codable {
-    let info: Info
+    let info: InfoDO
     let results: [LocationDO]
 }
 

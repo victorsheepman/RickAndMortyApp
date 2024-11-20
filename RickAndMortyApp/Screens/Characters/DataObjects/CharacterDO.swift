@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - Result
+
 struct CharacterDO: Codable {
     let id: Int
     let name, status, species, type: String
@@ -17,4 +17,10 @@ struct CharacterDO: Codable {
     let episode: [String]
     let url: String
     let created: String
+}
+
+
+struct Location: Codable {
+    let name: String
+    let url: String
 }
