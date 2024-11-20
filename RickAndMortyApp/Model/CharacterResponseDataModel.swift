@@ -12,11 +12,3 @@ import Foundation
 
 
 
-
-
-struct CharacterFilter {
-    var status = String()
-    var gender = String()
-    var species = String()
-    var name = String()
-}

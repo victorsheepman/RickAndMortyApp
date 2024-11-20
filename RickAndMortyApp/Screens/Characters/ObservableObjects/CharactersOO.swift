@@ -26,7 +26,7 @@ class CharacterOO: ObservableObject {
         getDataFromApi(url: url)
     }
     
-    func getCharacterFiltered(by filters: CharacterFilters) {
+    func getCharacterFiltered(by filters: CharacterFilter) {
         guard let url = constructURL(filters) else {
             print("Invalid URL")
             return
@@ -53,7 +53,7 @@ class CharacterOO: ObservableObject {
         cancellable.store(in: &cancellables)
     }
     
-    private func constructURL(_ filters: CharacterFilters) -> URL? {
+    private func constructURL(_ filters: CharacterFilter) -> URL? {
         
         var queryItems = [URLQueryItem]()
         

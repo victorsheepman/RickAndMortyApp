@@ -14,7 +14,7 @@ struct FilterCharacterView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @Binding var filters: CharacterFilters
+    @Binding var filters: CharacterFilter
     
     var manager: CharacterOO
     
@@ -175,7 +175,7 @@ struct FilterCharacterView: View {
 
 #Preview {
     FilterCharacterView(
-        filters: .constant(CharacterFilters(status: "", gender: "", species: "", name: "")),
+        filters: .constant(CharacterFilter(status: "", gender: "", species: "", name: "")),
         manager: CharacterOO()
     )
 }
