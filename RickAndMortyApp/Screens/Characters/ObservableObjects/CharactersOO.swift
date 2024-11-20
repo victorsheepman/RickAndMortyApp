@@ -39,6 +39,7 @@ class CharacterOO: ObservableObject {
     
     private func fetchData(from url: URL) {
         NetworkManager.shared.fetchData(from: url, responseType: CharacterResponseDO.self)
+            .map { $0.results }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 switch completion {
@@ -48,7 +49,7 @@ class CharacterOO: ObservableObject {
                     print("error: \(error.localizedDescription)")
                 }
             } receiveValue: { [weak self] response in
-                self?.characters = response.results
+                self?.characters = response
             }
             .store(in: &cancellables)
     }
