@@ -6,8 +6,6 @@
 //
 
 import Foundation
-
-import Foundation
 import Combine
 
 class EpisodeDetailOO: ObservableObject {
@@ -17,52 +15,60 @@ class EpisodeDetailOO: ObservableObject {
     
     let baseURL = Constansts.MainURL.main + Constansts.Endpoints.episodes
     
-    var cancellables = Set<AnyCancellable>()
-    
-    func fetchEpisodeAndCharacters(from id: Int) {
+    func getEpisode(from id: Int) {
         
-        let url = URL(string: self.baseURL + "/\(id)")!
+        guard let url = URL(string: self.baseURL + "/\(id)") else {
+            print("Invalid episodes URL")
+            return
+        }
         
-        NetworkManager.shared.fetchData(from: url, responseType: EpisodeDO.self)
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    print("error: \(error.localizedDescription)")
-                }
-            } receiveValue: { [weak self] data in
-                self?.episode = data
-                let characterIds = self?.getCharacterIds(from: data.characters) ?? []
-                self?.getResidents(from: characterIds)
-
+        fetchData(url: url, responseType: EpisodeDO.self) { response in
+            switch response {
+            case .success(let data):
+                self.handleResponse(data)
+            case .failure(let error):
+                print("Error fetching character: \(error.localizedDescription)")
             }
-            .store(in: &cancellables)
-    }
-
-    private func getCharacterIds(from characters: [String]) -> [String] {
-        return characters.compactMap { url in
-            return url.split(separator: "/").last.flatMap { String($0) }
         }
     }
     
-   
+    private func handleResponse(_ data: EpisodeDO) {
+        self.episode = data
+        let characterIds = data.characters.compactMap { $0.split(separator: "/").last.map(String.init) }
+        self.getResidents(from: characterIds)
+    }
+    
     private func getResidents(from ids: [String]) {
-       
-        let url = URL(string: Constansts.MainURL.main + Constansts.Endpoints.characters + "/\(ids)")!
         
-        NetworkManager.shared.fetchData(from: url, responseType: [CharacterDO].self)
+        guard let url = URL(string: Constansts.MainURL.main + Constansts.Endpoints.characters + "/\(ids)") else {
+            print("Invalid episodes URL")
+            return
+        }
+        
+        fetchData(url: url, responseType: [CharacterDO].self) { response in
+            switch response {
+            case .success(let data):
+                self.characters = data
+            case .failure(let error):
+                print("Error fetching character: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    private func fetchData<T: Decodable>(url: URL, responseType: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
+        var cancellables = Set<AnyCancellable>()
+        NetworkManager.shared.fetchData(from: url, responseType: responseType)
             .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
+            .sink { completionResult in
+                switch completionResult {
                 case .finished:
                     break
                 case .failure(let error):
-                    print("error: \(error.localizedDescription)")
+                    print("Error fetching data: \(error.localizedDescription)")
+                    completion(.failure(error)) // Retorna el error si ocurre
                 }
-            } receiveValue: { [weak self] data in
-                self?.characters = data
+            } receiveValue: { data in
+                completion(.success(data)) // Retorna los datos
             }
             .store(in: &cancellables)
     }
