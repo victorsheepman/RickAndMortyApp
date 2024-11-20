@@ -92,25 +92,13 @@ struct FilterCharacterView: View {
             Divider()
             
             VStack(alignment:.leading, spacing: 10){
-                
-                EnumToggle(
-                    selectedValue: $status,
-                    toggleValue: Status.alive,
-                    label: "Alive"
-                )
-                
-                EnumToggle(
-                    selectedValue: $status,
-                    toggleValue: Status.dead,
-                    label: "Dead"
-                )
-                
-                EnumToggle(
-                    selectedValue: $status,
-                    toggleValue: Status.unknown,
-                    label: "Unknown"
-                )
-                
+                ForEach(Status.allCases, id: \.hashValue) { status in
+                    EnumToggle(
+                        selectedValue: $status,
+                        toggleValue: status,
+                        label: status.rawValue.capitalized
+                    )
+                }
             }
             .padding(.horizontal, 16)
         }
@@ -126,31 +114,13 @@ struct FilterCharacterView: View {
             Divider()
             
             VStack(alignment:.leading, spacing: 12){
-                
-                EnumToggle(
-                    selectedValue: $gender,
-                    toggleValue: Gender.female,
-                    label: "Female"
-                )
-                
-                EnumToggle(
-                    selectedValue: $gender,
-                    toggleValue: Gender.male,
-                    label: "Male"
-                )
-                
-                EnumToggle(
-                    selectedValue: $gender,
-                    toggleValue: Gender.genderless,
-                    label: "Genderless"
-                )
-                
-                EnumToggle(
-                    selectedValue: $gender,
-                    toggleValue: Gender.unknown,
-                    label: "Unknown"
-                )
-                
+                ForEach(Gender.allCases, id: \.hashValue) { gender in
+                    EnumToggle(
+                        selectedValue: $gender,
+                        toggleValue: gender,
+                        label: gender.rawValue.capitalized
+                    )
+                }
             }.padding(.horizontal, 16)
         }
     }
