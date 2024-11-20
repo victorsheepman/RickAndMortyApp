@@ -85,7 +85,7 @@ class EpisodeOO: ObservableObject {
 
     private func constructURL(name: String, episode: String) -> URL? {
         var queryItems: [URLQueryItem] = [
-            name.isEmpty ? nil : URLQueryItem(name: "name",    value: name),
+            name.isEmpty    ? nil : URLQueryItem(name: "name",    value: name),
             episode.isEmpty ? nil : URLQueryItem(name: "status",  value: episode)
         ].compactMap { $0 }
         
