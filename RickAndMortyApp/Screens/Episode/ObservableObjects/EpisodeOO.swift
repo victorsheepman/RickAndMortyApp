@@ -8,9 +8,10 @@
 import Foundation
 import Combine
 
+
 class EpisodeOO: ObservableObject {
     
-    @Published var seasons: [Season] = []
+    @Published var seasons: [SeasonDO] = []
     
     var cancellables = Set<AnyCancellable>()
     let baseUrl = Constansts.MainURL.main + Constansts.Endpoints.episodes + "?"
@@ -33,7 +34,7 @@ class EpisodeOO: ObservableObject {
     }
     
     private func getDataFromApi(url:URL){
-        let cancellable = NetworkManager.shared.fetchData(from: url, responseType:  EpisodeResponseDataModel.self)
+        let cancellable = NetworkManager.shared.fetchData(from: url, responseType:  EpisodeResponseDO.self)
             .map { $0.results }
             .map { [weak self] episodes in
                 self?.groupEpisodesBySeason(episodes: episodes) ?? []
@@ -55,8 +56,8 @@ class EpisodeOO: ObservableObject {
         cancellable.store(in: &cancellables)
     }
 
-    private func groupEpisodesBySeason(episodes: [EpisodeDO]) -> [Season] {
-        var seasons: [Season] = []
+    private func groupEpisodesBySeason(episodes: [EpisodeDO]) -> [SeasonDO] {
+        var seasons: [SeasonDO] = []
         
         for episode in episodes {
             let seasonPrefix = String(episode.episode.prefix(3)) // "S01" de "S01E01"
@@ -70,7 +71,7 @@ class EpisodeOO: ObservableObject {
                 seasons[index] = updatedSeason
             } else {
                 // Si no existe, crear una nueva temporada y añadirla al arreglo
-                let newSeason = Season(name: seasonName, episodes: [episode])
+                let newSeason = SeasonDO(name: seasonName, episodes: [episode])
                 seasons.append(newSeason)
             }
         }

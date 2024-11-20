@@ -20,10 +20,3 @@ struct EpisodeDO: Codable {
         case episode, characters, url, created
     }
 }
-
-
-struct Season {
-    let name: String
-    var episodes: [EpisodeDO]
-}
-

@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+struct LocationFilter {
+    var name = String()
+    var type = String()
+    var dimension = String()
+}
+
 struct LocationView: View {
     
     @StateObject private var viewModel = LocationOO()

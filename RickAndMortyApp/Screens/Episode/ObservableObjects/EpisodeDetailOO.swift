@@ -10,8 +10,6 @@ import Foundation
 import Foundation
 import Combine
 
-
-
 class EpisodeDetailOO: ObservableObject {
     
     @Published var characters: [CharacterDO] = []

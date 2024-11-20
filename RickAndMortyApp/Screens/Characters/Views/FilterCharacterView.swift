@@ -8,8 +8,6 @@
 import SwiftUI
 
 
-
-
 struct FilterCharacterView: View {
     
     @Environment(\.dismiss) private var dismiss

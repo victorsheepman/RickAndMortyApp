@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+enum Status: String {
+    case dead    = "dead"
+    case alive   = "alive"
+    case unknown = "unknown"
+}
+
+enum Gender: String {
+    case male       = "male"
+    case female     = "female"
+    case unknown    = "unknown"
+    case genderless = "genderless"
+
+}
+
 struct EnumToggle<T: RawRepresentable & Equatable>: View where T.RawValue == String {
     
     @Binding var selectedValue: String

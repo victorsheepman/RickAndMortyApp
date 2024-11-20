@@ -1,8 +1,8 @@
 //
-//  LocationResponseDataModel.swift
+//  LocationResponseDO.swift
 //  RickAndMortyApp
 //
-//  Created by Victor Marquez on 13/7/24.
+//  Created by Victor Marquez on 20/11/24.
 //
 
 import Foundation

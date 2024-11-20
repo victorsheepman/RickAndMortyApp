@@ -28,7 +28,7 @@ struct EpisodeView: View {
     
     var list: some View {
         List {
-            ForEach(viewModel.seasons, id: \.name) { season in
+            ForEach(viewModel.seasons, id: \.id) { season in
                 Section(header: Text(season.name)
                     .font(.title3.bold())
                     .foregroundStyle(.gray)
