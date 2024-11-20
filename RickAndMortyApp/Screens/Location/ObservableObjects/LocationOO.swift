@@ -40,6 +40,7 @@ class LocationOO: ObservableObject {
     private func fetchData(url:URL) {
         var cancellables = Set<AnyCancellable>()
         let cancellable = NetworkManager.shared.fetchData(from: url, responseType: LocationResponseDO.self)
+            .map { $0.results }
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -48,9 +49,9 @@ class LocationOO: ObservableObject {
                 case .failure(let error):
                     print("error: \(error.localizedDescription)")
                 }
-            } receiveValue: { [weak self] dataModel in
+            } receiveValue: { [weak self] response in
                 
-                self?.locations = dataModel.results
+                self?.locations = response
             }
         
         cancellable.store(in: &cancellables)
