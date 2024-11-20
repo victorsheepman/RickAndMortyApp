@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LocationView: View {
     
-    @StateObject private var viewModel = LocationViewModel()
+    @StateObject private var viewModel = LocationOO()
     
     @State private var isPresented: Bool   = false
     @State private var filter = LocationFilter()
@@ -65,11 +65,6 @@ struct LocationView: View {
     }
 }
 
-struct LocationFilter {
-    var name = String()
-    var type = String()
-    var dimension = String()
-}
 
 
 #Preview {

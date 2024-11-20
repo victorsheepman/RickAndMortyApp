@@ -1,57 +1,50 @@
 //
-//  FilterLocationView.swift
+//  FilterEpisodeView.swift
 //  RickAndMortyApp
 //
-//  Created by Victor Marquez on 14/7/24.
+//  Created by Victor Marquez on 17/7/24.
 //
 
 import SwiftUI
 
-struct FilterLocationView: View {
+struct FilterEpisodeView: View {
+    
     @Environment(\.dismiss) private var dismiss
     
-    @Binding var filter: LocationFilter
+    @Binding var filter: EpisodeFilter
     
-    var manager: LocationViewModel
+    var manager: EpisodeOO
     
     private var isApplyDisabled: Bool {
-        [filter.name, filter.type, filter.dimension]
+        [filter.episode, filter.name]
             .allSatisfy { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
     }
-    
     var body: some View {
         NavigationStack{
             VStack(alignment:.leading){
                 Divider()
+                    .padding(.top, 15)
+                
                 SearchItem(
                     textToSearch: $filter.name,
                     title: "Name",
                     placeholder: "Give a name"
                 )
-                
                 Divider()
                 Divider()
                     .padding(.top, 15)
-                
+            
                 SearchItem(
-                    textToSearch: $filter.type,
-                    title: "Type",
+                    textToSearch: $filter.episode,
+                    title: "Episode",
                     placeholder: "Select one"
                 )
                 
                 Divider()
-                Divider()
-                    .padding(.top, 15)
-                
-                SearchItem(
-                    textToSearch: $filter.dimension,
-                    title: "Dimension",
-                    placeholder: "Select one"
-                )
-                Divider()
+
                 Spacer()
-            }
-            .toolbar {
+                
+            }.toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Clear"){
                         clean()
@@ -77,30 +70,32 @@ struct FilterLocationView: View {
                     .disabled(isApplyDisabled)
                     
                 }
-                
             }
         }
     }
     
+
+    
     private func clean() -> Void {
-        manager.getLocations(from: "page=3")
-        resetFilter()
+        if !isApplyDisabled {
+            manager.getEpisodes(from: "page=1")
+        }
+        resetFilters()
     }
     
-    private func resetFilter() {
-        filter.name = ""
-        filter.type = ""
-        filter.dimension = ""
+    private func resetFilters() {
+        filter.name    = ""
+        filter.episode = ""
     }
     
     private func apply() -> Void {
-        manager.getLocationsFiltered(by: filter)
+        manager.getEpisodesFiltered(by: filter)
     }
 }
 
 #Preview {
-    FilterLocationView(
-        filter:.constant(LocationFilter(name: "", type: "", dimension: "")),
-        manager: LocationViewModel()
+    FilterEpisodeView(
+        filter: .constant(EpisodeFilter()),
+        manager:     EpisodeOO()
     )
 }

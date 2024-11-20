@@ -12,7 +12,7 @@ struct LocationDetailView: View {
     
     var locationId: Int
 
-    @StateObject private var viewModel = LocationDetailViewModel()
+    @StateObject private var viewModel = LocationDetailOO()
    
     var body: some View {
         VStack(alignment: .leading) {

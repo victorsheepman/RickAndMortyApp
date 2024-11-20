@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EpisodeDetailView: View {
     
-    @StateObject private var viewModel = EpisodeDetailViewModel()
+    @StateObject private var viewModel = EpisodeDetailOO()
     @State private var isPresentingDetailResident   = false
     
     var episodeId: Int

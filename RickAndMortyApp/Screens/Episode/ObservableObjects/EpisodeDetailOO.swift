@@ -12,10 +12,10 @@ import Combine
 
 
 
-class EpisodeDetailViewModel: ObservableObject {
+class EpisodeDetailOO: ObservableObject {
     
-    @Published var characters: [CharacterDataModel] = []
-    @Published var episode: EpisodeDataModel?
+    @Published var characters: [CharacterDO] = []
+    @Published var episode: EpisodeDO?
     
     let baseURL = Constansts.MainURL.main + Constansts.Endpoints.episodes
     
@@ -25,7 +25,7 @@ class EpisodeDetailViewModel: ObservableObject {
         
         let url = URL(string: self.baseURL + "/\(id)")!
         
-        NetworkManager.shared.fetchData(from: url, responseType: EpisodeDataModel.self)
+        NetworkManager.shared.fetchData(from: url, responseType: EpisodeDO.self)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -54,7 +54,7 @@ class EpisodeDetailViewModel: ObservableObject {
        
         let url = URL(string: Constansts.MainURL.main + Constansts.Endpoints.characters + "/\(ids)")!
         
-        NetworkManager.shared.fetchData(from: url, responseType: [CharacterDataModel].self)
+        NetworkManager.shared.fetchData(from: url, responseType: [CharacterDO].self)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {

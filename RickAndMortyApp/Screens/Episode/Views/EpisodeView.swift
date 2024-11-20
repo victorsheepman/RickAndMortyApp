@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EpisodeView: View {
-    @StateObject var episodeViewModel = EpisodeViewModel()
+    @StateObject var viewModel = EpisodeOO()
     
     
     @State private var isPresented: Bool    = false
@@ -21,14 +21,14 @@ struct EpisodeView: View {
         .fullScreenCover(isPresented: $isPresented){
             FilterEpisodeView(
                 filter: $filter,
-                manager: episodeViewModel
+                manager: viewModel
             )
         }
     }
     
     var list: some View {
         List {
-            ForEach(episodeViewModel.seasons, id: \.name) { season in
+            ForEach(viewModel.seasons, id: \.name) { season in
                 Section(header: Text(season.name)
                     .font(.title3.bold())
                     .foregroundStyle(.gray)

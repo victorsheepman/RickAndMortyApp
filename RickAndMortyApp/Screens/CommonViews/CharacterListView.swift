@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CharacterListView: View {
     
-    var characters: [CharacterDataModel]
+    var characters: [CharacterDO]
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {

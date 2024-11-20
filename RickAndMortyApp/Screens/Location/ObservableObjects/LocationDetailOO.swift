@@ -8,10 +8,10 @@
 import Foundation
 import Combine
 
-class LocationDetailViewModel: ObservableObject {
+class LocationDetailOO: ObservableObject {
     
-    @Published var characters: [CharacterDataModel] = []
-    @Published var location: LocationDataModel?
+    @Published var characters: [CharacterDO] = []
+    @Published var location: LocationDO?
     
     let baseURL          = Constansts.MainURL.main + Constansts.Endpoints.locations
     let baseURLCharacter = Constansts.MainURL.main + Constansts.Endpoints.characters
@@ -20,7 +20,7 @@ class LocationDetailViewModel: ObservableObject {
     func fetchLocationAndResidents(from id: Int) {
         let url = URL(string: self.baseURL + "/\(id)")!
         
-        NetworkManager.shared.fetchData(from: url, responseType: LocationDataModel.self)
+        NetworkManager.shared.fetchData(from: url, responseType: LocationDO.self)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -58,7 +58,7 @@ class LocationDetailViewModel: ObservableObject {
         
         let url = URL(string: self.baseURLCharacter + "/\(ids)")!
         
-        NetworkManager.shared.fetchData(from: url, responseType: [CharacterDataModel].self)
+        NetworkManager.shared.fetchData(from: url, responseType: [CharacterDO].self)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -78,7 +78,7 @@ class LocationDetailViewModel: ObservableObject {
         
         let url = URL(string: self.baseURLCharacter + "/\(id)")!
         
-        NetworkManager.shared.fetchData(from: url, responseType: CharacterDataModel.self)
+        NetworkManager.shared.fetchData(from: url, responseType: CharacterDO.self)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {

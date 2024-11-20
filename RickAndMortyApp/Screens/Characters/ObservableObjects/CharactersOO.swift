@@ -1,18 +1,17 @@
 //
-//  CharacterViewModel.swift
+//  CharactersOO.swift
 //  RickAndMortyApp
 //
-//  Created by Victor Marquez on 3/5/24.
+//  Created by Victor Marquez on 19/11/24.
 //
 
 
 import Foundation
 import Combine
 
-
-class CharacterViewModel: ObservableObject {
+class CharacterOO: ObservableObject {
     
-    @Published var characterModel:[CharacterDataModel] = []
+    @Published var characterModel:[CharacterDO] = []
     
     var cancellables = Set<AnyCancellable>()
     
@@ -37,7 +36,7 @@ class CharacterViewModel: ObservableObject {
     
     
     private func getDataFromApi(url:URL){
-        let cancellable = NetworkManager.shared.fetchData(from: url, responseType: CharacterResponseDataModel.self)
+        let cancellable = NetworkManager.shared.fetchData(from: url, responseType: CharacterResponseDO.self)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -46,8 +45,8 @@ class CharacterViewModel: ObservableObject {
                 case .failure(let error):
                     print("error: \(error.localizedDescription)")
                 }
-            } receiveValue: { [weak self] characterDataModel in
-                self?.characterModel =  characterDataModel.results
+            } receiveValue: { [weak self] characterDO in
+                self?.characterModel =  characterDO.results
                 
             }
         

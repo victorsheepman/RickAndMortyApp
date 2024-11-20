@@ -8,10 +8,10 @@
 import Foundation
 import Combine
 
-extension CharacterDetailView {
-    class ViewModel: ObservableObject {
-        @Published var episodes:[EpisodeDataModel] = []
-        @Published var character: CharacterDataModel?
+
+class CharacterDetailOO: ObservableObject {
+        @Published var episodes:[EpisodeDO] = []
+        @Published var character: CharacterDO?
         
         var cancellables = Set<AnyCancellable>()
         
@@ -31,7 +31,7 @@ extension CharacterDetailView {
             
             let url = URL(string: Constansts.MainURL.main + Constansts.Endpoints.characters + "/\(id)")!
             
-            let cancellable = NetworkManager.shared.fetchData(from: url, responseType: CharacterDataModel.self)
+            let cancellable = NetworkManager.shared.fetchData(from: url, responseType: CharacterDO.self)
                    .receive(on: DispatchQueue.main)
                    .sink { completion in
                        switch completion {
@@ -63,7 +63,7 @@ extension CharacterDetailView {
            
             let url = URL(string: Constansts.MainURL.main + Constansts.Endpoints.episodes + "/\(ids)")!
               
-            NetworkManager.shared.fetchData(from: url, responseType: [EpisodeDataModel].self)
+            NetworkManager.shared.fetchData(from: url, responseType: [EpisodeDO].self)
                   .receive(on: DispatchQueue.main)
                   .sink { completion in
                       switch completion {
@@ -81,4 +81,4 @@ extension CharacterDetailView {
         
     }
 
-}
+

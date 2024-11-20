@@ -12,7 +12,7 @@ struct CharacterDetailView: View {
     
     var characterId: Int
     
-    @StateObject var viewModel = ViewModel()
+    @StateObject var viewModel = CharacterDetailOO()
     
     var body: some View {
         VStack(alignment:.leading){

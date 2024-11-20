@@ -1,16 +1,17 @@
 //
-//  LocationViewModel.swift
+//  LocationOO.swift
 //  RickAndMortyApp
 //
-//  Created by Victor Marquez on 2/7/24.
+//  Created by Victor Marquez on 19/11/24.
 //
+
 
 import Foundation
 import Combine
 
-class LocationViewModel: ObservableObject {
+class LocationOO: ObservableObject {
     
-    @Published var locations:[LocationDataModel] = []
+    @Published var locations:[LocationDO] = []
     
     var cancellables = Set<AnyCancellable>()
     
@@ -36,7 +37,7 @@ class LocationViewModel: ObservableObject {
     
     
     private func getDataFromApi(url:URL){
-        let cancellable = NetworkManager.shared.fetchData(from: url, responseType: LocationResponseDataModel.self)
+        let cancellable = NetworkManager.shared.fetchData(from: url, responseType: LocationResponseDO.self)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {

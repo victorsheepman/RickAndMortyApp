@@ -8,7 +8,7 @@
 import Foundation
 
 
-extension CharacterDataModel {
+extension CharacterDO {
     func toSections() -> [RowItem] {
         return [
             RowItem(title: "Name", value: name),

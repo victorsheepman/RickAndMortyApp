@@ -10,13 +10,13 @@ import SwiftUI
 
 
 
-struct FilterCharacter: View {
+struct FilterCharacterView: View {
     
     @Environment(\.dismiss) private var dismiss
     
     @Binding var filters: CharacterFilters
     
-    var manager: CharacterViewModel
+    var manager: CharacterOO
     
     private var isApplyDisabled: Bool {
         [filters.status, filters.gender, filters.species, filters.name]
@@ -174,8 +174,8 @@ struct FilterCharacter: View {
 }
 
 #Preview {
-    FilterCharacter(
+    FilterCharacterView(
         filters: .constant(CharacterFilters(status: "", gender: "", species: "", name: "")),
-        manager: CharacterViewModel()
+        manager: CharacterOO()
     )
 }

@@ -1,21 +1,15 @@
 //
-//  EpisodeViewModel.swift
+//  EpisodeOO.swift
 //  RickAndMortyApp
 //
-//  Created by Victor Marquez on 3/5/24.
+//  Created by Victor Marquez on 19/11/24.
 //
 
 import Foundation
 import Combine
 
-struct Season  {
-    let name: String
-    var episodes: [EpisodeDataModel]
-}
-
-class EpisodeViewModel: ObservableObject {
+class EpisodeOO: ObservableObject {
     
-    @Published var episodes:[String: [EpisodeDataModel]] = [:]
     @Published var seasons: [Season] = []
     
     var cancellables = Set<AnyCancellable>()
@@ -60,27 +54,8 @@ class EpisodeViewModel: ObservableObject {
         
         cancellable.store(in: &cancellables)
     }
-    
-    private func divideEpisodesBySeason(episodes: [EpisodeDataModel]) -> [String: [EpisodeDataModel]] {
-        var seasons: [String: [EpisodeDataModel]] = [:]
-        
-        for episode in episodes {
-            let seasonPrefix = String(episode.episode.prefix(3)) // "S01" de "S01E01"
-            if let seasonNumber = Int(seasonPrefix.dropFirst()) {
-                let seasonName = "Season \(seasonNumber)"
-                
-                if seasons[seasonName] != nil {
-                    seasons[seasonName]?.append(episode)
-                } else {
-                    seasons[seasonName] = [episode]
-                }
-            }
-        }
-        
-        return seasons
-    }
-    
-    private func groupEpisodesBySeason(episodes: [EpisodeDataModel]) -> [Season] {
+
+    private func groupEpisodesBySeason(episodes: [EpisodeDO]) -> [Season] {
         var seasons: [Season] = []
         
         for episode in episodes {
