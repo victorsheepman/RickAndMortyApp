@@ -16,6 +16,7 @@ class LocationDetailOO: ObservableObject {
     let baseURL          = Constansts.MainURL.main + Constansts.Endpoints.locations
     let baseURLCharacter = Constansts.MainURL.main + Constansts.Endpoints.characters
     
+    var cancellables = Set<AnyCancellable>()
     
     func getLocations(from id: Int) {
         guard let url = URL(string: self.baseURL + "/\(id)") else {
@@ -68,8 +69,6 @@ class LocationDetailOO: ObservableObject {
     }
     
     private func fetchData<T: Decodable>(url: URL, responseType: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
-        
-        var cancellables = Set<AnyCancellable>()
         NetworkManager.shared.fetchData(from: url, responseType: responseType)
             .receive(on: DispatchQueue.main)
             .sink { completionResult in

@@ -15,6 +15,8 @@ class EpisodeDetailOO: ObservableObject {
     
     let baseURL = Constansts.MainURL.main + Constansts.Endpoints.episodes
     
+    var cancellables = Set<AnyCancellable>()
+    
     func getEpisode(from id: Int) {
         
         guard let url = URL(string: self.baseURL + "/\(id)") else {
@@ -56,7 +58,7 @@ class EpisodeDetailOO: ObservableObject {
     }
     
     private func fetchData<T: Decodable>(url: URL, responseType: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
-        var cancellables = Set<AnyCancellable>()
+      
         NetworkManager.shared.fetchData(from: url, responseType: responseType)
             .receive(on: DispatchQueue.main)
             .sink { completionResult in

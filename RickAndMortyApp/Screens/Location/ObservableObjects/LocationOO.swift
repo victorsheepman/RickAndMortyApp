@@ -12,11 +12,12 @@ import Combine
 class LocationOO: ObservableObject {
     
     @Published var locations: [LocationDO] = []
-
+    
     let baseURL = Constansts.MainURL.main + Constansts.Endpoints.locations + "?"
+    var cancellables = Set<AnyCancellable>()
     
     init() {
-        getLocations(from: "page=3")
+        getLocations(from: "page=2")
     }
     
     
@@ -25,6 +26,7 @@ class LocationOO: ObservableObject {
             print("Invalid URL")
             return
         }
+        
         fetchData(url: url)
     }
     
@@ -38,7 +40,7 @@ class LocationOO: ObservableObject {
     
     
     private func fetchData(url:URL) {
-        var cancellables = Set<AnyCancellable>()
+        
         let cancellable = NetworkManager.shared.fetchData(from: url, responseType: LocationResponseDO.self)
             .map { $0.results }
             .receive(on: DispatchQueue.main)
@@ -50,7 +52,6 @@ class LocationOO: ObservableObject {
                     print("error: \(error.localizedDescription)")
                 }
             } receiveValue: { [weak self] response in
-                
                 self?.locations = response
             }
         

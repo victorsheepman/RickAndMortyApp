@@ -13,8 +13,9 @@ class EpisodeOO: ObservableObject {
     
     @Published var seasons: [SeasonDO] = []
     
-   
     let baseURL = Constansts.MainURL.main + Constansts.Endpoints.episodes + "?"
+    
+    var cancellables = Set<AnyCancellable>()
     
     init(){
         getEpisodes(from: "page=1")
@@ -37,7 +38,7 @@ class EpisodeOO: ObservableObject {
     }
     
     private func fetchData(from url:URL){
-        var cancellables = Set<AnyCancellable>()
+        
         let cancellable = NetworkManager.shared.fetchData(from: url, responseType:  EpisodeResponseDO.self)
             .map { $0.results }
             .map { [weak self] episodes in
