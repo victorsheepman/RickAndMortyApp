@@ -8,6 +8,10 @@
 import Foundation
 import Combine
 
+struct EpisodeFilter {
+    var name = String()
+    var episode = String()
+}
 
 class EpisodeOO: ObservableObject {
     
