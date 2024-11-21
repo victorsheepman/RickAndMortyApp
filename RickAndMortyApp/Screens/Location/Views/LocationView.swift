@@ -18,8 +18,7 @@ struct LocationView: View {
     @StateObject private var viewModel = LocationOO()
     
     @State private var isPresented: Bool   = false
-    @State private var filter = LocationFilter()
-   
+    
     var body: some View {
         HeaderContainer(config: HeaderContainerConfiguration(title: "Location", isFilterPresented: $isPresented)){
             ScrollView {
@@ -37,7 +36,6 @@ struct LocationView: View {
         }
         .fullScreenCover(isPresented: $isPresented){
             FilterLocationView(
-                filter: $filter,
                 manager: viewModel
             )
         }

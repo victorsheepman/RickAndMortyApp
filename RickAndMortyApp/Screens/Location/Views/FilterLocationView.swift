@@ -9,13 +9,15 @@ import SwiftUI
 
 struct FilterLocationView: View {
     @Environment(\.dismiss) private var dismiss
-    
-    @Binding var filter: LocationFilter
-    
+        
+    @SceneStorage("nameFilterLocation") private var name: String = ""
+    @SceneStorage("typeFilterLocation") private var type: String = ""
+    @SceneStorage("dimensionFilterLocation") private var dimension: String = ""
+ 
     var manager: LocationOO
     
     private var isApplyDisabled: Bool {
-        [filter.name, filter.type, filter.dimension]
+        [type, dimension, name]
             .allSatisfy { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
     }
     
@@ -24,7 +26,7 @@ struct FilterLocationView: View {
             VStack(alignment:.leading){
                 Divider()
                 SearchItem(
-                    textToSearch: $filter.name,
+                    textToSearch: $name,
                     title: "Name",
                     placeholder: "Give a name"
                 )
@@ -34,7 +36,7 @@ struct FilterLocationView: View {
                     .padding(.top, 15)
                 
                 SearchItem(
-                    textToSearch: $filter.type,
+                    textToSearch: $type,
                     title: "Type",
                     placeholder: "Select one"
                 )
@@ -44,7 +46,7 @@ struct FilterLocationView: View {
                     .padding(.top, 15)
                 
                 SearchItem(
-                    textToSearch: $filter.dimension,
+                    textToSearch: $dimension,
                     title: "Dimension",
                     placeholder: "Select one"
                 )
@@ -83,24 +85,30 @@ struct FilterLocationView: View {
     }
     
     private func clean() -> Void {
-        manager.getLocations(from: "page=3")
         resetFilter()
+        if !isApplyDisabled {
+            manager.getLocations(from: "page=3")
+        }
     }
     
     private func resetFilter() {
-        filter.name = ""
-        filter.type = ""
-        filter.dimension = ""
+        name = ""
+        type = ""
+        dimension = ""
     }
     
     private func apply() -> Void {
+        let filter = LocationFilter(
+            name: name,
+            type: type,
+            dimension: dimension
+        )
         manager.getLocationsFiltered(by: filter)
     }
 }
 
 #Preview {
     FilterLocationView(
-        filter:.constant(LocationFilter(name: "", type: "", dimension: "")),
         manager: LocationOO()
     )
 }
