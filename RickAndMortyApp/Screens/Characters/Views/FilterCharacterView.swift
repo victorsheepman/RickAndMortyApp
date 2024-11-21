@@ -7,20 +7,26 @@
 
 import SwiftUI
 
+struct CharacterFilter {
+    var status = String()
+    var gender = String()
+    var species = String()
+    var name = String()
+}
 
 struct FilterCharacterView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @SceneStorage("statusCharacter") var status: String = ""
-    @SceneStorage("genderCharacter") var gender: String = ""
+    @SceneStorage("statusCharacter") var selectedStatus: String = ""
+    @SceneStorage("genderCharacter") var selectedGender: String = ""
     @SceneStorage("speciesCharacter") var species: String = ""
     @SceneStorage("nameCharacter") var name: String = ""
     
     var manager: CharacterOO
     
     private var isApplyDisabled: Bool {
-        [status, gender, species, name]
+        [selectedStatus, selectedGender, species, name]
             .allSatisfy { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
     }
     
@@ -43,13 +49,26 @@ struct FilterCharacterView: View {
                 
                 Divider()
                 
-                statusSection
-                
-                genderSection
-                
-                Spacer()
-                
-                
+                List {
+                    Section(header: sectionHeader("Status")) {
+                        ForEach(Status.allCases, id: \.hashValue) { status in
+                            EnumToggle(
+                                selectedValue: $selectedStatus,
+                                toggleValue: status,
+                                label: status.rawValue.capitalized
+                            )
+                        }
+                    }
+                    Section(header: sectionHeader("Gender")){
+                        ForEach(Gender.allCases, id:\.hashValue) { gender in
+                            EnumToggle(
+                                selectedValue: $selectedGender,
+                                toggleValue: gender,
+                                label: gender.rawValue.capitalized
+                            )
+                        }
+                    }
+                }.listStyle(.plain)
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -82,47 +101,10 @@ struct FilterCharacterView: View {
         }
     }
     
-    private var statusSection: some View {
-        VStack(alignment:.leading) {
-            Text("Status")
-                .font(.headline)
-                .foregroundStyle(.gray2)
-                .padding(.horizontal, 16)
-            
-            Divider()
-            
-            VStack(alignment:.leading, spacing: 10){
-                ForEach(Status.allCases, id: \.hashValue) { status in
-                    EnumToggle(
-                        selectedValue: $status,
-                        toggleValue: status,
-                        label: status.rawValue.capitalized
-                    )
-                }
-            }
-            .padding(.horizontal, 16)
-        }
-        .padding(.vertical)
-    }
-    
-    private var genderSection: some View {
-        VStack(alignment:.leading) {
-            Text("Gender")
-                .font(.headline)
-                .foregroundStyle(.gray2)
-                .padding(.horizontal, 16)
-            Divider()
-            
-            VStack(alignment:.leading, spacing: 12){
-                ForEach(Gender.allCases, id: \.hashValue) { gender in
-                    EnumToggle(
-                        selectedValue: $gender,
-                        toggleValue: gender,
-                        label: gender.rawValue.capitalized
-                    )
-                }
-            }.padding(.horizontal, 16)
-        }
+    private func sectionHeader(_ text: String) -> some View {
+        Text(text)
+            .font(.title3.bold())
+            .foregroundStyle(.gray)
     }
     
     private func clean() -> Void {
@@ -133,14 +115,19 @@ struct FilterCharacterView: View {
     }
     
     private func resetFilters() {
-        gender = ""
-        status = ""
+        selectedGender = ""
+        selectedStatus = ""
         species = ""
         name = ""
     }
     
     private func apply() -> Void {
-        var filter = CharacterFilter(status: status, gender: gender, species: species, name: name)
+        let filter = CharacterFilter(
+            status: selectedStatus,
+            gender: selectedGender,
+            species: species,
+            name: name
+        )
         manager.getCharacterFiltered(by: filter)
     }
 }

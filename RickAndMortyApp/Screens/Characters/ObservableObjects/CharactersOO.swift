@@ -41,7 +41,7 @@ class CharacterOO: ObservableObject {
         NetworkManager.shared.fetchData(from: url, responseType: CharacterResponseDO.self)
             .map { $0.results }
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] completion in
+            .sink { completion in
                 switch completion {
                 case .finished:
                     break
