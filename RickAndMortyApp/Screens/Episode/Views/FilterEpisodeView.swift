@@ -10,13 +10,14 @@ import SwiftUI
 struct FilterEpisodeView: View {
     
     @Environment(\.dismiss) private var dismiss
-    
-    @Binding var filter: EpisodeFilter
+        
+    @SceneStorage("nameFilterEpisode") private var name: String = ""
+    @SceneStorage("episodeFilterEpisode") private var episode: String = ""
     
     var manager: EpisodeOO
     
     private var isApplyDisabled: Bool {
-        [filter.episode, filter.name]
+        [episode, name]
             .allSatisfy { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
     }
     var body: some View {
@@ -26,7 +27,7 @@ struct FilterEpisodeView: View {
                     .padding(.top, 15)
                 
                 SearchItem(
-                    textToSearch: $filter.name,
+                    textToSearch: $name,
                     title: "Name",
                     placeholder: "Give a name"
                 )
@@ -35,7 +36,7 @@ struct FilterEpisodeView: View {
                     .padding(.top, 15)
             
                 SearchItem(
-                    textToSearch: $filter.episode,
+                    textToSearch: $episode,
                     title: "Episode",
                     placeholder: "Select one"
                 )
@@ -74,28 +75,24 @@ struct FilterEpisodeView: View {
         }
     }
     
-
-    
     private func clean() -> Void {
+        resetFilters()
         if !isApplyDisabled {
             manager.getEpisodes(from: "page=1")
         }
-        resetFilters()
     }
     
     private func resetFilters() {
-        filter.name    = ""
-        filter.episode = ""
+        name    = ""
+        episode = ""
     }
     
     private func apply() -> Void {
+        let filter = EpisodeFilter(name: name, episode: episode)
         manager.getEpisodesFiltered(by: filter)
     }
 }
 
 #Preview {
-    FilterEpisodeView(
-        filter: .constant(EpisodeFilter()),
-        manager:     EpisodeOO()
-    )
+    FilterEpisodeView(manager: EpisodeOO())
 }

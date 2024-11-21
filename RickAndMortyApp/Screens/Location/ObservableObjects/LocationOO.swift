@@ -9,6 +9,12 @@
 import Foundation
 import Combine
 
+struct LocationFilter {
+    var name = String()
+    var type = String()
+    var dimension = String()
+}
+
 class LocationOO: ObservableObject {
     
     @Published var locations: [LocationDO] = []

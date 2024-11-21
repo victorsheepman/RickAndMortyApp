@@ -9,20 +9,14 @@ import SwiftUI
 
 struct EpisodeView: View {
     @StateObject var viewModel = EpisodeOO()
-    
-    
     @State private var isPresented: Bool    = false
-    @State private var filter = EpisodeFilter()
     
     var body: some View {
         HeaderContainer(config: HeaderContainerConfiguration(title: "Episode", isFilterPresented: $isPresented)) {
             list
         }
         .fullScreenCover(isPresented: $isPresented){
-            FilterEpisodeView(
-                filter: $filter,
-                manager: viewModel
-            )
+            FilterEpisodeView( manager: viewModel)
         }
     }
     
@@ -49,13 +43,6 @@ struct EpisodeView: View {
         .background(.white)
     }
 }
-
-struct EpisodeFilter {
-    var name = String()
-    var episode = String()
-}
-
-
 
 
 

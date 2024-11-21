@@ -7,19 +7,32 @@
 
 import SwiftUI
 
-enum Status: String {
+enum Status: String, CaseIterable {
     case dead    = "dead"
     case alive   = "alive"
     case unknown = "unknown"
 }
 
-enum Gender: String {
+enum Gender: String, CaseIterable {
     case male       = "male"
     case female     = "female"
     case unknown    = "unknown"
     case genderless = "genderless"
 
 }
+
+struct Sea: Hashable, Identifiable {
+        let name: String
+        let id = UUID()
+    }
+
+
+struct OceanRegion: Identifiable {
+    let name: String
+    let seas: [Sea]
+    let id = UUID()
+}
+
 
 struct EnumToggle<T: RawRepresentable & Equatable>: View where T.RawValue == String {
     
