@@ -5,10 +5,10 @@ La aplicación Rick and Morty está diseñada utilizando SwiftUI y Combine para 
 ## Funcionalidades del proyecto
 
 - **Funcionalidad 1:**  Lista de personajes, locaciones y episodios
-- **Funcionalidad 2:**  Filtro personalizados para la busqueda de personajes, locaciones y episodios
-- **Funcionalidad 3:**  Vista con la informacion de el personaje, locacion y episodio
-- **Funcionalidad 4:**  Clase con genericos para el manejo de las diferentes peticiones de datos a la api
-- **Funcionalidad 5:**  Enrutamiento conectado para ver las relaciones entre los personajes, locaciones y episodios
+- **Funcionalidad 2:**  Filtro para personalizar la busqueda de personajes, locaciones y episodios
+- **Funcionalidad 3:**  Vista de detalles del personaje, locacion y episidio
+- **Funcionalidad 4:**  Enrutamiento para encontrar los personajes relacionados a un episodio y origen
+- **Funcionalidad 5:**  Utilizacion de una unica clase para la llamada de los diferentes
 
 ## Tecnologías y detalles del desarrollo
 
@@ -18,3 +18,6 @@ La aplicación Rick and Morty está diseñada utilizando SwiftUI y Combine para 
 - MVVM
 - Combine
 - XCTest
+
+## Funcionalidades del proyecto
+
