@@ -85,7 +85,6 @@ struct FilterLocationView: View {
     }
     
     private func clean() -> Void {
-       
         if !isApplyDisabled {
             manager.getLocations(from: "page=2")
         }
