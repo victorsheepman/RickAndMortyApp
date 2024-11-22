@@ -76,10 +76,10 @@ struct FilterEpisodeView: View {
     }
     
     private func clean() -> Void {
-        resetFilters()
         if !isApplyDisabled {
             manager.getEpisodes(from: "page=1")
         }
+        resetFilters()
     }
     
     private func resetFilters() {
