@@ -19,5 +19,4 @@ La aplicación Rick and Morty está diseñada utilizando SwiftUI y Combine para 
 - Combine
 - XCTest
 
-## Funcionalidades del proyecto
 
